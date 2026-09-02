@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DARI LOVE · три направления</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .page { max-width: 1080px; margin: 0 auto; padding: clamp(40px, 8vw, 90px) clamp(18px, 4vw, 40px) 90px; }
+  h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: var(--step-4); margin: 14px 0 6px; }
+  .sub { color: var(--muted); margin: 0 0 42px; }
+  .list { display: grid; gap: 18px; }
+  .row {
+    display: grid; grid-template-columns: 92px 1fr auto; gap: clamp(16px, 3vw, 32px);
+    align-items: center; padding: 22px clamp(18px, 3vw, 28px);
+    border-radius: 14px; text-decoration: none; color: inherit;
+    transition: transform 200ms var(--ease);
+  }
+  .row:hover { transform: translateY(-3px); }
+  .row__key { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.6rem; line-height: 1; color: var(--gold); }
+  .row__name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: var(--step-3); margin: 0; }
+  .row__note { color: var(--muted); font-size: var(--step-1); margin: 6px 0 0; max-width: 56ch; }
+  @media (max-width: 620px) { .row { grid-template-columns: 56px 1fr; } .row .pill { grid-column: 2; justify-self: start; } }
+</style>
+</head>
+<body>
+<div class="velvet"></div>
+<div class="grain"></div>
+
+<main class="page">
+  <p class="kicker">Направление · выбор одного из трёх</p>
+  <h1>DARI <i style="font-style:italic;color:var(--skin)">love</i> — три варианта</h1>
+  <p class="sub">Каждый вариант показывает два экрана: первый экран и секцию с четырьмя карточками. Выбранный разворачивается в полный лендинг.</p>
+
+  <div class="list">
+    <a class="row material" href="a-perepliot.html">
+      <span class="row__key">A</span>
+      <span>
+        <h2 class="row__name">Переплёт</h2>
+        <p class="row__note">Страница как переплетённая вручную книга: корешок слева, золочёный обрез, ляссе-закладка, четыре тома, колофон вместо прайс-таблицы.</p>
+      </span>
+      <span class="pill pill--quiet">Открыть</span>
+    </a>
+
+    <a class="row material" href="b-lozha.html">
+      <span class="row__key">B</span>
+      <span>
+        <h2 class="row__name">Ложа</h2>
+        <p class="row__note">Бархатная театральная ложа: занавес по краям кадра, латунный поручень, свет рампы, программка вечера, четыре номера.</p>
+      </span>
+      <span class="pill pill--quiet">Открыть</span>
+    </a>
+
+    <a class="row material" href="c-kanon.html">
+      <span class="row__key">C</span>
+      <span>
+        <h2 class="row__name">Канон</h2>
+        <p class="row__note">Стандарт категории, сыгранный прямо: сплит-геро с прайсом, ряд карточек, липкая нижняя полоса с кнопкой и «Поблагодарить».</p>
+      </span>
+      <span class="pill pill--quiet">Открыть</span>
+    </a>
+  </div>
+</main>
+</body>
+</html>

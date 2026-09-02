@@ -3,66 +3,225 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DARI LOVE · три направления</title>
+<title>DARI LOVE · Индивидуальное обучение · Москва</title>
+<meta name="description" content="Индивидуальное обучение и разборы. Онлайн и очно в Москве.">
+<meta property="og:title" content="DARI LOVE">
+<meta property="og:description" content="Индивидуальное обучение · Москва">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#180A0E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="variants/shared.css">
-<style>
-  .page { max-width: 1080px; margin: 0 auto; padding: clamp(40px, 8vw, 90px) clamp(18px, 4vw, 40px) 90px; }
-  h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: var(--step-4); margin: 14px 0 6px; }
-  .sub { color: var(--muted); margin: 0 0 42px; }
-  .list { display: grid; gap: 18px; }
-  .row {
-    display: grid; grid-template-columns: 92px 1fr auto; gap: clamp(16px, 3vw, 32px);
-    align-items: center; padding: 22px clamp(18px, 3vw, 28px);
-    border-radius: 14px; text-decoration: none; color: inherit;
-    transition: transform 200ms var(--ease);
-  }
-  .row:hover { transform: translateY(-3px); }
-  .row__key { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.6rem; line-height: 1; color: var(--gold); }
-  .row__name { font-family: 'Cormorant Garamond', Georgia, serif; font-size: var(--step-3); margin: 0; }
-  .row__note { color: var(--muted); font-size: var(--step-1); margin: 6px 0 0; max-width: 56ch; }
-  @media (max-width: 620px) { .row { grid-template-columns: 56px 1fr; } .row .pill { grid-column: 2; justify-self: start; } }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
+<!--
+THESIS: обучение интимности подано как переплетённая вручную книга, которую
+дают в руки; отказ от боудуар-лендинга с фотографией во всю ширину.
+OWN-WORLD: вишнёвый бархат переплёта, крашеный золотой обрез, корешок как
+единственная вертикальная ось, ляссе-закладка, колофон вместо прайс-таблицы.
+STORY: посетитель видит закрытую книгу по теме, о которой не говорят вслух,
+проходит четыре тома и уходит в Telegram за своим экземпляром.
+FIRST VIEWPORT: слева титул с золочёной строкой, строка тем, кнопка и колофон
+цен; справа вклеенная иллюстрация 4:5 с золочёным обрезом.
+FORM: переплётная мастерская, кандидат 5 из семи, seed 8447b63e.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
 <div class="velvet"></div>
 <div class="grain"></div>
 
-<main class="page">
-  <p class="kicker">Направление · выбор одного из трёх</p>
-  <h1>DARI <i style="font-style:italic;color:var(--skin)">love</i> — три варианта</h1>
-  <p class="sub">Каждый вариант показывает два экрана: первый экран и секцию с четырьмя карточками. Выбранный разворачивается в полный лендинг.</p>
-
-  <div class="list">
-    <a class="row material" href="variants/a-perepliot.html">
-      <span class="row__key">A</span>
-      <span>
-        <h2 class="row__name">Переплёт</h2>
-        <p class="row__note">Страница как переплетённая вручную книга: корешок слева, золочёный обрез, ляссе-закладка, четыре тома, колофон вместо прайс-таблицы.</p>
-      </span>
-      <span class="pill pill--quiet">Открыть</span>
-    </a>
-
-    <a class="row material" href="variants/b-lozha.html">
-      <span class="row__key">B</span>
-      <span>
-        <h2 class="row__name">Ложа</h2>
-        <p class="row__note">Бархатная театральная ложа: занавес по краям кадра, латунный поручень, свет рампы, программка вечера, четыре номера.</p>
-      </span>
-      <span class="pill pill--quiet">Открыть</span>
-    </a>
-
-    <a class="row material" href="variants/c-kanon.html">
-      <span class="row__key">C</span>
-      <span>
-        <h2 class="row__name">Канон</h2>
-        <p class="row__note">Стандарт категории, сыгранный прямо: сплит-геро с прайсом, ряд карточек, липкая нижняя полоса с кнопкой и «Поблагодарить».</p>
-      </span>
-      <span class="pill pill--quiet">Открыть</span>
-    </a>
+<!-- Возрастной гейт: страница за размытием до подтверждения -->
+<div class="gate" id="gate" hidden>
+  <div class="gate__card material">
+    <h2>Здесь говорят о сексе прямо</h2>
+    <p>Материалы сайта предназначены для совершеннолетних.</p>
+    <div class="gate__row">
+      <button class="pill" id="gate-yes" type="button">Мне есть 18</button>
+      <button class="pill pill--quiet" id="gate-no" type="button">Мне нет 18</button>
+    </div>
   </div>
+</div>
+
+<aside class="spine">
+  <div class="lasse"></div>
+  <a class="spine__mark" href="#top">DARI <i>love</i></a>
+
+  <nav class="spine__nav" aria-label="Оглавление">
+    <a class="spine__tick" href="#chapters"><span>Тома</span></a>
+    <a class="spine__tick" href="#live"><span>Живой формат</span></a>
+    <a class="spine__tick" href="#private"><span>Приватно</span></a>
+    <a class="spine__tick" href="#about"><span>Обо мне</span></a>
+    <a class="spine__tick" href="#faq"><span>Вопросы</span></a>
+  </nav>
+
+  <div class="spine__folio">МОСКВА</div>
+</aside>
+
+<div id="bounce">
+
+<header class="head" id="head">
+  <a href="#chapters">Оглавление</a>
+  <a href="#live">Живой формат</a>
+  <a href="#about">Обо мне</a>
+  <a class="thanks" data-href="tribute" href="#">Поблагодарить</a>
+  <a class="pill" data-tg="head" href="#">Написать в Telegram</a>
+</header>
+
+<main class="wrap" id="top">
+
+  <!-- ——— Титульный разворот ——————————————————————————————— -->
+  <section class="hero">
+    <div>
+      <p class="kicker">Индивидуальное обучение · Москва</p>
+      <div class="hero__rule"></div>
+      <h1>Об этом<br>не говорят<br><span class="gilt">вслух</span></h1>
+      <p class="lede">Живые занятия и разборы, готовые лекции и работа один на один. Теория, практика с обратной связью и план на несколько недель вместо случайных советов.</p>
+      <p class="subjects">Кунилингус · Сексология · БДСМ · Приватно</p>
+
+      <div class="actions">
+        <a class="pill" data-tg="hero" href="#">Написать в Telegram</a>
+        <a class="pill pill--quiet" href="#chapters">Смотреть оглавление</a>
+      </div>
+
+      <dl class="colophon" id="prices"></dl>
+      <p class="colophon__note">Адрес очных занятий — после подтверждения записи</p>
+    </div>
+
+    <figure class="frontis">
+      <div class="plate frontis__plate">
+        <img class="under" src="assets/img/dari-wide.webp" alt="" aria-hidden="true">
+        <img class="over" src="assets/img/dari-hero.webp" alt="Dari love в бордовом платье" fetchpriority="high">
+        <div class="frontis__edge"></div>
+      </div>
+      <figcaption class="frontis__cap"><span>Фронтиспис</span><span class="tabular">4:5</span></figcaption>
+    </figure>
+  </section>
+
+  <!-- ——— Манифест ————————————————————————————————————————— -->
+  <section class="manifest">
+    <p>Стыд <span class="gilt">не учит</span> ничему. Учит практика.</p>
+    <p class="manifest__note">Никаких намёков и обтекаемых формулировок: темы называются своими именами, разбираются по частям и отрабатываются с обратной связью.</p>
+  </section>
+
+  <!-- ——— Оглавление: четыре тома, пин-карусель ————————————— -->
+  <section class="chapters" id="chapters">
+    <div class="chapters__pin">
+      <div class="chapters__head">
+        <div>
+          <p class="kicker">Оглавление</p>
+          <h2>Четыре тома</h2>
+        </div>
+        <p class="chapters__counter tabular" id="deck-counter">1 / 4</p>
+      </div>
+
+      <div class="deck">
+        <div class="deck__track" id="deck-track"></div>
+      </div>
+
+      <div class="deck__dots" id="deck-dots" role="tablist" aria-label="Переключение томов"></div>
+    </div>
+  </section>
+
+  <!-- ——— Живой формат ——————————————————————————————————— -->
+  <section class="live" id="live">
+    <p class="kicker">Живой формат</p>
+    <h2>Занятия в Москве</h2>
+    <p class="live__lede">Очные занятия проходят небольшими группами и один на один. Мест физически немного, поэтому запись закрывается заранее.</p>
+
+    <div class="live__grid">
+      <div class="fact"><b class="tabular" id="live-seats"></b><span>свободно на ближайшие даты</span></div>
+      <div class="fact"><b class="tabular" id="live-deadline"></b><span id="live-month"></span></div>
+      <div class="fact"><b>Гайд</b><span id="live-gift"></span></div>
+    </div>
+
+    <p style="margin-top:30px"><a class="pill" data-tg="live" href="#">Занять место</a></p>
+  </section>
+
+  <!-- ——— Приватно ———————————————————————————————————————— -->
+  <section class="private material" id="private">
+    <div>
+      <p class="kicker">Один на один</p>
+      <h2>Индивидуальная консультация</h2>
+      <p>Личный запрос, онлайн или очно в Москве. Формат, длительность и цена обсуждаются в переписке до записи. Адрес приходит только после подтверждения.</p>
+      <p style="margin-top:26px"><a class="pill" data-tg="private" href="#">Написать лично</a></p>
+    </div>
+    <div class="plate private__plate">
+      <img src="assets/img/card-konsul.webp" alt="" loading="lazy">
+    </div>
+  </section>
+
+  <!-- ——— Обо мне ————————————————————————————————————————— -->
+  <section class="about" id="about">
+    <div class="plate about__plate">
+      <img src="assets/img/dari-wide.webp" alt="Dari love" loading="lazy">
+    </div>
+    <div>
+      <p class="kicker">Автор</p>
+      <h2 id="about-title"></h2>
+      <p class="about__text" id="about-text"></p>
+      <p class="placeholder">Заглушка — заменить на настоящий текст и факты</p>
+      <div class="about__facts" id="about-facts"></div>
+      <p style="margin-top:26px"><a class="thanks" data-href="tribute" href="#" style="color:var(--skin)">Поблагодарить →</a></p>
+    </div>
+  </section>
+
+  <!-- ——— Отзывы (удаляются, пока список пуст) ———————————— -->
+  <section class="reviews" id="reviews">
+    <p class="kicker">Отзывы</p>
+    <div class="reviews__grid" id="reviews-grid"></div>
+  </section>
+
+  <!-- ——— Вопросы ————————————————————————————————————————— -->
+  <section class="faq" id="faq">
+    <p class="kicker">Частые вопросы</p>
+    <h2>Что обычно спрашивают</h2>
+    <div id="faq-list"></div>
+  </section>
+
+  <!-- ——— Заявка —————————————————————————————————————————— -->
+  <section class="lead material">
+    <div>
+      <p class="kicker">Первый шаг</p>
+      <h2>Напишите — разберём ваш запрос</h2>
+      <p>Первое сообщение ни к чему не обязывает. Расскажите, что хотите изменить, и я предложу формат.</p>
+    </div>
+    <div class="lead__side">
+      <a class="pill" data-tg="lead" href="#">Написать в Telegram</a>
+      <label class="consent">
+        <input type="checkbox" checked>
+        Переписка остаётся между нами. Никакие данные не публикуются и не передаются третьим лицам.
+      </label>
+    </div>
+  </section>
+
+  <!-- ——— Подвал —————————————————————————————————————————— -->
+  <footer class="foot">
+    <div class="wordmark">DARI <i>love</i></div>
+    <div class="foot__links" id="foot-links"></div>
+    <small id="foot-legal"></small>
+    <small>18+ · Москва</small>
+  </footer>
 </main>
+
+</div><!-- /#bounce -->
+
+<!-- Липкая полоса: появляется после оглавления -->
+<div class="dock" id="dock">
+  <p class="dock__note" id="dock-note"></p>
+  <div class="dock__side">
+    <a class="quiet" data-href="tribute" href="#">Поблагодарить</a>
+    <a class="pill" data-tg="dock" href="#">Написать в Telegram</a>
+  </div>
+</div>
+
+<dialog class="sheet" id="sheet">
+  <div class="sheet__inner material" id="sheet-body"></div>
+  <button class="sheet__close" id="sheet-close" type="button" aria-label="Закрыть">×</button>
+</dialog>
+
+<script src="js/content.js"></script>
+<script src="js/site.js"></script>
 </body>
 </html>

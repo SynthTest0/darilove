@@ -2,13 +2,13 @@
    Единственный примитив анимации — налив: одна переменная --fill,
    одна маска. Он же золочение обреза, он же прогресс, он же ховер. */
 
-body { padding-left: 84px; }
+body { padding-left: var(--spine); }
 
 /* ——— Корешок: единственная вертикальная ось страницы ——————————— */
 .spine {
   position: fixed;
   left: 0; top: 0; bottom: 0;
-  width: 84px;
+  width: var(--spine);
   z-index: 60;
   display: flex;
   flex-direction: column;
@@ -60,7 +60,10 @@ body { padding-left: 84px; }
   background: currentColor;
   transition: width 200ms var(--ease), background-color 200ms var(--ease);
 }
-.spine__tick:hover::before, .spine__tick[aria-current="true"]::before { width: 22px; background: var(--gold); }
+.spine__tick[aria-current="true"]::before { width: 22px; background: var(--gold); }
+@media (hover: hover) and (pointer: fine) {
+  .spine__tick:hover::before { width: 22px; background: var(--gold); }
+}
 .spine__tick span {
   position: absolute; left: 26px;
   white-space: nowrap;
@@ -69,7 +72,10 @@ body { padding-left: 84px; }
   opacity: 0; pointer-events: none;
   transition: opacity 180ms var(--ease);
 }
-.spine__tick:hover span, .spine__tick:focus-visible span { opacity: 1; }
+.spine__tick:focus-visible span { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .spine__tick:hover span { opacity: 1; }
+}
 
 .spine__folio { writing-mode: vertical-rl; font-size: 11px; letter-spacing: .3em; color: var(--muted); }
 
@@ -81,11 +87,13 @@ body { padding-left: 84px; }
   padding: 14px clamp(18px, 4vw, 56px);
   background: linear-gradient(180deg, rgba(24,10,14,.94), rgba(24,10,14,.35) 80%, transparent);
   backdrop-filter: blur(10px);
-  transition: transform 280ms var(--ease);
+  transition: transform 240ms var(--ease-move);
 }
 .head[data-hidden="1"] { transform: translateY(-110%); }
 .head a:not(.pill) { color: var(--skin); text-decoration: none; font-size: var(--step-1); }
-.head a:not(.pill):hover { color: var(--cream); }
+@media (hover: hover) and (pointer: fine) {
+  .head a:not(.pill):hover { color: var(--cream); }
+}
 
 .wrap { max-width: 1360px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 56px); }
 
@@ -165,7 +173,7 @@ h1 {
 .frontis__edge {
   position: absolute; top: 8px; bottom: 8px; right: -7px;
   width: 7px; border-radius: 0 3px 3px 0;
-  background: linear-gradient(180deg, var(--gold-hi), var(--gold) 45%, #7A5320);
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold) 45%, var(--gold-deep));
   clip-path: inset(calc(100% - var(--fill) * 100%) 0 0 0);
   box-shadow: 2px 0 6px -2px rgba(9,3,5,.9);
 }
@@ -233,8 +241,9 @@ h1 {
   color: inherit;
   cursor: pointer;
   opacity: calc(1 - var(--away, 0) * .75);
-  transition: opacity 160ms linear;
+  transition: opacity 160ms linear, transform 140ms var(--ease);
 }
+.tome:active { transform: scale(0.99); }
 .tome__plate {
   aspect-ratio: 4 / 5;
   border-radius: 8px;
@@ -259,7 +268,7 @@ h1 {
 .tome__more { display: inline-flex; align-items: center; gap: .5em; margin-top: 22px; color: var(--cream); font-size: var(--step-1); }
 .tome__more::after { content: ""; width: 26px; height: 1px; background: var(--gold); }
 
-.tome--private { --wine-deep: #6B2A31; }
+.tome--private { --wine-deep: var(--wine-lit); }
 .tome--private .tome__num { color: var(--gold-hi); }
 
 /* Крупные кропы разводят карточки по ритму: каждая смотрит по-своему. */
@@ -273,6 +282,7 @@ h1 {
   width: 34px; height: 2px; border: 0; padding: 0;
   background: rgba(252,231,220,.22);
   cursor: pointer;
+  transition: background-color 200ms var(--ease);
 }
 .deck__dot[aria-current="true"] { background: var(--gold); }
 
@@ -300,7 +310,7 @@ h1 {
   align-items: center;
   padding: clamp(28px, 4vw, 48px);
   border-radius: 16px;
-  --wine-deep: #6B2A31;
+  --wine-deep: var(--wine-lit);
   margin-bottom: clamp(60px, 9vw, 120px);
 }
 .private h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: var(--step-4); line-height: 1.02; margin: 10px 0 0; }
@@ -367,23 +377,42 @@ h1 {
 
 /* ——— Липкая нижняя полоса ————————————————————————————————————— */
 .dock {
-  position: fixed; left: 84px; right: 0; bottom: 0; z-index: 55;
+  position: fixed; left: var(--spine); right: 0; bottom: 0; z-index: 55;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 12px clamp(16px, 4vw, 40px);
   background: linear-gradient(0deg, rgba(24,10,14,.97), rgba(24,10,14,.8));
   border-top: 1px solid rgba(252,231,220,.12);
   transform: translateY(110%);
-  transition: transform 320ms var(--ease);
+  transition: transform 200ms var(--ease);
 }
-.dock[data-show="1"] { transform: none; }
+/* Появление чуть медленнее ухода: уход — реакция системы, он должен быть быстрым. */
+.dock[data-show="1"] { transform: none; transition-duration: 280ms; }
 .dock__note { font-size: var(--step-1); color: var(--skin); margin: 0; }
 .dock__side { display: flex; align-items: center; gap: 18px; }
 .dock a.quiet { color: var(--muted); font-size: var(--step-1); text-decoration: none; }
 .dock a.quiet:hover { color: var(--skin); }
 
 /* ——— Модальное окно тома —————————————————————————————————————— */
-.sheet { border: 0; padding: 0; background: transparent; max-width: min(920px, 92vw); width: 100%; }
-.sheet::backdrop { background: rgba(12, 4, 6, .78); backdrop-filter: blur(6px); }
+.sheet {
+  border: 0; padding: 0; background: transparent;
+  max-width: min(920px, 92vw); width: 100%;
+  opacity: 1;
+  transform: scale(1);
+  /* Модалка не привязана к триггеру — растёт из центра. */
+  transform-origin: center;
+  transition: opacity 180ms var(--ease), transform 180ms var(--ease), overlay 180ms allow-discrete, display 180ms allow-discrete;
+}
+.sheet:not([open]) { opacity: 0; transform: scale(0.96); }
+@starting-style { .sheet[open] { opacity: 0; transform: scale(0.96); } }
+
+.sheet::backdrop {
+  background: rgba(12, 4, 6, .78);
+  backdrop-filter: blur(6px);
+  opacity: 1;
+  transition: opacity 180ms var(--ease), overlay 180ms allow-discrete, display 180ms allow-discrete;
+}
+.sheet:not([open])::backdrop { opacity: 0; }
+@starting-style { .sheet[open]::backdrop { opacity: 0; } }
 .sheet__inner {
   display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1fr);
   gap: clamp(20px, 3vw, 40px);
@@ -430,9 +459,7 @@ body[data-gated="1"] { overflow: hidden; }
 }
 
 @media (max-width: 640px) {
-  body { padding-left: 56px; }
-  .spine { width: 56px; }
-  .dock { left: 56px; }
+  :root { --spine: 56px; }
   .spine__nav { display: none; }
   .dock__note { display: none; }
   .head a.thanks { display: none; }

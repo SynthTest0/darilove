@@ -16,7 +16,7 @@ body { padding-left: var(--spine); }
   justify-content: space-between;
   padding: 20px 0 22px;
   background:
-    linear-gradient(90deg, rgba(12,4,6,.55), rgba(252,231,220,.06) 42%, rgba(12,4,6,.5)),
+    linear-gradient(90deg, rgba(34,14,20,.55), rgba(252,231,220,.06) 42%, rgba(34,14,20,.5)),
     var(--wine-deep);
   border-right: 1px solid rgba(252, 231, 220, .12);
 }
@@ -40,7 +40,7 @@ body { padding-left: var(--spine); }
   margin-left: -1.5px;
   height: calc(var(--read, 0) * 100%);
   background: linear-gradient(180deg, var(--gold-hi), var(--gold) 40%, var(--wine-lit));
-  box-shadow: 1px 0 0 rgba(12, 4, 6, .5);
+  box-shadow: 1px 0 0 rgba(34, 14, 20, .5);
 }
 
 /* Тики глав: ось несёт навигацию, а не только имя. */
@@ -120,7 +120,7 @@ body { padding-left: var(--spine); }
 @media (min-width: 1021px) {
   .hero h1 { font-size: min(var(--step-5), 9.2vh); }
   .hero .lede { font-size: var(--step-1); margin-top: 16px; }
-  .hero__rule { margin: 16px 0 12px; }
+  .hero__rule { margin: 18px 0 0; }
   .actions { margin-top: 20px; }
   .colophon { margin-top: 22px; }
   .colophon__row { padding: 8px 0; }
@@ -130,7 +130,8 @@ body { padding-left: var(--spine); }
 
 .hero__rule {
   height: 1px;
-  margin: 24px 0 20px;
+  margin: 22px 0 0;
+  max-width: 30ch;
   background: linear-gradient(90deg, var(--gold) calc(var(--fill) * 100%), rgba(252,231,220,.14) 0);
 }
 
@@ -140,7 +141,7 @@ h1 {
   font-size: var(--step-5);
   line-height: .94;
   letter-spacing: -.015em;
-  margin: 16px 0 0;
+  margin: 0;
 }
 
 /* Золочение — тот же налив, применённый к букве. */
@@ -151,7 +152,7 @@ h1 {
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  filter: drop-shadow(0 2px 1px rgba(12, 4, 6, .55));
+  filter: drop-shadow(0 2px 1px rgba(34, 14, 20, .55));
 }
 
 .lede { max-width: 46ch; color: var(--skin); margin: 20px 0 0; }
@@ -186,7 +187,7 @@ h1 {
   aspect-ratio: 4 / 5;
   border-radius: 4px 14px 14px 4px;
   border: 1px solid rgba(252,231,220,.12);
-  box-shadow: 0 40px 80px -30px rgba(9,3,5,.95);
+  box-shadow: 0 40px 80px -30px rgba(30,12,18,.95);
 }
 .frontis__plate img.under { position: absolute; inset: 0; }
 .frontis__plate img.over {
@@ -198,7 +199,7 @@ h1 {
   position: absolute; top: 10px; bottom: 10px; right: -8px;
   width: 8px; border-radius: 0 3px 3px 0;
   background: linear-gradient(180deg, var(--gold-dim), var(--gold-deep) 55%, #4A3418);
-  box-shadow: 2px 0 6px -2px rgba(9,3,5,.9);
+  box-shadow: 2px 0 6px -2px rgba(30,12,18,.9);
 }
 
 /* Позолота лежит на обрезе с самого начала — тусклая; налив её разжигает. */
@@ -323,13 +324,13 @@ h1 {
 .live__grid {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(18px, 3vw, 40px);
-  max-width: 620px;
+  max-width: 760px;
   padding-top: 26px; margin-top: 26px;
   border-top: 1px solid rgba(252,231,220,.13);
 }
 .live h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: var(--step-4); line-height: 1; margin: 8px 0 0; }
 .live__lede { color: var(--skin); max-width: 52ch; margin: 18px 0 0; }
-.live__cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+.live__cta { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 30px; }
 .live__cta span { color: var(--muted); font-size: var(--step-1); }
 
 .fact b {
@@ -449,7 +450,7 @@ h1 {
 @starting-style { .sheet[open] { opacity: 0; transform: scale(0.96); } }
 
 .sheet::backdrop {
-  background: rgba(12, 4, 6, .78);
+  background: rgba(34, 14, 20, .78);
   backdrop-filter: blur(6px);
   opacity: 1;
   transition: opacity 180ms var(--ease), overlay 180ms allow-discrete, display 180ms allow-discrete;
@@ -483,7 +484,7 @@ h1 {
   position: fixed; inset: 0; z-index: 90;
   display: grid; place-items: center;
   padding: 24px;
-  background: rgba(12, 4, 6, .55);
+  background: rgba(34, 14, 20, .55);
   backdrop-filter: blur(14px);
 }
 .gate__card { max-width: 460px; padding: clamp(26px, 4vw, 40px); border-radius: 16px; text-align: center; }
@@ -508,7 +509,7 @@ body[data-gated="1"] { overflow: hidden; }
   .hero h1 { font-size: min(var(--step-5), 8.4vh); }
   .hero .lede { font-size: var(--step-1); margin-top: 14px; max-width: 38ch; }
   .hero .subjects { margin-top: 12px; }
-  .hero__rule { margin: 14px 0 10px; }
+  .hero__rule { margin: 16px 0 0; }
   .actions { margin-top: 18px; }
   .frontis { margin-top: 22px; }
   .frontis__plate { height: min(46vh, 420px); width: auto; }

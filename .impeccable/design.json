@@ -1,172 +1,507 @@
 {
-  "schemaVersion": 2,
-  "generatedAt": "2026-09-02T00:00:00.000Z",
-  "title": "Design System: DARI LOVE",
-  "extensions": {
-    "colorMeta": {
-      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#241017", "tonalRamp": ["#150910", "#241017", "#3A1B24", "#553039", "#7A4E55", "#A67C81", "#CFAFB1", "#EEDCDD"] },
-      "wine-deep": { "role": "primary", "displayName": "Deep Wine", "canonical": "#2C1015", "tonalRamp": ["#180810", "#2C1015", "#421A20", "#5D2B31", "#824A4F", "#AC787C", "#D4ACAE", "#F1DCDD"] },
-      "wine": { "role": "primary", "displayName": "Bound Wine", "canonical": "#4A1F24", "tonalRamp": ["#1C0B0E", "#301418", "#4A1F24", "#653036", "#8A4E53", "#B27C80", "#D7AFB1", "#F2DEDF"] },
-      "wine-lit": { "role": "primary", "displayName": "Cherry Velvet", "canonical": "#6B2A31", "tonalRamp": ["#280F13", "#3F181D", "#552027", "#6B2A31", "#8C444B", "#B2747A", "#D8A9AD", "#F3DDDF"] },
-      "cream": { "role": "neutral", "displayName": "Cream", "canonical": "#F2E2DA", "tonalRamp": ["#3A2A24", "#55403A", "#745B54", "#957A73", "#B69B95", "#D3BDB7", "#F2E2DA", "#FBF2EE"] },
-      "skin": { "role": "neutral", "displayName": "Skin", "canonical": "#C9A392", "tonalRamp": ["#33231C", "#4C362C", "#68503F", "#8A6C57", "#A98673", "#C9A392", "#DFC4B7", "#F3E5DC"] },
-      "muted": { "role": "neutral", "displayName": "Muted Rose", "canonical": "#A98A85", "tonalRamp": ["#2B1E1C", "#41302D", "#5C4441", "#7A5C58", "#96736E", "#A98A85", "#C9AFAB", "#EBDCDA"] },
-      "gold": { "role": "secondary", "displayName": "Leaf Gold", "canonical": "#D9A24E", "tonalRamp": ["#33230D", "#4C3614", "#6B4C1C", "#8E6727", "#B48334", "#D9A24E", "#EBC489", "#F8E6C7"] },
-      "gold-hi": { "role": "secondary", "displayName": "Gold Highlight", "canonical": "#FCCB6D", "tonalRamp": ["#3A2C10", "#54401A", "#755A24", "#9B7930", "#C29A3F", "#E4B554", "#FCCB6D", "#FDE7B6"] },
-      "gold-deep": { "role": "secondary", "displayName": "Dyed Edge Shadow", "canonical": "#7A5320", "tonalRamp": ["#241806", "#3A280C", "#523913", "#7A5320", "#9C6E2E", "#BE8F4C", "#DBB784", "#F2E1C4"] },
-      "gold-dim": { "role": "secondary", "displayName": "Gilding At Rest", "canonical": "#8A6A38", "tonalRamp": ["#261C0E", "#3B2C15", "#54401F", "#6F5429", "#8A6A38", "#AE8C55", "#D0B78B", "#EFE2CA"] }
-    },
-    "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero title only; additionally capped against viewport height (9.2vh desktop, 8.4vh below 1021px) so the first viewport closes." },
-      "headline": { "displayName": "Headline", "purpose": "Section h2, volume title, modal h3, manifest sentence. Cormorant 400." },
-      "title": { "displayName": "Title", "purpose": "Colophon prices, about-facts, gate heading; with 0.34em tracking and uppercase it is the wordmark and spine mark." },
-      "body": { "displayName": "Body", "purpose": "All reading copy in Golos Text. Measures held at 44-62ch." },
-      "label": { "displayName": "Label", "purpose": "Uppercase metadata: subjects line, volume audience, frontispiece caption, modal meta, consent." },
-      "action": { "displayName": "Action", "purpose": "Pill button labels only. Golos 600." }
-    },
-    "shadows": [
-      { "name": "material", "value": "0 1px 0 rgba(252,231,220,0.06) inset, 0 -14px 30px rgba(34,14,20,0.24) inset, 0 22px 44px -18px rgba(30,12,18,0.85)", "purpose": "The one shared recipe for every raised panel, card, review, modal body and gate card." },
-      { "name": "pill-rest", "value": "0 1px 0 rgba(255,240,232,0.28) inset, 0 -10px 18px rgba(34,14,20,0.24) inset, 0 14px 26px -12px rgba(30,12,18,0.9)", "purpose": "The convex pressable form of the material." },
-      { "name": "pill-active", "value": "0 2px 6px rgba(30,12,18,0.55) inset, 0 10px 20px rgba(34,14,20,0.42) inset, 0 2px 6px -4px rgba(30,12,18,0.9)", "purpose": "Button pressed into the binding, paired with translateY(2px) scale(0.975)." },
-      { "name": "pasted-plate", "value": "0 40px 80px -30px rgba(30,12,18,0.95)", "purpose": "Hero frontispiece only: the one object depicted as physically pasted in." },
-      { "name": "fore-edge", "value": "2px 0 6px -2px rgba(30,12,18,0.9)", "purpose": "The gilded fore-edge lifting off the book block." }
-    ],
-    "motion": [
-      { "name": "ease", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Entrance and response: button press, tick growth, dock, modal, FAQ." },
-      { "name": "ease-move", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "Movement across the screen: header retraction, velvet drift." },
-      { "name": "fill", "value": "--fill (0 to 1, scroll / 0.62vh)", "purpose": "The single scroll primitive: hero rule, hero photo wipe mask, fore-edge gilding, tick growth. Pinned to 1 under reduced motion." },
-      { "name": "read", "value": "--read (0 to 1, scroll / max)", "purpose": "Reading progress; sets the height of the ribbon bookmark on the spine." },
-      { "name": "velvet-drift", "value": "drift 52s cubic-bezier(0.77,0,0.175,1) infinite alternate", "purpose": "Background field breathing via transform, disabled under reduced motion." },
-      { "name": "reduced-motion-policy", "value": "transition-property: opacity, color, background-color, border-color; 200ms", "purpose": "Reduced motion keeps color and opacity change and drops movement; it is not zero animation." }
-    ],
-    "breakpoints": [
-      { "name": "narrow", "value": "1020px" },
-      { "name": "phone", "value": "640px" },
-      { "name": "fine-pointer", "value": "(hover: hover) and (pointer: fine)" }
+ "schemaVersion": 2,
+ "generatedAt": "2026-09-02T16:34:07",
+ "title": "Design System: DARI LOVE",
+ "extensions": {
+  "colorMeta": {
+   "ink": {
+    "role": "neutral",
+    "displayName": "Ink",
+    "canonical": "#241017",
+    "tonalRamp": [
+     "#150910",
+     "#241017",
+     "#3A1B24",
+     "#553039",
+     "#7A4E55",
+     "#A67C81",
+     "#CFAFB1",
+     "#EEDCDD"
     ]
+   },
+   "wine-deep": {
+    "role": "primary",
+    "displayName": "Deep Wine",
+    "canonical": "#2C1015",
+    "tonalRamp": [
+     "#180810",
+     "#2C1015",
+     "#421A20",
+     "#5D2B31",
+     "#824A4F",
+     "#AC787C",
+     "#D4ACAE",
+     "#F1DCDD"
+    ]
+   },
+   "wine": {
+    "role": "primary",
+    "displayName": "Bound Wine",
+    "canonical": "#4A1F24",
+    "tonalRamp": [
+     "#1C0B0E",
+     "#301418",
+     "#4A1F24",
+     "#653036",
+     "#8A4E53",
+     "#B27C80",
+     "#D7AFB1",
+     "#F2DEDF"
+    ]
+   },
+   "wine-lit": {
+    "role": "primary",
+    "displayName": "Cherry Velvet",
+    "canonical": "#6B2A31",
+    "tonalRamp": [
+     "#280F13",
+     "#3F181D",
+     "#552027",
+     "#6B2A31",
+     "#8C444B",
+     "#B2747A",
+     "#D8A9AD",
+     "#F3DDDF"
+    ]
+   },
+   "cream": {
+    "role": "neutral",
+    "displayName": "Cream",
+    "canonical": "#F2E2DA",
+    "tonalRamp": [
+     "#3A2A24",
+     "#55403A",
+     "#745B54",
+     "#957A73",
+     "#B69B95",
+     "#D3BDB7",
+     "#F2E2DA",
+     "#FBF2EE"
+    ]
+   },
+   "skin": {
+    "role": "neutral",
+    "displayName": "Skin",
+    "canonical": "#C9A392",
+    "tonalRamp": [
+     "#33231C",
+     "#4C362C",
+     "#68503F",
+     "#8A6C57",
+     "#A98673",
+     "#C9A392",
+     "#DFC4B7",
+     "#F3E5DC"
+    ]
+   },
+   "muted": {
+    "role": "neutral",
+    "displayName": "Muted Rose",
+    "canonical": "#A98A85",
+    "tonalRamp": [
+     "#2B1E1C",
+     "#41302D",
+     "#5C4441",
+     "#7A5C58",
+     "#96736E",
+     "#A98A85",
+     "#C9AFAB",
+     "#EBDCDA"
+    ]
+   },
+   "gold": {
+    "role": "secondary",
+    "displayName": "Leaf Gold",
+    "canonical": "#D9A24E",
+    "tonalRamp": [
+     "#33230D",
+     "#4C3614",
+     "#6B4C1C",
+     "#8E6727",
+     "#B48334",
+     "#D9A24E",
+     "#EBC489",
+     "#F8E6C7"
+    ]
+   },
+   "gold-hi": {
+    "role": "secondary",
+    "displayName": "Gold Highlight",
+    "canonical": "#FCCB6D",
+    "tonalRamp": [
+     "#3A2C10",
+     "#54401A",
+     "#755A24",
+     "#9B7930",
+     "#C29A3F",
+     "#E4B554",
+     "#FCCB6D",
+     "#FDE7B6"
+    ]
+   },
+   "gold-deep": {
+    "role": "secondary",
+    "displayName": "Dyed Edge Shadow",
+    "canonical": "#7A5320",
+    "tonalRamp": [
+     "#241806",
+     "#3A280C",
+     "#523913",
+     "#7A5320",
+     "#9C6E2E",
+     "#BE8F4C",
+     "#DBB784",
+     "#F2E1C4"
+    ]
+   },
+   "gold-dim": {
+    "role": "secondary",
+    "displayName": "Gilding At Rest",
+    "canonical": "#8A6A38",
+    "tonalRamp": [
+     "#261C0E",
+     "#3B2C15",
+     "#54401F",
+     "#6F5429",
+     "#8A6A38",
+     "#AE8C55",
+     "#D0B78B",
+     "#EFE2CA"
+    ]
+   },
+   "edge": {
+    "value": "rgb(252 231 220)",
+    "role": "Светлая грань материала. Живёт лестницей прозрачностей --edge-05 … --edge-32; чистым цветом не красится ничего.",
+    "usage": "borders, top edges, hairlines, dividers"
+   }
   },
-  "components": [
-    {
-      "name": "Pill Button",
-      "kind": "button",
-      "refersTo": "pill",
-      "description": "The primary call to action: convex cherry-velvet pill that presses into the binding.",
-      "html": "<a class=\"ds-pill\" href=\"#\">Написать в Telegram</a>",
-      "css": ".ds-pill { display: inline-flex; align-items: center; gap: 0.6em; padding: 0.95em 1.9em; border: 1px solid rgba(252,231,220,0.14); border-top-color: rgba(252,231,220,0.32); border-radius: 999px; background: linear-gradient(180deg, rgba(252,231,220,0.16), rgba(34,14,20,0.18) 55%), #6B2A31; color: #F2E2DA; font: 600 0.9375rem/1 'Golos Text', system-ui, sans-serif; letter-spacing: 0.01em; text-decoration: none; cursor: pointer; box-shadow: 0 1px 0 rgba(255,240,232,0.28) inset, 0 -10px 18px rgba(34,14,20,0.24) inset, 0 14px 26px -12px rgba(30,12,18,0.9); transition: transform 140ms cubic-bezier(0.23,1,0.32,1), box-shadow 140ms cubic-bezier(0.23,1,0.32,1), filter 140ms cubic-bezier(0.23,1,0.32,1); } @media (hover: hover) and (pointer: fine) { .ds-pill:hover { filter: brightness(1.09); } } .ds-pill:active { transform: translateY(2px) scale(0.975); box-shadow: 0 2px 6px rgba(30,12,18,0.55) inset, 0 10px 20px rgba(34,14,20,0.42) inset, 0 2px 6px -4px rgba(30,12,18,0.9); } .ds-pill:focus-visible { outline: 2px solid #FCCB6D; outline-offset: 3px; border-radius: 999px; }"
-    },
-    {
-      "name": "Quiet Pill",
-      "kind": "button",
-      "refersTo": "pill-quiet",
-      "description": "The secondary action beside a primary pill: transparent face, single top highlight, no outer shadow.",
-      "html": "<a class=\"ds-pill-quiet\" href=\"#\">Смотреть оглавление</a>",
-      "css": ".ds-pill-quiet { display: inline-flex; align-items: center; gap: 0.6em; padding: 0.95em 1.9em; border: 1px solid rgba(252,231,220,0.14); border-top-color: rgba(252,231,220,0.32); border-radius: 999px; background: linear-gradient(180deg, rgba(252,231,220,0.08), transparent 60%); color: #C9A392; font: 600 0.9375rem/1 'Golos Text', system-ui, sans-serif; letter-spacing: 0.01em; text-decoration: none; cursor: pointer; box-shadow: 0 1px 0 rgba(255,240,232,0.16) inset; transition: transform 140ms cubic-bezier(0.23,1,0.32,1), filter 140ms cubic-bezier(0.23,1,0.32,1); } @media (hover: hover) and (pointer: fine) { .ds-pill-quiet:hover { filter: brightness(1.09); } } .ds-pill-quiet:active { transform: translateY(2px) scale(0.975); } .ds-pill-quiet:focus-visible { outline: 2px solid #FCCB6D; outline-offset: 3px; }"
-    },
-    {
-      "name": "Material Panel",
-      "kind": "card",
-      "refersTo": "material-panel",
-      "description": "The shared raised surface: light top edge, inner downward shading, wine-tinted offset shadow.",
-      "html": "<section class=\"ds-panel\"><h2>Индивидуальная консультация</h2><p>Личный запрос, онлайн или очно в Москве.</p></section>",
-      "css": ".ds-panel { padding: clamp(28px, 4vw, 48px); border-radius: 16px; background: linear-gradient(180deg, rgba(252,231,220,0.07), rgba(34,14,20,0.10) 42%), #2C1015; border: 1px solid rgba(252,231,220,0.10); border-top-color: rgba(252,231,220,0.20); box-shadow: 0 1px 0 rgba(252,231,220,0.06) inset, 0 -14px 30px rgba(34,14,20,0.24) inset, 0 22px 44px -18px rgba(30,12,18,0.85); color: #F2E2DA; font: 400 1.0625rem/1.6 'Golos Text', system-ui, sans-serif; } .ds-panel h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(2rem, 1.2rem + 3.2vw, 3.6rem); line-height: 1.02; margin: 0; } .ds-panel p { color: #F2E2DA; max-width: 46ch; margin: 18px 0 0; }"
-    },
-    {
-      "name": "Volume Card",
-      "kind": "card",
-      "refersTo": "tome-card",
-      "description": "One of four chapter cards: Cormorant roman numeral, serif title, uppercase audience label, teaser, gold-ruled 'more'.",
-      "html": "<article class=\"ds-tome\" tabindex=\"0\" role=\"button\"><p class=\"ds-tome-num\">I</p><h3 class=\"ds-tome-title\">Кунилингус</h3><p class=\"ds-tome-whom\">Мужчинам</p><p class=\"ds-tome-teaser\">Техника, темп, дыхание и обратная связь.</p><span class=\"ds-tome-more\">Подробнее</span></article>",
-      "css": ".ds-tome { display: block; padding: clamp(16px, 2vw, 26px); border-radius: 12px; background: linear-gradient(180deg, rgba(252,231,220,0.07), rgba(34,14,20,0.10) 42%), #2C1015; border: 1px solid rgba(252,231,220,0.10); border-top-color: rgba(252,231,220,0.20); box-shadow: 0 1px 0 rgba(252,231,220,0.06) inset, 0 -14px 30px rgba(34,14,20,0.24) inset, 0 22px 44px -18px rgba(30,12,18,0.85); color: #F2E2DA; font: 400 1.0625rem/1.6 'Golos Text', system-ui, sans-serif; cursor: pointer; transition: opacity 160ms linear, transform 140ms cubic-bezier(0.23,1,0.32,1); } .ds-tome:active { transform: scale(0.99); } .ds-tome:focus-visible { outline: 2px solid #FCCB6D; outline-offset: 3px; } .ds-tome-num { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2.2rem, 1rem + 3vw, 3.4rem); line-height: 1; color: #D9A24E; margin: 0; } .ds-tome-title { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(2rem, 1rem + 3.4vw, 3.6rem); line-height: 1.02; margin: 10px 0 0; } .ds-tome-whom { font-size: 0.8125rem; letter-spacing: 0.24em; text-transform: uppercase; color: #C9A392; margin: 12px 0 0; } .ds-tome-teaser { color: #A98A85; margin: 16px 0 0; max-width: 44ch; } .ds-tome-more { display: inline-flex; align-items: center; gap: 0.5em; margin-top: 22px; color: #F2E2DA; font-size: 0.9375rem; } .ds-tome-more::after { content: \"\"; width: 26px; height: 1px; background: #D9A24E; }"
-    },
-    {
-      "name": "Spine Navigation",
-      "kind": "nav",
-      "refersTo": "spine",
-      "description": "The page's only vertical axis: vertical wordmark, ribbon bookmark, chapter ticks that grow and gild on hover or current section, city folio.",
-      "html": "<aside class=\"ds-spine\"><div class=\"ds-lasse\"></div><a class=\"ds-spine-mark\" href=\"#top\">DARI <i>love</i></a><nav class=\"ds-spine-nav\"><a class=\"ds-tick\" href=\"#a\" aria-current=\"true\"><span>Тома</span></a><a class=\"ds-tick\" href=\"#b\"><span>Живой формат</span></a><a class=\"ds-tick\" href=\"#c\"><span>Приватно</span></a></nav><div class=\"ds-folio\">МОСКВА</div></aside>",
-      "css": ".ds-spine { position: relative; width: 84px; min-height: 420px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 20px 0 22px; background: linear-gradient(90deg, rgba(34,14,20,0.55), rgba(252,231,220,0.06) 42%, rgba(34,14,20,0.5)), #2C1015; border-right: 1px solid rgba(252,231,220,0.12); } .ds-lasse { position: absolute; left: 50%; top: 0; width: 3px; margin-left: -1.5px; height: 45%; background: linear-gradient(180deg, #FCCB6D, #D9A24E 40%, #6B2A31); box-shadow: 1px 0 0 rgba(34,14,20,0.5); } .ds-spine-mark { writing-mode: vertical-rl; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 15px; letter-spacing: 0.44em; text-transform: uppercase; color: #F2E2DA; text-decoration: none; } .ds-spine-mark i { font-style: italic; letter-spacing: 0.08em; text-transform: none; color: #C9A392; } .ds-spine-nav { display: flex; flex-direction: column; align-items: center; gap: 18px; } .ds-tick { position: relative; width: 22px; height: 22px; display: grid; place-items: center; justify-items: start; color: #A98A85; text-decoration: none; } .ds-tick::before { content: \"\"; width: 22px; height: 1px; background: currentColor; transform: scaleX(0.55); transform-origin: left center; transition: transform 200ms cubic-bezier(0.23,1,0.32,1), background-color 200ms cubic-bezier(0.23,1,0.32,1); } .ds-tick[aria-current=\"true\"]::before { transform: scaleX(1); background: #D9A24E; } @media (hover: hover) and (pointer: fine) { .ds-tick:hover::before { transform: scaleX(1); background: #D9A24E; } .ds-tick:hover span { opacity: 1; } } .ds-tick span { position: absolute; left: 26px; white-space: nowrap; font: 400 11px/1.6 'Golos Text', system-ui, sans-serif; letter-spacing: 0.18em; text-transform: uppercase; color: #C9A392; opacity: 0; pointer-events: none; transition: opacity 180ms cubic-bezier(0.23,1,0.32,1); } .ds-tick:focus-visible span { opacity: 1; } .ds-folio { writing-mode: vertical-rl; font: 400 11px/1.6 'Golos Text', system-ui, sans-serif; letter-spacing: 0.3em; color: #A98A85; }"
-    },
-    {
-      "name": "Colophon Row",
-      "kind": "custom",
-      "refersTo": "colophon-row",
-      "description": "Prices set as a book colophon rather than a pricing table: hairline-ruled rows, Golos label with muted note, Cormorant value.",
-      "html": "<dl class=\"ds-colophon\"><div class=\"ds-colophon-row\"><dt>Разбор запроса, онлайн<small>к любой теме</small></dt><dd>5 000 ₽</dd></div><div class=\"ds-colophon-row\"><dt>Индивидуальное занятие<small>очно или онлайн</small></dt><dd>20 000 ₽</dd></div></dl>",
-      "css": ".ds-colophon { margin: 0; border-top: 1px solid rgba(252,231,220,0.12); font: 400 1.0625rem/1.6 'Golos Text', system-ui, sans-serif; } .ds-colophon-row { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(252,231,220,0.08); } .ds-colophon-row dt { color: #F2E2DA; font-size: 0.9375rem; } .ds-colophon-row dt small { display: block; color: #A98A85; font-size: 0.8125rem; margin-top: 2px; } .ds-colophon-row dd { margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.35rem, 1.1rem + 1.1vw, 2rem); color: #F2E2DA; font-variant-numeric: tabular-nums; }"
-    },
-    {
-      "name": "FAQ Disclosure",
-      "kind": "custom",
-      "refersTo": "faq",
-      "description": "Hairline-ruled native details/summary; the gold plus is two 1px gradients that rotate and collapse to a minus when open.",
-      "html": "<div class=\"ds-faq\"><details><summary>Это подходит новичкам?</summary><p>Да. Начинаем с того уровня, на котором вы сейчас.</p></details><details><summary>Как проходит занятие?</summary><p>Онлайн или очно в Москве, один на один.</p></details></div>",
-      "css": ".ds-faq { font: 400 1.0625rem/1.6 'Golos Text', system-ui, sans-serif; color: #F2E2DA; } .ds-faq details { border-top: 1px solid rgba(252,231,220,0.12); } .ds-faq details:last-of-type { border-bottom: 1px solid rgba(252,231,220,0.12); } .ds-faq summary { list-style: none; cursor: pointer; padding: 18px 0; display: flex; justify-content: space-between; gap: 18px; align-items: baseline; font-size: 1.0625rem; } .ds-faq summary::-webkit-details-marker { display: none; } .ds-faq summary:focus-visible { outline: 2px solid #FCCB6D; outline-offset: 3px; border-radius: 6px; } .ds-faq summary::after { content: \"\"; flex: 0 0 auto; width: 14px; height: 14px; background: linear-gradient(#D9A24E, #D9A24E) center/14px 1px no-repeat, linear-gradient(#D9A24E, #D9A24E) center/1px 14px no-repeat; transition: transform 200ms cubic-bezier(0.23,1,0.32,1); } .ds-faq details[open] summary::after { transform: rotate(90deg); background-size: 14px 1px, 0 0; } .ds-faq p { margin: 0 0 20px; color: #A98A85; max-width: 62ch; }"
-    },
-    {
-      "name": "Photographic Plate",
-      "kind": "custom",
-      "refersTo": "plate",
-      "description": "The CSS duotone: wine in color blend masked to weaken over bright areas, plus a warm screen layer. Source raster untouched.",
-      "html": "<div class=\"ds-plate\"><img src=\"assets/img/dari-hero.webp\" alt=\"\"></div>",
-      "css": ".ds-plate { position: relative; overflow: hidden; background: #2C1015; isolation: isolate; aspect-ratio: 4 / 5; width: 320px; border-radius: 8px; border: 1px solid rgba(252,231,220,0.12); } .ds-plate img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.62) contrast(1.06) brightness(1.01); } .ds-plate::before { content: \"\"; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, #6B2A31, #2C1015 78%); mix-blend-mode: color; opacity: 0.72; -webkit-mask-image: radial-gradient(70% 56% at 50% 58%, rgba(0,0,0,.18), #000 70%); mask-image: radial-gradient(70% 56% at 50% 58%, rgba(0,0,0,.18), #000 70%); pointer-events: none; } .ds-plate::after { content: \"\"; position: absolute; inset: 0; z-index: 1; background: radial-gradient(70% 56% at 50% 58%, rgba(252,203,109,0.85), transparent 72%); mix-blend-mode: screen; opacity: 0.20; pointer-events: none; }"
-    },
-    {
-      "name": "Gilded Fore-Edge",
-      "kind": "custom",
-      "refersTo": "frontis",
-      "description": "The book block: asymmetric plate radius plus an 8px dyed edge mounted outside the plate's overflow, ignited by --fill.",
-      "html": "<figure class=\"ds-frontis\"><div class=\"ds-frontis-book\"><div class=\"ds-plate ds-frontis-plate\"><img src=\"assets/img/dari-hero.webp\" alt=\"\"></div><div class=\"ds-frontis-edge\"></div></div><figcaption class=\"ds-frontis-cap\"><span>Фронтиспис</span><span>4:5</span></figcaption></figure>",
-      "css": ".ds-frontis { margin: 0; --fill: 0.6; } .ds-frontis-book { position: relative; width: fit-content; } .ds-frontis-plate { position: relative; overflow: hidden; background: #2C1015; isolation: isolate; aspect-ratio: 4 / 5; width: 300px; border-radius: 4px 14px 14px 4px; border: 1px solid rgba(252,231,220,0.12); box-shadow: 0 40px 80px -30px rgba(30,12,18,0.95); } .ds-frontis-plate img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.62) contrast(1.06) brightness(1.01); } .ds-frontis-edge { position: absolute; top: 10px; bottom: 10px; right: -8px; width: 8px; border-radius: 0 3px 3px 0; background: linear-gradient(180deg, #8A6A38, #7A5320 55%, #4A3418); box-shadow: 2px 0 6px -2px rgba(30,12,18,0.9); } .ds-frontis-edge::after { content: \"\"; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, #FCCB6D, #D9A24E 45%, #7A5320); clip-path: inset(calc(100% - var(--fill) * 100%) 0 0 0); } .ds-frontis-cap { display: flex; justify-content: space-between; margin-top: 12px; font: 400 0.8125rem/1.6 'Golos Text', system-ui, sans-serif; letter-spacing: 0.24em; text-transform: uppercase; color: #A98A85; }"
-    },
-    {
-      "name": "Age Gate",
-      "kind": "custom",
-      "refersTo": "gate",
-      "description": "Wine scrim at 55% with a 14px blur over the live page, carrying a material card and the two pills; the answer persists in localStorage.",
-      "html": "<div class=\"ds-gate\"><div class=\"ds-gate-card\"><h2>Здесь говорят о сексе прямо</h2><p>Материалы сайта предназначены для совершеннолетних.</p><div class=\"ds-gate-row\"><button class=\"ds-pill\" type=\"button\">Мне есть 18</button><button class=\"ds-pill-quiet\" type=\"button\">Мне нет 18</button></div></div></div>",
-      "css": ".ds-gate { position: relative; display: grid; place-items: center; padding: 24px; min-height: 320px; background: rgba(34,14,20,0.55); backdrop-filter: blur(14px); } .ds-gate-card { max-width: 460px; padding: clamp(26px, 4vw, 40px); border-radius: 16px; text-align: center; background: linear-gradient(180deg, rgba(252,231,220,0.07), rgba(34,14,20,0.10) 42%), #2C1015; border: 1px solid rgba(252,231,220,0.10); border-top-color: rgba(252,231,220,0.20); box-shadow: 0 1px 0 rgba(252,231,220,0.06) inset, 0 -14px 30px rgba(34,14,20,0.24) inset, 0 22px 44px -18px rgba(30,12,18,0.85); font: 400 1.0625rem/1.6 'Golos Text', system-ui, sans-serif; } .ds-gate-card h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(1.35rem, 1.1rem + 1.1vw, 2rem); color: #F2E2DA; margin: 0; } .ds-gate-card p { color: #C9A392; margin: 14px 0 24px; } .ds-gate-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; } .ds-pill { display: inline-flex; align-items: center; padding: 0.95em 1.9em; border: 1px solid rgba(252,231,220,0.14); border-top-color: rgba(252,231,220,0.32); border-radius: 999px; background: linear-gradient(180deg, rgba(252,231,220,0.16), rgba(34,14,20,0.18) 55%), #6B2A31; color: #F2E2DA; font: 600 0.9375rem/1 'Golos Text', system-ui, sans-serif; cursor: pointer; box-shadow: 0 1px 0 rgba(255,240,232,0.28) inset, 0 -10px 18px rgba(34,14,20,0.24) inset, 0 14px 26px -12px rgba(30,12,18,0.9); } .ds-pill-quiet { display: inline-flex; align-items: center; padding: 0.95em 1.9em; border: 1px solid rgba(252,231,220,0.14); border-top-color: rgba(252,231,220,0.32); border-radius: 999px; background: linear-gradient(180deg, rgba(252,231,220,0.08), transparent 60%); color: #C9A392; font: 600 0.9375rem/1 'Golos Text', system-ui, sans-serif; cursor: pointer; box-shadow: 0 1px 0 rgba(255,240,232,0.16) inset; }"
-    }
+  "typographyMeta": {
+   "display": {
+    "displayName": "Display",
+    "purpose": "Hero title only; additionally capped against viewport height (9.2vh desktop, 8.4vh below 1021px) so the first viewport closes."
+   },
+   "headline": {
+    "displayName": "Headline",
+    "purpose": "Section h2, volume title, modal h3, manifest sentence. Cormorant 400."
+   },
+   "title": {
+    "displayName": "Title",
+    "purpose": "Colophon prices, about-facts, gate heading; with 0.34em tracking and uppercase it is the wordmark and spine mark."
+   },
+   "body": {
+    "displayName": "Body",
+    "purpose": "All reading copy in Golos Text. Measures held at 44-62ch."
+   },
+   "label": {
+    "displayName": "Label",
+    "purpose": "Uppercase metadata: subjects line, volume audience, frontispiece caption, modal meta, consent."
+   },
+   "action": {
+    "displayName": "Action",
+    "purpose": "Pill button labels only. Golos 600."
+   },
+   "micro": {
+    "token": "--step-00",
+    "fontSize": "0.6875rem",
+    "fontFamily": "Golos Text",
+    "usage": "фолио корешка, подписи тиков"
+   },
+   "figure": {
+    "token": "--step-3x",
+    "fontSize": "clamp(1.7rem, 1rem + 2.2vw, 2.6rem)",
+    "fontFamily": "Cormorant Garamond",
+    "usage": "номера томов, крупные цифры живого формата"
+   },
+   "numeralsNote": "Старостильные цифры недоступны: в поставляемой сборке Cormorant Garamond в GSUB только calt, ccmp, dnom, frac, liga, lnum, locl, numr, tnum — таблицы onum нет, объявление oldstyle-nums не даёт ничего."
+  },
+  "shadows": [
+   {
+    "name": "material",
+    "value": "0 1px 0 rgba(252,231,220,0.06) inset, 0 -14px 30px rgba(34,14,20,0.24) inset, 0 22px 44px -18px rgba(30,12,18,0.85)",
+    "purpose": "The one shared recipe for every raised panel, card, review, modal body and gate card."
+   },
+   {
+    "name": "pill-rest",
+    "value": "0 1px 0 rgba(255,240,232,0.28) inset, 0 -10px 18px rgba(34,14,20,0.24) inset, 0 14px 26px -12px rgba(30,12,18,0.9)",
+    "purpose": "The convex pressable form of the material."
+   },
+   {
+    "name": "pill-active",
+    "value": "0 2px 6px rgba(30,12,18,0.55) inset, 0 10px 20px rgba(34,14,20,0.42) inset, 0 2px 6px -4px rgba(30,12,18,0.9)",
+    "purpose": "Button pressed into the binding, paired with translateY(2px) scale(0.975)."
+   },
+   {
+    "name": "pasted-plate",
+    "value": "0 40px 80px -30px rgba(30,12,18,0.95)",
+    "purpose": "Hero frontispiece only: the one object depicted as physically pasted in."
+   },
+   {
+    "name": "fore-edge",
+    "value": "2px 0 6px -2px rgba(30,12,18,0.9)",
+    "purpose": "The gilded fore-edge lifting off the book block."
+   }
   ],
-  "narrative": {
-    "northStar": "The Hand-Bound Volume",
-    "overview": "The page is a book handed to you, not a landing page shown at you. A cherry-velvet binding fills the field, a gilded fore-edge runs down the pasted-in frontispiece, and a single vertical spine holds the left edge of every viewport. Prices are set as a colophon, not a pricing table; the four products are four volumes with roman numerals. The subject matter is explicit and the treatment is not: the world earns its intimacy from material — velvet, gilding, grain, ribbon — rather than from skin.\n\nDensity is editorial and unhurried. Large Cormorant display type sits against short measures (44-52ch), generous section rhythm (60-120px), and a single wide container (1360px) inset by a fluid gutter. Nothing is neutral: there is no pure black and no pure white anywhere in the build. The darkest ink is a warm near-black wine (#241017) and the lightest surface is a warm cream (#F2E2DA); every shadow, border and divider is tinted toward wine.\n\nOne animation primitive governs the entire page. A single scroll-driven custom property, --fill, gilds the hero rule, wipes one hero photograph over another, ignites the fore-edge and drives the same growth as scaleX on the spine's chapter ticks; a second, --read, sets the length of the ribbon bookmark. There is no second motion language, and the build explicitly refuses a full-bleed boudoir photograph as its opening move.",
-    "keyCharacteristics": [
-      "Cherry-velvet field sampled from the client's own burgundy latex photographs; no pure black, no pure white.",
-      "One vertical axis: the fixed spine, 84px desktop / 56px at ≤640px, and the page's left padding is that axis.",
-      "One material recipe for every raised surface: light top edge, inner downward shading, soft wine-tinted offset shadow.",
-      "One motion primitive (--fill) and one progress primitive (--read).",
-      "Photography is duotoned in CSS over untouched source rasters; gold highlights survive the tint.",
-      "Gilding is reserved: gradient-clipped gold on exactly one accent word per composition."
-    ],
-    "rules": [
-      { "name": "The No-Black Rule", "body": "Nothing in this system is #000 or #fff. The darkest token is Ink (#241017), the field floors at Deep Wine, and every shadow, border, scrim and divider is a wine-tinted rgba — never neutral.", "section": "colors" },
-      { "name": "The Single Gilding Rule", "body": "Gradient-clipped gold text (.gilt) appears on exactly one accent word per composition — the hero's last word and the manifest's verb. It is never applied to a heading, a price, a metric, or a run of more than one word.", "section": "colors" },
-      { "name": "The Three-Voice Text Rule", "body": "Body copy has three levels and only three: Cream for what must be read, Skin for what supports it, Muted Rose for what is metadata. A fourth text color is not available.", "section": "colors" },
-      { "name": "The Cormorant Italic Rule", "body": "Every italic on the page is Cormorant. Golos Text ships Cyrillic in roman only, so an italic Golos would fall back and break the line. Emphasis in a Golos passage is expressed by color or weight, never by italic.", "section": "typography" },
-      { "name": "The Serif-Numeral Rule", "body": "Numbers that are content — prices, volume numerals, facts, live-format counters — are set in Cormorant with font-variant-numeric: tabular-nums where they change in place. Numbers inside running copy stay in Golos.", "section": "typography" },
-      { "name": "The Six-Step Ramp Rule", "body": "The type scale is six steps (--step-0 … --step-5); the three lowest are fixed rem, the three highest are clamps. A new size means picking a step, not inventing a value.", "section": "typography" },
-      { "name": "The One Material Rule", "body": "Every raised surface uses the same three-part recipe — light top edge, inner downward shading, soft outer shadow. A new surface adopts it; it does not invent its own shadow.", "section": "elevation" },
-      { "name": "The Wine Shadow Rule", "body": "Shadows are rgba built on the wine inks (34,14,20 / 30,12,18). A neutral or blue-grey shadow is wrong in this binding.", "section": "elevation" },
-      { "name": "The Reserved Depth Rule", "body": "Cards, panels and buttons share one elevation. The only surface allowed a deeper shadow is the hero frontispiece, because it is the one object depicted as physically pasted in.", "section": "elevation" }
-    ],
-    "dos": [
-      "Do put every raised surface on the shared material recipe (light top edge, inner downward shading, wine-tinted offset shadow) and every button on the pill.",
-      "Do drive new scroll-linked visuals from the existing --fill and --read custom properties rather than adding a second scroll primitive.",
-      "Do keep gilding scarce: one gradient-clipped accent word per composition, gold otherwise reserved for active state and hairline marks.",
-      "Do tint all photography through the .plate duotone and leave the source raster untouched; the mask that preserves gold highlights is part of the recipe.",
-      "Do set every italic in Cormorant Garamond, because Golos Text has no Cyrillic italic.",
-      "Do gate hover effects behind (hover: hover) and (pointer: fine), and give reduced motion the same information through opacity and color instead of movement.",
-      "Do budget the first viewport against svh height, not just width, when a composition must land whole.",
-      "Do hold reading measures between 44ch and 62ch."
-    ],
-    "donts": [
-      "Don't introduce #000, #fff, or a neutral grey shadow; the darkest value available is Ink (#241017).",
-      "Don't give a new surface its own shadow vocabulary — only the hero frontispiece gets a deeper throw, because it is the one pasted-in object.",
-      "Don't apply the .gilt gradient-text treatment to headings, prices, metrics or multi-word runs.",
-      "Don't add a second vertical axis or a second fixed rail; the spine is the only one, and page padding is derived from its width.",
-      "Don't ship a full-bleed photograph as the opening move — the confirmed rejection this direction was chosen against.",
-      "Don't degrade the pinned carousel into a cramped horizontal scroller on touch or reduced motion; drop the pin and show the plain vertical stack.",
-      "Don't invent a type size outside the six-step ramp, or a fourth body text color outside Cream / Skin / Muted Rose."
-    ]
+  "motion": [
+   {
+    "name": "ease",
+    "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+    "purpose": "Entrance and response: button press, tick growth, dock, modal, FAQ."
+   },
+   {
+    "name": "ease-move",
+    "value": "cubic-bezier(0.77, 0, 0.175, 1)",
+    "purpose": "Movement across the screen: header retraction, velvet drift."
+   },
+   {
+    "name": "fill",
+    "value": "--fill (0 to 1, scroll / 0.62vh)",
+    "purpose": "The single scroll primitive: hero rule, hero photo wipe mask, fore-edge gilding, tick growth. Pinned to 1 under reduced motion."
+   },
+   {
+    "name": "read",
+    "value": "--read (0 to 1, scroll / max)",
+    "purpose": "Reading progress; sets the height of the ribbon bookmark on the spine."
+   },
+   {
+    "name": "velvet-drift",
+    "value": "drift 52s cubic-bezier(0.77,0,0.175,1) infinite alternate",
+    "purpose": "Background field breathing via transform, disabled under reduced motion."
+   },
+   {
+    "name": "reduced-motion-policy",
+    "value": "transition-property: opacity, color, background-color, border-color; 200ms",
+    "purpose": "Reduced motion keeps color and opacity change and drops movement; it is not zero animation."
+   }
+  ],
+  "breakpoints": [
+   {
+    "name": "narrow",
+    "value": "1020px"
+   },
+   {
+    "name": "phone",
+    "value": "640px"
+   },
+   {
+    "name": "fine-pointer",
+    "value": "(hover: hover) and (pointer: fine)"
+   }
+  ],
+  "alphaLadder": {
+   "token": "--edge-rgb: 252 231 220",
+   "steps": {
+    "--edge-05": ".05",
+    "--edge-08": ".08",
+    "--edge-10": ".10",
+    "--edge-14": ".14",
+    "--edge-20": ".20 (alias --edge-hi)",
+    "--edge-32": ".32"
+   },
+   "note": "Одна светлая грань на весь материал. Любая новая прозрачность добавляется ступенью, а не литералом."
+  },
+  "radii": {
+   "--r-xs": "3px",
+   "--r-s": "6px",
+   "--r-m": "10px",
+   "--r-l": "14px",
+   "--r-xl": "18px",
+   "--r-pill": "999px",
+   "note": "Пилюля — только у нажимаемого. Карточки и панели берут --r-l или --r-xl."
   }
+ },
+ "components": [
+  {
+   "name": "Pill Button",
+   "kind": "button",
+   "refersTo": "pill",
+   "description": "The primary call to action: convex cherry-velvet pill that presses into the binding.",
+   "html": "<a class=\"ds-pill\" href=\"#\">Написать в Telegram</a>",
+   "css": ".ds-pill { display: inline-flex; align-items: center; gap: 0.6em; padding: 0.95em 1.9em; border: 1px solid rgba(252,231,220,0.14); border-top-color: rgba(252,231,220,0.32); border-radius: 999px; background: linear-gradient(180deg, rgba(252,231,220,0.16), rgba(34,14,20,0.18) 55%), #6B2A31; color: #F2E2DA; font: 600 0.9375rem/1 'Golos Text', system-ui, sans-serif; letter-spacing: 0.01em; text-decoration: none; cursor: pointer; box-shadow: 0 1px 0 rgba(255,240,232,0.28) inset, 0 -10px 18px rgba(34,14,20,0.24) inset, 0 14px 26px -12px rgba(30,12,18,0.9); transition: transform 140ms cubic-bezier(0.23,1,0.32,1), box-shadow 140ms cubic-bezier(0.23,1,0.32,1), filter 140ms cubic-bezier(0.23,1,0.32,1); } @media (hover: hover) and (pointer: fine) { .ds-pill:hover { filter: brightness(1.09); } } .ds-pill:active { transform: translateY(2px) scale(0.975); box-shadow: 0 2px 6px rgba(30,12,18,0.55) inset, 0 10px 20px rgba(34,14,20,0.42) inset, 0 2px 6px -4px rgba(30,12,18,0.9); } .ds-pill:focus-visible { outline: 2px solid #FCCB6D; outline-offset: 3px; border-radius: 999px; }"
+  },
+  {
+   "name": "Quiet Pill",
+   "kind": "button",
+   "refersTo": "pill-quiet",
+   "description": "The secondary action beside a primary pill: transparent face, single top highlight, no outer shadow.",
+   "html": "<a class=\"ds-pill-quiet\" href=\"#\">Смотреть оглавление</a>",
+   "css": ".ds-pill-quiet { display: inline-flex; align-items: center; gap: 0.6em; padding: 0.95em 1.9em; border: 1px solid rgba(252,231,220,0.14); border-top-color: rgba(252,231,220,0.32); border-radius: 999px; background: linear-gradient(180deg, rgba(252,231,220,0.08), transparent 60%); color: #C9A392; font: 600 0.9375rem/1 'Golos Text', system-ui, sans-serif; letter-spacing: 0.01em; text-decoration: none; cursor: pointer; box-shadow: 0 1px 0 rgba(255,240,232,0.16) inset; transition: transform 140ms cubic-bezier(0.23,1,0.32,1), filter 140ms cubic-bezier(0.23,1,0.32,1); } @media (hover: hover) and (pointer: fine) { .ds-pill-quiet:hover { filter: brightness(1.09); } } .ds-pill-quiet:active { transform: translateY(2px) scale(0.975); } .ds-pill-quiet:focus-visible { outline: 2px solid #FCCB6D; outline-offset: 3px; }"
+  },
+  {
+   "name": "Material Panel",
+   "kind": "card",
+   "refersTo": "material-panel",
+   "description": "The shared raised surface: light top edge, inner downward shading, wine-tinted offset shadow.",
+   "html": "<section class=\"ds-panel\"><h2>Индивидуальная консультация</h2><p>Личный запрос, онлайн или очно в Москве.</p></section>",
+   "css": ".ds-panel { padding: clamp(28px, 4vw, 48px); border-radius: 16px; background: linear-gradient(180deg, rgba(252,231,220,0.07), rgba(34,14,20,0.10) 42%), #2C1015; border: 1px solid rgba(252,231,220,0.10); border-top-color: rgba(252,231,220,0.20); box-shadow: 0 1px 0 rgba(252,231,220,0.06) inset, 0 -14px 30px rgba(34,14,20,0.24) inset, 0 22px 44px -18px rgba(30,12,18,0.85); color: #F2E2DA; font: 400 1.0625rem/1.6 'Golos Text', system-ui, sans-serif; } .ds-panel h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(2rem, 1.2rem + 3.2vw, 3.6rem); line-height: 1.02; margin: 0; } .ds-panel p { color: #F2E2DA; max-width: 46ch; margin: 18px 0 0; }"
+  },
+  {
+   "name": "Volume Card",
+   "kind": "card",
+   "refersTo": "tome-card",
+   "description": "One of four chapter cards: Cormorant roman numeral, serif title, uppercase audience label, teaser, gold-ruled 'more'.",
+   "html": "<article class=\"ds-tome\" tabindex=\"0\" role=\"button\"><p class=\"ds-tome-num\">I</p><h3 class=\"ds-tome-title\">Кунилингус</h3><p class=\"ds-tome-whom\">Мужчинам</p><p class=\"ds-tome-teaser\">Техника, темп, дыхание и обратная связь.</p><span class=\"ds-tome-more\">Подробнее</span></article>",
+   "css": ".ds-tome { display: block; padding: clamp(16px, 2vw, 26px); border-radius: 12px; background: linear-gradient(180deg, rgba(252,231,220,0.07), rgba(34,14,20,0.10) 42%), #2C1015; border: 1px solid rgba(252,231,220,0.10); border-top-color: rgba(252,231,220,0.20); box-shadow: 0 1px 0 rgba(252,231,220,0.06) inset, 0 -14px 30px rgba(34,14,20,0.24) inset, 0 22px 44px -18px rgba(30,12,18,0.85); color: #F2E2DA; font: 400 1.0625rem/1.6 'Golos Text', system-ui, sans-serif; cursor: pointer; transition: opacity 160ms linear, transform 140ms cubic-bezier(0.23,1,0.32,1); } .ds-tome:active { transform: scale(0.99); } .ds-tome:focus-visible { outline: 2px solid #FCCB6D; outline-offset: 3px; } .ds-tome-num { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(2.2rem, 1rem + 3vw, 3.4rem); line-height: 1; color: #D9A24E; margin: 0; } .ds-tome-title { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(2rem, 1rem + 3.4vw, 3.6rem); line-height: 1.02; margin: 10px 0 0; } .ds-tome-whom { font-size: 0.8125rem; letter-spacing: 0.24em; text-transform: uppercase; color: #C9A392; margin: 12px 0 0; } .ds-tome-teaser { color: #A98A85; margin: 16px 0 0; max-width: 44ch; } .ds-tome-more { display: inline-flex; align-items: center; gap: 0.5em; margin-top: 22px; color: #F2E2DA; font-size: 0.9375rem; } .ds-tome-more::after { content: \"\"; width: 26px; height: 1px; background: #D9A24E; }"
+  },
+  {
+   "name": "Spine Navigation",
+   "kind": "nav",
+   "refersTo": "spine",
+   "description": "Единственная вертикальная ось страницы: каптал в головке, вордмарк, ленточное ляссе у края, тики глав, растущие трансформом и золотящиеся на текущей секции, фолио города, тень сгиба справа.",
+   "html": "<aside class=\"ds-spine\"><div class=\"ds-headband\"></div><div class=\"ds-lasse\"></div><a class=\"ds-spine-mark\" href=\"#top\">DARI <i>love</i></a><nav class=\"ds-spine-nav\"><a class=\"ds-tick\" href=\"#a\" aria-current=\"true\"><span>Тома</span></a><a class=\"ds-tick\" href=\"#b\"><span>Живой формат</span></a><a class=\"ds-tick\" href=\"#c\"><span>Приватно</span></a></nav><div class=\"ds-folio\">МОСКВА</div></aside>",
+   "css": ".ds-spine { position: relative; width: 84px; min-height: 420px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 20px 0 22px; background: linear-gradient(90deg, rgba(34,14,20,0.55), rgba(252,231,220,0.06) 42%, rgba(34,14,20,0.5)), #2C1015; border-right: 1px solid rgba(252,231,220,0.12); } .ds-headband { position: absolute; top: 0; left: 0; right: 0; height: 14px; background: repeating-linear-gradient(90deg, #D9A24E 0 2px, #F2E2DA 2px 4px, #4A1F24 4px 6px); opacity: .82; box-shadow: 0 1px 0 rgba(30,12,18,.6); } .ds-lasse { position: absolute; right: 11px; top: 0; width: 11px; height: calc(14px + 45%); background: linear-gradient(90deg, rgba(34,14,20,.42), rgb(252 231 220 / .24) 34%, rgba(34,14,20,.30) 78%, rgba(34,14,20,.5)), linear-gradient(180deg, #FCCB6D, #D9A24E 30%, #8A5F27); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 9px), 50% 100%, 0 calc(100% - 9px)); box-shadow: 1px 0 3px rgba(34,14,20,.55); } .ds-spine::after { content: \"\"; position: absolute; top: 0; bottom: 0; right: -26px; width: 26px; background: linear-gradient(90deg, rgba(30,12,18,.55), rgba(30,12,18,.18) 42%, transparent); } .ds-spine-mark { writing-mode: vertical-rl; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 15px; letter-spacing: 0.44em; text-transform: uppercase; color: #F2E2DA; text-decoration: none; } .ds-spine-mark i { font-style: italic; letter-spacing: 0.08em; text-transform: none; color: #C9A392; } .ds-spine-nav { display: flex; flex-direction: column; align-items: center; gap: 18px; } .ds-tick { position: relative; width: 22px; height: 22px; display: grid; place-items: center; justify-items: start; color: #A98A85; text-decoration: none; } .ds-tick::before { content: \"\"; width: 22px; height: 1px; background: currentColor; transform: scaleX(0.55); transform-origin: left center; transition: transform 200ms cubic-bezier(0.23,1,0.32,1), background-color 200ms cubic-bezier(0.23,1,0.32,1); } .ds-tick[aria-current=\"true\"]::before { transform: scaleX(1); background: #D9A24E; } @media (hover: hover) and (pointer: fine) { .ds-tick:hover::before { transform: scaleX(1); background: #D9A24E; } .ds-tick:hover span { opacity: 1; } } .ds-tick span { position: absolute; left: 26px; white-space: nowrap; font: 400 11px/1.6 'Golos Text', system-ui, sans-serif; letter-spacing: 0.18em; text-transform: uppercase; color: #C9A392; opacity: 0; pointer-events: none; transition: opacity 180ms cubic-bezier(0.23,1,0.32,1); } .ds-tick:focus-visible span { opacity: 1; } .ds-folio { writing-mode: vertical-rl; font: 400 11px/1.6 'Golos Text', system-ui, sans-serif; letter-spacing: 0.3em; color: #A98A85; }"
+  },
+  {
+   "name": "Colophon Row",
+   "kind": "custom",
+   "refersTo": "colophon-row",
+   "description": "Prices set as a book colophon rather than a pricing table: hairline-ruled rows, Golos label with muted note, Cormorant value.",
+   "html": "<dl class=\"ds-colophon\"><div class=\"ds-colophon-row\"><dt>Разбор запроса, онлайн<small>к любой теме</small></dt><dd>5 000 ₽</dd></div><div class=\"ds-colophon-row\"><dt>Индивидуальное занятие<small>очно или онлайн</small></dt><dd>20 000 ₽</dd></div></dl>",
+   "css": ".ds-colophon { margin: 0; border-top: 1px solid rgba(252,231,220,0.12); font: 400 1.0625rem/1.6 'Golos Text', system-ui, sans-serif; } .ds-colophon-row { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(252,231,220,0.08); } .ds-colophon-row dt { color: #F2E2DA; font-size: 0.9375rem; } .ds-colophon-row dt small { display: block; color: #A98A85; font-size: 0.8125rem; margin-top: 2px; } .ds-colophon-row dd { margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.35rem, 1.1rem + 1.1vw, 2rem); color: #F2E2DA; font-variant-numeric: tabular-nums; }"
+  },
+  {
+   "name": "FAQ Disclosure",
+   "kind": "custom",
+   "refersTo": "faq",
+   "description": "Hairline-ruled native details/summary; the gold plus is two 1px gradients that rotate and collapse to a minus when open.",
+   "html": "<div class=\"ds-faq\"><details><summary>Это подходит новичкам?</summary><p>Да. Начинаем с того уровня, на котором вы сейчас.</p></details><details><summary>Как проходит занятие?</summary><p>Онлайн или очно в Москве, один на один.</p></details></div>",
+   "css": ".ds-faq { font: 400 1.0625rem/1.6 'Golos Text', system-ui, sans-serif; color: #F2E2DA; } .ds-faq details { border-top: 1px solid rgba(252,231,220,0.12); } .ds-faq details:last-of-type { border-bottom: 1px solid rgba(252,231,220,0.12); } .ds-faq summary { list-style: none; cursor: pointer; padding: 18px 0; display: flex; justify-content: space-between; gap: 18px; align-items: baseline; font-size: 1.0625rem; } .ds-faq summary::-webkit-details-marker { display: none; } .ds-faq summary:focus-visible { outline: 2px solid #FCCB6D; outline-offset: 3px; border-radius: 6px; } .ds-faq summary::after { content: \"\"; flex: 0 0 auto; width: 14px; height: 14px; background: linear-gradient(#D9A24E, #D9A24E) center/14px 1px no-repeat, linear-gradient(#D9A24E, #D9A24E) center/1px 14px no-repeat; transition: transform 200ms cubic-bezier(0.23,1,0.32,1); } .ds-faq details[open] summary::after { transform: rotate(90deg); background-size: 14px 1px, 0 0; } .ds-faq p { margin: 0 0 20px; color: #A98A85; max-width: 62ch; }"
+  },
+  {
+   "name": "Photographic Plate",
+   "kind": "custom",
+   "refersTo": "plate",
+   "description": "Оправа кадра: фотография идёт в собственном цвете. Тонирование снято по решению клиента — плита даёт фон, обрезку и радиус, но не фильтр и не режим наложения.",
+   "html": "<div class=\"ds-plate\"><img src=\"assets/img/dari-hero.webp\" alt=\"\"></div>",
+   "css": ".ds-plate { position: relative; overflow: hidden; background: #2C1015; isolation: isolate; aspect-ratio: 4 / 5; width: 320px; border-radius: var(--r-s, 6px); border: 1px solid rgb(252 231 220 / .10); } .ds-plate img { display: block; width: 100%; height: 100%; object-fit: cover; }"
+  },
+  {
+   "name": "Gilded Fore-Edge",
+   "kind": "custom",
+   "refersTo": "frontis",
+   "description": "The book block: asymmetric plate radius plus an 8px dyed edge mounted outside the plate's overflow, ignited by --fill.",
+   "html": "<figure class=\"ds-frontis\"><div class=\"ds-frontis-book\"><div class=\"ds-plate ds-frontis-plate\"><img src=\"assets/img/dari-hero.webp\" alt=\"\"></div><div class=\"ds-frontis-edge\"></div></div><figcaption class=\"ds-frontis-cap\"><span>Фронтиспис</span><span>4:5</span></figcaption></figure>",
+   "css": ".ds-frontis { margin: 0; --fill: 0.6; } .ds-frontis-book { position: relative; width: fit-content; } .ds-frontis-plate { position: relative; overflow: hidden; background: #2C1015; isolation: isolate; aspect-ratio: 4 / 5; width: 300px; border-radius: 4px 14px 14px 4px; border: 1px solid rgba(252,231,220,0.12); box-shadow: 0 40px 80px -30px rgba(30,12,18,0.95); } .ds-frontis-plate img { display: block; width: 100%; height: 100%; object-fit: cover; } .ds-frontis-edge { position: absolute; top: 10px; bottom: 10px; right: -8px; width: 8px; border-radius: 0 3px 3px 0; background: linear-gradient(180deg, #8A6A38, #7A5320 55%, #4A3418); box-shadow: 2px 0 6px -2px rgba(30,12,18,0.9); } .ds-frontis-edge::after { content: \"\"; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, #FCCB6D, #D9A24E 45%, #7A5320); clip-path: inset(calc(100% - var(--fill) * 100%) 0 0 0); } .ds-frontis-cap { display: flex; justify-content: space-between; margin-top: 12px; font: 400 0.8125rem/1.6 'Golos Text', system-ui, sans-serif; letter-spacing: 0.24em; text-transform: uppercase; color: #A98A85; }"
+  },
+  {
+   "name": "Age Gate",
+   "kind": "custom",
+   "refersTo": "gate",
+   "description": "Wine scrim at 55% with a 14px blur over the live page, carrying a material card and the two pills; the answer persists in localStorage.",
+   "html": "<div class=\"ds-gate\"><div class=\"ds-gate-card\"><h2>Здесь говорят о сексе прямо</h2><p>Материалы сайта предназначены для совершеннолетних.</p><div class=\"ds-gate-row\"><button class=\"ds-pill\" type=\"button\">Мне есть 18</button><button class=\"ds-pill-quiet\" type=\"button\">Мне нет 18</button></div></div></div>",
+   "css": ".ds-gate { position: relative; display: grid; place-items: center; padding: 24px; min-height: 320px; background: rgba(34,14,20,0.55); backdrop-filter: blur(14px); } .ds-gate-card { max-width: 460px; padding: clamp(26px, 4vw, 40px); border-radius: 16px; text-align: center; background: linear-gradient(180deg, rgba(252,231,220,0.07), rgba(34,14,20,0.10) 42%), #2C1015; border: 1px solid rgba(252,231,220,0.10); border-top-color: rgba(252,231,220,0.20); box-shadow: 0 1px 0 rgba(252,231,220,0.06) inset, 0 -14px 30px rgba(34,14,20,0.24) inset, 0 22px 44px -18px rgba(30,12,18,0.85); font: 400 1.0625rem/1.6 'Golos Text', system-ui, sans-serif; } .ds-gate-card h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(1.35rem, 1.1rem + 1.1vw, 2rem); color: #F2E2DA; margin: 0; } .ds-gate-card p { color: #C9A392; margin: 14px 0 24px; } .ds-gate-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; } .ds-pill { display: inline-flex; align-items: center; padding: 0.95em 1.9em; border: 1px solid rgba(252,231,220,0.14); border-top-color: rgba(252,231,220,0.32); border-radius: 999px; background: linear-gradient(180deg, rgba(252,231,220,0.16), rgba(34,14,20,0.18) 55%), #6B2A31; color: #F2E2DA; font: 600 0.9375rem/1 'Golos Text', system-ui, sans-serif; cursor: pointer; box-shadow: 0 1px 0 rgba(255,240,232,0.28) inset, 0 -10px 18px rgba(34,14,20,0.24) inset, 0 14px 26px -12px rgba(30,12,18,0.9); } .ds-pill-quiet { display: inline-flex; align-items: center; padding: 0.95em 1.9em; border: 1px solid rgba(252,231,220,0.14); border-top-color: rgba(252,231,220,0.32); border-radius: 999px; background: linear-gradient(180deg, rgba(252,231,220,0.08), transparent 60%); color: #C9A392; font: 600 0.9375rem/1 'Golos Text', system-ui, sans-serif; cursor: pointer; box-shadow: 0 1px 0 rgba(255,240,232,0.16) inset; }"
+  },
+  {
+   "name": "Versal",
+   "kind": "custom",
+   "refersTo": "versal",
+   "description": "Буквица наборной полосы: первая литера абзаца уходит на три строки и набирается золотом.",
+   "html": "<p class=\"ds-note\"><span class=\"ds-versal\">Н</span>икаких намёков и обтекаемых формулировок…</p>",
+   "css": ".ds-note { font-family: 'Golos Text', sans-serif; font-size: 1.0625rem; color: #C9A392; max-width: 52ch; } .ds-versal { float: left; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 3.9em; line-height: .74; padding: .06em .14em 0 0; color: #D9A24E; }"
+  },
+  {
+   "name": "Fleuron",
+   "kind": "custom",
+   "refersTo": "fleuron",
+   "description": "Наборное украшение, закрывающее полосу: контурная виньетка золотом, повторяется в подвале тише.",
+   "html": "<svg class=\"ds-fleuron\" viewBox=\"0 0 120 24\" aria-hidden=\"true\"><path d=\"M60 4c-6 0-10 4-10 8s4 8 10 8 10-4 10-8-4-8-10-8zm0 3c4 0 7 2 7 5s-3 5-7 5-7-2-7-5 3-5 7-5z\"/><path d=\"M50 12H30c-4 0-6-2-8-4M70 12h20c4 0 6-2 8-4M50 12H30c-4 0-6 2-8 4M70 12h20c4 0 6 2 8 4\"/><circle cx=\"14\" cy=\"12\" r=\"2\"/><circle cx=\"106\" cy=\"12\" r=\"2\"/></svg>",
+   "css": ".ds-fleuron { display: block; width: 120px; height: 24px; fill: none; stroke: #D9A24E; stroke-width: 1; opacity: .7; } .ds-fleuron circle { fill: #D9A24E; stroke: none; }"
+  },
+  {
+   "name": "Marbled Endpaper",
+   "kind": "custom",
+   "refersTo": "foot",
+   "description": "Форзац: мраморная бумага внутренней стороны крышки. Слоистые повторяющиеся градиенты, замаскированные так, чтобы поле угасало сверху и снизу.",
+   "html": "<footer class=\"ds-foot\">…</footer>",
+   "css": ".ds-foot { position: relative; padding: 34px 0 120px; text-align: center; } .ds-foot::before { content: \"\"; position: absolute; inset: 0 -50vw; z-index: -1; opacity: .38; -webkit-mask-image: linear-gradient(180deg, transparent, #F2E2DA 12%, #F2E2DA 76%, transparent); mask-image: linear-gradient(180deg, transparent, #F2E2DA 12%, #F2E2DA 76%, transparent); background: repeating-radial-gradient(ellipse 140px 40px at 20% 30%, rgba(217,162,78,.10) 0 6px, transparent 6px 18px), repeating-radial-gradient(ellipse 200px 60px at 78% 62%, rgba(201,163,146,.09) 0 5px, transparent 5px 22px), repeating-linear-gradient(112deg, rgba(107,42,49,.22) 0 14px, transparent 14px 34px), repeating-linear-gradient(68deg, rgba(36,16,23,.30) 0 9px, transparent 9px 26px); filter: blur(.4px); }"
+  },
+  {
+   "name": "Letterpress Display",
+   "kind": "custom",
+   "refersTo": "h1",
+   "description": "Тиснение на титульной строке: свет по верхней кромке литеры, тень под ней. Только дисплейный кегль, никогда текст.",
+   "html": "<h1 class=\"ds-display\">Об этом<br>не говорят<br><span class=\"ds-gilt\">вслух</span></h1>",
+   "css": ".ds-display { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(2.8rem, 1rem + 7vw, 6.5rem); line-height: .94; letter-spacing: -.015em; margin: 0; text-shadow: 0 1px 0 rgba(30,12,18,.55), 0 -1px 0 rgb(252 231 220 / .12); }"
+  }
+ ],
+ "narrative": {
+  "northStar": "The Hand-Bound Volume",
+  "overview": "The page is a book handed to you, not a landing page shown at you. A cherry-velvet binding fills the field, a gilded fore-edge runs down the pasted-in frontispiece, and a single vertical spine holds the left edge of every viewport. Prices are set as a colophon, not a pricing table; the four products are four volumes with roman numerals. The subject matter is explicit and the treatment is not: the world earns its intimacy from material — velvet, gilding, grain, ribbon — rather than from skin.\n\nDensity is editorial and unhurried. Large Cormorant display type sits against short measures (44-52ch), generous section rhythm (60-120px), and a single wide container (1360px) inset by a fluid gutter. Nothing is neutral: there is no pure black and no pure white anywhere in the build. The darkest ink is a warm near-black wine (#241017) and the lightest surface is a warm cream (#F2E2DA); every shadow, border and divider is tinted toward wine.\n\nOne animation primitive governs the entire page. A single scroll-driven custom property, --fill, gilds the hero rule, wipes one hero photograph over another, ignites the fore-edge and drives the same growth as scaleX on the spine's chapter ticks; a second, --read, sets the length of the ribbon bookmark. There is no second motion language, and the build explicitly refuses a full-bleed boudoir photograph as its opening move.",
+  "keyCharacteristics": [
+   "Cherry-velvet field sampled from the client's own burgundy latex photographs; no pure black, no pure white.",
+   "One vertical axis: the fixed spine, 84px desktop / 56px at ≤640px, and the page's left padding is that axis.",
+   "One material recipe for every raised surface: light top edge, inner downward shading, soft wine-tinted offset shadow.",
+   "One motion primitive (--fill) and one progress primitive (--read).",
+   "Фотография идёт в собственном цвете: тонирование снято, вклад плиты — оправа, а не фильтр. Тёмный фон кадров — единственное место, где страница уходит ниже своего цветового пола.",
+   "Gilding is reserved: gradient-clipped gold on exactly one accent word per composition.",
+   "Переплётная работа собрана материально: каптал, ленточное ляссе с косым срезом, тень корешкового сгиба, тиснение титульной строки, буквица, виньетка и мраморный форзац."
+  ],
+  "rules": [
+   {
+    "name": "The No-Black Rule",
+    "body": "Nothing in this system is #000 or #fff. The darkest token is Ink (#241017), the field floors at Deep Wine, and every shadow, border, scrim and divider is a wine-tinted rgba — never neutral.",
+    "section": "colors"
+   },
+   {
+    "name": "The Single Gilding Rule",
+    "body": "Gradient-clipped gold text (.gilt) appears on exactly one accent word per composition — the hero's last word and the manifest's verb. It is never applied to a heading, a price, a metric, or a run of more than one word.",
+    "section": "colors"
+   },
+   {
+    "name": "The Three-Voice Text Rule",
+    "body": "Body copy has three levels and only three: Cream for what must be read, Skin for what supports it, Muted Rose for what is metadata. A fourth text color is not available.",
+    "section": "colors"
+   },
+   {
+    "name": "The Cormorant Italic Rule",
+    "body": "Every italic on the page is Cormorant. Golos Text ships Cyrillic in roman only, so an italic Golos would fall back and break the line. Emphasis in a Golos passage is expressed by color or weight, never by italic.",
+    "section": "typography"
+   },
+   {
+    "name": "The Serif-Numeral Rule",
+    "body": "Numbers that are content — prices, volume numerals, facts, live-format counters — are set in Cormorant with font-variant-numeric: tabular-nums where they change in place. Numbers inside running copy stay in Golos.",
+    "section": "typography"
+   },
+   {
+    "name": "The Six-Step Ramp Rule",
+    "body": "The type scale is six steps (--step-0 … --step-5); the three lowest are fixed rem, the three highest are clamps. A new size means picking a step, not inventing a value.",
+    "section": "typography"
+   },
+   {
+    "name": "The One Material Rule",
+    "body": "Every raised surface uses the same three-part recipe — light top edge, inner downward shading, soft outer shadow. A new surface adopts it; it does not invent its own shadow.",
+    "section": "elevation"
+   },
+   {
+    "name": "The Wine Shadow Rule",
+    "body": "Shadows are rgba built on the wine inks (34,14,20 / 30,12,18). A neutral or blue-grey shadow is wrong in this binding.",
+    "section": "elevation"
+   },
+   {
+    "name": "The Reserved Depth Rule",
+    "body": "Cards, panels and buttons share one elevation. The only surface allowed a deeper shadow is the hero frontispiece, because it is the one object depicted as physically pasted in.",
+    "section": "elevation"
+   }
+  ],
+  "dos": [
+   "Do put every raised surface on the shared material recipe (light top edge, inner downward shading, wine-tinted offset shadow) and every button on the pill.",
+   "Do drive new scroll-linked visuals from the existing --fill and --read custom properties rather than adding a second scroll primitive.",
+   "Do keep gilding scarce: one gradient-clipped accent word per composition, gold otherwise reserved for active state and hairline marks.",
+   "Do let the photograph keep its own colour; the plate contributes background, crop and radius, never a filter or a blend mode.",
+   "Do set every italic in Cormorant Garamond, because Golos Text has no Cyrillic italic.",
+   "Do gate hover effects behind (hover: hover) and (pointer: fine), and give reduced motion the same information through opacity and color instead of movement.",
+   "Do budget the first viewport against svh height, not just width, when a composition must land whole.",
+   "Do hold reading measures between 44ch and 62ch."
+  ],
+  "donts": [
+   "Don't introduce #000, #fff, or a neutral grey shadow; the darkest value available is Ink (#241017).",
+   "Don't give a new surface its own shadow vocabulary — only the hero frontispiece gets a deeper throw, because it is the one pasted-in object.",
+   "Don't apply the .gilt gradient-text treatment to headings, prices, metrics or multi-word runs.",
+   "Don't add a second vertical axis or a second fixed rail; the spine is the only one, and page padding is derived from its width.",
+   "Don't ship a full-bleed photograph as the opening move — the confirmed rejection this direction was chosen against.",
+   "Don't degrade the pinned carousel into a cramped horizontal scroller on touch or reduced motion; drop the pin and show the plain vertical stack.",
+   "Don't invent a type size outside the six-step ramp, or a fourth body text color outside Cream / Skin / Muted Rose.",
+   "Don't declare oldstyle-nums: the shipped Cormorant Garamond has no onum table, so the rule is inert and the intent is lost.",
+   "Don't write a light-edge alpha as a literal; add a step to the --edge ladder instead."
+  ]
+ }
 }

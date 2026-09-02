@@ -17,13 +17,31 @@
   /* Ширина корешка: от неё зависят отступ страницы и левый край полосы. */
   --spine: 84px;
 
-  --edge-hi: rgba(252, 231, 220, 0.20);
+  /* Светлая грань материала: один цвет, лестница прозрачностей. */
+  --edge-rgb: 252 231 220;
+  --edge-05: rgb(var(--edge-rgb) / .05);
+  --edge-08: rgb(var(--edge-rgb) / .08);
+  --edge-10: rgb(var(--edge-rgb) / .10);
+  --edge-14: rgb(var(--edge-rgb) / .14);
+  --edge-20: rgb(var(--edge-rgb) / .20);
+  --edge-32: rgb(var(--edge-rgb) / .32);
+  --edge-hi: var(--edge-20);
   --edge-lo: rgba(34, 14, 20, 0.55);
+
+  /* Радиусы: одна лестница на весь сайт. */
+  --r-xs: 3px;
+  --r-s:  6px;
+  --r-m:  10px;
+  --r-l:  14px;
+  --r-xl: 18px;
+  --r-pill: 999px;
 
   --step-0: 0.8125rem;
   --step-1: 0.9375rem;
   --step-2: 1.0625rem;
+  --step-00: 0.6875rem;
   --step-3: clamp(1.35rem, 1.1rem + 1.1vw, 2rem);
+  --step-3x: clamp(1.7rem, 1rem + 2.2vw, 2.6rem);
   --step-4: clamp(2rem, 1.2rem + 3.2vw, 3.6rem);
   --step-5: clamp(2.8rem, 1rem + 7vw, 6.5rem);
 
@@ -95,12 +113,12 @@ body {
 /* Материал: бархат, светлая грань по верхнему краю, мягкая внешняя тень. */
 .material {
   background:
-    linear-gradient(180deg, rgba(252, 231, 220, 0.07), rgba(34, 14, 20, 0.10) 42%),
+    linear-gradient(180deg, var(--edge-08), rgba(34, 14, 20, 0.10) 42%),
     var(--wine-deep);
-  border: 1px solid rgba(252, 231, 220, 0.10);
+  border: 1px solid var(--edge-10);
   border-top-color: var(--edge-hi);
   box-shadow:
-    0 1px 0 rgba(252, 231, 220, 0.06) inset,
+    0 1px 0 var(--edge-14) inset,
     0 -14px 30px rgba(34, 14, 20, 0.24) inset,
     0 22px 44px -18px rgba(30, 12, 18, 0.85);
 }
@@ -113,11 +131,11 @@ body {
   align-items: center;
   gap: 0.6em;
   padding: 0.95em 1.9em;
-  border: 1px solid rgba(252, 231, 220, 0.14);
-  border-top-color: rgba(252, 231, 220, 0.32);
-  border-radius: 999px;
+  border: 1px solid var(--edge-14);
+  border-top-color: var(--edge-32);
+  border-radius: var(--r-pill);
   background:
-    linear-gradient(180deg, rgba(252, 231, 220, 0.16), rgba(34, 14, 20, 0.18) 55%),
+    linear-gradient(180deg, var(--edge-20), rgba(34, 14, 20, 0.18) 55%),
     var(--pill-face);
   color: var(--cream);
   font: 600 var(--step-1)/1 'Golos Text', system-ui, sans-serif;
@@ -146,7 +164,7 @@ body {
 
 .pill--quiet {
   --pill-face: transparent;
-  background: linear-gradient(180deg, rgba(252, 231, 220, 0.08), transparent 60%);
+  background: linear-gradient(180deg, var(--edge-08), transparent 60%);
   color: var(--skin);
   box-shadow: 0 1px 0 rgba(255, 240, 232, 0.16) inset;
 }
@@ -154,11 +172,11 @@ body {
 :where(a, button, summary):focus-visible {
   outline: 2px solid var(--gold-hi);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: var(--r-s);
 }
 
-/* Дуотон: яркость фотографии ложится на вишнёвую основу,
-   золото возвращается отдельным слоем на screen. */
+/* Фотографии идут в собственном цвете: тонирование снято по решению клиента.
+   Остаётся только посадка кадра в оправу — рамка, радиус, тень задаются снаружи. */
 .plate {
   position: relative;
   overflow: hidden;
@@ -171,34 +189,6 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.62) contrast(1.06) brightness(1.01);
-}
-
-/* Вишня ложится тоном, а не заливкой: яркость кадра остаётся,
-   золотые блики переживают тонирование. */
-.plate::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(180deg, var(--wine-lit), var(--wine-deep) 78%);
-  mix-blend-mode: color;
-  opacity: 0.72;
-  /* Тон слабее там, где кадр светлее: золото и блики остаются золотыми. */
-  -webkit-mask-image: radial-gradient(70% 56% at 50% 58%, rgba(0,0,0,.18), #000 70%);
-  mask-image: radial-gradient(70% 56% at 50% 58%, rgba(0,0,0,.18), #000 70%);
-  pointer-events: none;
-}
-
-.plate::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: radial-gradient(70% 56% at 50% 58%, rgba(252, 203, 109, 0.85), transparent 72%);
-  mix-blend-mode: screen;
-  opacity: 0.20;
-  pointer-events: none;
 }
 
 .wordmark {

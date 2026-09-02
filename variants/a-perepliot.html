@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DARI LOVE · Индивидуальное обучение · Москва</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ——— A. ПЕРЕПЛЁТ ——————————————————————————————————————————————
+   Страница как переплетённая вручную книга: корешок слева, крашеный
+   вишнёвый обрез, золочение как единственная анимация «налива». */
+
+body { padding-left: 76px; }
+
+/* Корешок: единственная вертикальная ось, которой подчинена вся страница. */
+.spine {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 76px;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0;
+  background:
+    linear-gradient(90deg, rgba(12,4,6,.55), rgba(252,231,220,.06) 42%, rgba(12,4,6,.5)),
+    var(--wine-deep);
+  border-right: 1px solid rgba(252, 231, 220, 0.12);
+}
+
+.spine__mark {
+  writing-mode: vertical-rl;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 0.44em;
+  text-transform: uppercase;
+  color: var(--cream);
+}
+.spine__mark i { font-style: italic; letter-spacing: .08em; text-transform: none; color: var(--skin); }
+
+/* Ляссе: закладка отмечает прочитанное. Это же индикатор прогресса. */
+.lasse {
+  position: absolute;
+  left: 50%; top: 0;
+  width: 3px;
+  margin-left: -1.5px;
+  height: calc(var(--read, 0) * 100%);
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold) 40%, var(--wine-lit));
+  box-shadow: 1px 0 0 rgba(12, 4, 6, 0.5);
+}
+
+.spine__folio {
+  writing-mode: vertical-rl;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+}
+
+.wrap { max-width: 1360px; margin: 0 auto; padding: 0 clamp(18px, 4vw, 56px); }
+
+/* ——— Титульный разворот ——— */
+.hero {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(28px, 5vw, 76px);
+  align-items: center;
+  padding: 96px 0 56px;
+}
+
+.hero__rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold) calc(var(--fill) * 100%), rgba(252,231,220,.14) 0);
+  margin: 26px 0 22px;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  font-size: var(--step-5);
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+  margin: 18px 0 0;
+  color: var(--cream);
+}
+
+/* Золочение обреза — единственный примитив анимации.
+   Тот же приём наливает заголовок, линейки и рёбра карточек. */
+h1 .gilt {
+  font-style: italic;
+  color: transparent;
+  background-image: linear-gradient(180deg, var(--gold-hi), var(--gold) 55%, var(--wine-lit));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 1px rgba(12, 4, 6, 0.55));
+}
+
+.lede {
+  max-width: 46ch;
+  color: var(--skin);
+  font-size: var(--step-2);
+  margin: 22px 0 0;
+}
+
+.actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 34px; }
+
+.colophon {
+  margin-top: 44px;
+  border-top: 1px solid rgba(252, 231, 220, 0.12);
+}
+
+.colophon__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(252, 231, 220, 0.08);
+}
+
+.colophon__row dt { color: var(--cream); font-size: var(--step-1); }
+.colophon__row dd { margin: 0; color: var(--skin); font-size: var(--step-1); }
+.colophon__row .price { font-family: 'Cormorant Garamond', Georgia, serif; font-size: var(--step-3); color: var(--cream); }
+.colophon__note { margin-top: 12px; font-size: var(--step-0); color: var(--muted); }
+
+/* Вклеенная иллюстрация с золотым обрезом. */
+.frontis { position: relative; }
+
+.frontis__plate {
+  aspect-ratio: 4 / 5;
+  border-radius: 4px 14px 14px 4px;
+  border: 1px solid rgba(252, 231, 220, 0.12);
+  box-shadow: 0 40px 80px -30px rgba(9, 3, 5, 0.95);
+}
+
+.frontis__plate img.under { position: absolute; inset: 0; }
+
+/* Верхний кадр срезается маской по прогрессу: подмена кадра «наливом». */
+.frontis__plate img.over {
+  position: absolute; inset: 0;
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - var(--fill) * 100%), transparent 0);
+  mask-image: linear-gradient(180deg, #000 calc(100% - var(--fill) * 100%), transparent 0);
+}
+
+/* Золочёный обрез — правое ребро иллюстрации. */
+.frontis__edge {
+  position: absolute;
+  top: 8px; bottom: 8px; right: -7px;
+  width: 7px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold) 45%, #7A5320);
+  clip-path: inset(calc(100% - var(--fill) * 100%) 0 0 0);
+  box-shadow: 2px 0 6px -2px rgba(9, 3, 5, 0.9);
+}
+
+.frontis__cap {
+  display: flex; justify-content: space-between;
+  margin-top: 12px;
+  font-size: var(--step-0);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ——— Оглавление: четыре тома ——— */
+.chapters { padding: clamp(56px, 9vw, 120px) 0 clamp(70px, 10vw, 140px); }
+
+.chapters__head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  margin-bottom: 34px;
+}
+
+.chapters__head h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  font-size: var(--step-4);
+  line-height: 1;
+  margin: 8px 0 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(14px, 1.6vw, 22px);
+}
+
+.tome {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 240ms var(--ease);
+}
+
+.tome:hover { transform: translateY(-4px); }
+
+.tome__plate { aspect-ratio: 4 / 5; }
+
+.tome__num {
+  position: absolute; top: 14px; left: 16px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--gold-hi);
+  text-shadow: 0 2px 6px rgba(9, 3, 5, 0.85);
+}
+
+.tome__body { padding: 18px 18px 22px; }
+
+.tome__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: var(--step-3);
+  line-height: 1.06;
+  margin: 0;
+}
+
+.tome__whom {
+  font-size: var(--step-0);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--skin);
+  margin-top: 8px;
+}
+
+.tome__note { font-size: var(--step-1); color: var(--muted); margin: 12px 0 0; }
+
+/* Ребро тома наливается золотом при наведении — тот же примитив. */
+.tome__gilt {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold-hi), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 420ms var(--ease);
+}
+.tome:hover .tome__gilt, .tome:focus-visible .tome__gilt { transform: scaleX(1); }
+
+/* Личный экземпляр — четвёртая карточка живёт в более ярком бордо. */
+.tome--private { --wine-deep: #6B2A31; }
+.tome--private .tome__plate::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(180deg, rgba(107, 42, 49, 0.42) 0%, rgba(74, 31, 36, 0.88) 46%, rgba(44, 16, 21, 0.97) 100%);
+}
+.tome--private .tome__stamp {
+  position: absolute; z-index: 3; left: 18px; right: 18px; bottom: 18px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: var(--step-3);
+  line-height: 1.05;
+  text-shadow: 0 2px 10px rgba(9, 3, 5, 0.7);
+}
+.tome--private .tome__price { color: var(--gold-hi); font-size: var(--step-1); letter-spacing: .2em; text-transform: uppercase; margin-top: 8px; }
+
+@media (max-width: 1020px) {
+  .hero { grid-template-columns: 1fr; padding-top: 72px; }
+  .frontis { order: 2; max-width: 520px; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  body { padding-left: 54px; }
+  .spine { width: 54px; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<!--
+THESIS: обучение интимности подано как переплетённая вручную книга, которую
+дают в руки, а не как боудуар-лендинг с фотографией во всю ширину.
+OWN-WORLD: вишнёвый бархат переплёта, крашеный золотой обрез, корешок как
+единственная вертикальная ось, ляссе-закладка, колофон вместо прайс-таблицы.
+STORY: посетитель видит закрытую книгу по теме, о которой не говорят вслух,
+узнаёт четыре тома и уходит в Telegram за своим экземпляром.
+FIRST VIEWPORT: слева титул с золочёной строкой и колофоном цен, справа
+вклеенная иллюстрация 4:5 с золотым обрезом; кнопка в левой колонке.
+FORM: переплётная мастерская, кандидат 5 из семи, seed 8447b63e.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<div class="velvet"></div>
+<div class="grain"></div>
+
+<aside class="spine">
+  <div class="lasse"></div>
+  <div class="spine__mark">DARI <i>love</i></div>
+  <div class="spine__folio tabular">МОСКВА</div>
+</aside>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <p class="kicker">Индивидуальное обучение · Москва</p>
+      <div class="hero__rule"></div>
+      <h1>Об этом<br>не говорят<br><span class="gilt">вслух</span></h1>
+      <p class="lede">Живые занятия и разборы, готовые лекции и работа один на один. Теория, практика с обратной связью и план на несколько недель вместо случайных советов.</p>
+
+      <div class="actions">
+        <a class="pill" href="#">Написать в Telegram</a>
+        <a class="pill pill--quiet" href="#">Смотреть оглавление</a>
+      </div>
+
+      <dl class="colophon">
+        <div class="colophon__row"><dt>Разбор запроса, онлайн</dt><dd class="price tabular">5 000 ₽</dd></div>
+        <div class="colophon__row"><dt>Индивидуальное занятие</dt><dd class="price tabular">20 000 ₽</dd></div>
+        <div class="colophon__row"><dt>Приватная консультация</dt><dd>по запросу</dd></div>
+      </dl>
+      <p class="colophon__note tabular">Ближайшие даты — сентябрь · 2 места · адрес после подтверждения записи</p>
+    </div>
+
+    <figure class="frontis" style="margin:0">
+      <div class="plate frontis__plate">
+        <img class="under" src="../assets/img/dari-wide.webp" alt="" aria-hidden="true">
+        <img class="over" src="../assets/img/dari-hero.webp" alt="Dari love в бордовом платье">
+        <div class="frontis__edge"></div>
+      </div>
+      <figcaption class="frontis__cap"><span>Фронтиспис</span><span class="tabular">4:5</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="chapters">
+    <div class="chapters__head">
+      <div>
+        <p class="kicker">Оглавление</p>
+        <h2>Четыре тома</h2>
+      </div>
+      <p class="tabular" style="color:var(--muted);font-size:var(--step-1);margin:0">Записанные лекции пополняются</p>
+    </div>
+
+    <div class="grid">
+      <a class="tome material" href="#">
+        <div class="plate tome__plate">
+          <img src="../assets/img/card-kn.webp" alt="">
+          <span class="tome__num">I</span>
+        </div>
+        <div class="tome__body">
+          <h3 class="tome__title">Кунилингус</h3>
+          <p class="tome__whom">Мужчинам</p>
+          <p class="tome__note">Техника, темп, дыхание и обратная связь. Разбор на практике, а не список поз.</p>
+        </div>
+        <span class="tome__gilt"></span>
+      </a>
+
+      <a class="tome material" href="#">
+        <div class="plate tome__plate">
+          <img src="../assets/img/card-sexu.webp" alt="">
+          <span class="tome__num">II</span>
+        </div>
+        <div class="tome__body">
+          <h3 class="tome__title">Сексология</h3>
+          <p class="tome__whom">Для женщин</p>
+          <p class="tome__note">Тело, желание и разговор о нём без стыда. Курс из записанных лекций.</p>
+        </div>
+        <span class="tome__gilt"></span>
+      </a>
+
+      <a class="tome material" href="#">
+        <div class="plate tome__plate">
+          <img src="../assets/img/card-bdsm.webp" alt="">
+          <span class="tome__num">III</span>
+        </div>
+        <div class="tome__body">
+          <h3 class="tome__title">БДСМ</h3>
+          <p class="tome__whom">Обоим</p>
+          <p class="tome__note">Договорённости, роли и безопасность. С чего начинают вдвоём.</p>
+        </div>
+        <span class="tome__gilt"></span>
+      </a>
+
+      <a class="tome tome--private material" href="#">
+        <div class="plate tome__plate">
+          <img src="../assets/img/card-konsul.webp" alt="">
+          <span class="tome__num">IV</span>
+          <div class="tome__stamp">
+            Индивидуальная<br>консультация
+            <p class="tome__price">Один на один</p>
+          </div>
+        </div>
+        <div class="tome__body">
+          <p class="tome__note">Личный запрос, онлайн или в Москве. Цена и формат — в переписке.</p>
+        </div>
+        <span class="tome__gilt"></span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  var ticking = false;
+
+  function paint() {
+    ticking = false;
+    var h = innerHeight;
+    var fill = Math.min(1, Math.max(0, scrollY / (h * 0.62)));
+    var read = Math.min(1, scrollY / Math.max(1, document.body.scrollHeight - h));
+    root.style.setProperty('--fill', reduce.matches ? 1 : fill.toFixed(4));
+    root.style.setProperty('--read', read.toFixed(4));
+  }
+
+  addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(paint); }
+  }, { passive: true });
+
+  paint();
+})();
+</script>
+</body>
+</html>

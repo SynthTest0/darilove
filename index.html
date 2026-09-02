@@ -73,26 +73,30 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
   <!-- ——— Титульный разворот ——————————————————————————————— -->
   <section class="hero">
-    <div>
-      <p class="kicker">Индивидуальное обучение · Москва</p>
+    <div class="hero__lead">
       <div class="hero__rule"></div>
       <h1>Об этом<br>не говорят<br><span class="gilt">вслух</span></h1>
       <p class="lede">Живые занятия и разборы, готовые лекции и работа один на один. Теория, практика с обратной связью и план на несколько недель вместо случайных советов.</p>
-      <p class="subjects">Кунилингус · Сексология · БДСМ · Приватно</p>
+      <p class="subjects">Кунилингус · Сексология · БДСМ · Приватно · Москва</p>
 
       <div class="actions">
         <a class="pill" data-tg="hero" href="#">Написать в Telegram</a>
         <a class="pill pill--quiet" href="#chapters">Смотреть оглавление</a>
       </div>
 
+    </div>
+
+    <div class="hero__price">
       <dl class="colophon" id="prices"></dl>
       <p class="colophon__note">Адрес очных занятий — после подтверждения записи</p>
     </div>
 
     <figure class="frontis">
-      <div class="plate frontis__plate">
-        <img class="under" src="assets/img/dari-wide.webp" alt="" aria-hidden="true">
-        <img class="over" src="assets/img/dari-hero.webp" alt="Dari love в бордовом платье" fetchpriority="high">
+      <div class="frontis__book">
+        <div class="plate frontis__plate">
+          <img class="under" src="assets/img/dari-wide.webp" alt="" aria-hidden="true">
+          <img class="over" src="assets/img/dari-hero.webp" alt="Dari love в бордовом платье" fetchpriority="high">
+        </div>
         <div class="frontis__edge"></div>
       </div>
       <figcaption class="frontis__cap"><span>Фронтиспис</span><span class="tabular">4:5</span></figcaption>
@@ -109,10 +113,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <section class="chapters" id="chapters">
     <div class="chapters__pin">
       <div class="chapters__head">
-        <div>
-          <p class="kicker">Оглавление</p>
-          <h2>Четыре тома</h2>
-        </div>
+        <h2>Четыре тома</h2>
         <p class="chapters__counter tabular" id="deck-counter">1 / 4</p>
       </div>
 
@@ -126,23 +127,23 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
   <!-- ——— Живой формат ——————————————————————————————————— -->
   <section class="live" id="live">
-    <p class="kicker">Живой формат</p>
     <h2>Занятия в Москве</h2>
     <p class="live__lede">Очные занятия проходят небольшими группами и один на один. Мест физически немного, поэтому запись закрывается заранее.</p>
 
     <div class="live__grid">
       <div class="fact"><b class="tabular" id="live-seats"></b><span>свободно на ближайшие даты</span></div>
       <div class="fact"><b class="tabular" id="live-deadline"></b><span id="live-month"></span></div>
-      <div class="fact"><b>Гайд</b><span id="live-gift"></span></div>
     </div>
 
-    <p style="margin-top:30px"><a class="pill" data-tg="live" href="#">Занять место</a></p>
+    <p class="live__cta">
+      <a class="pill" data-tg="live" href="#">Занять место</a>
+      <span id="live-gift"></span>
+    </p>
   </section>
 
   <!-- ——— Приватно ———————————————————————————————————————— -->
   <section class="private material" id="private">
     <div>
-      <p class="kicker">Один на один</p>
       <h2>Индивидуальная консультация</h2>
       <p>Личный запрос, онлайн или очно в Москве. Формат, длительность и цена обсуждаются в переписке до записи. Адрес приходит только после подтверждения.</p>
       <p style="margin-top:26px"><a class="pill" data-tg="private" href="#">Написать лично</a></p>
@@ -158,24 +159,22 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <img src="assets/img/dari-wide.webp" alt="Dari love" loading="lazy">
     </div>
     <div>
-      <p class="kicker">Автор</p>
       <h2 id="about-title"></h2>
       <p class="about__text" id="about-text"></p>
       <p class="placeholder">Заглушка — заменить на настоящий текст и факты</p>
       <div class="about__facts" id="about-facts"></div>
-      <p style="margin-top:26px"><a class="thanks" data-href="tribute" href="#" style="color:var(--skin)">Поблагодарить →</a></p>
+      <p style="margin-top:26px"><a class="thanks arrowed" data-href="tribute" href="#">Поблагодарить<svg viewBox="0 0 24 12" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></a></p>
     </div>
   </section>
 
   <!-- ——— Отзывы (удаляются, пока список пуст) ———————————— -->
   <section class="reviews" id="reviews">
-    <p class="kicker">Отзывы</p>
+    <h2>Отзывы</h2>
     <div class="reviews__grid" id="reviews-grid"></div>
   </section>
 
   <!-- ——— Вопросы ————————————————————————————————————————— -->
   <section class="faq" id="faq">
-    <p class="kicker">Частые вопросы</p>
     <h2>Что обычно спрашивают</h2>
     <div id="faq-list"></div>
   </section>
@@ -183,16 +182,12 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <!-- ——— Заявка —————————————————————————————————————————— -->
   <section class="lead material">
     <div>
-      <p class="kicker">Первый шаг</p>
       <h2>Напишите — разберём ваш запрос</h2>
       <p>Первое сообщение ни к чему не обязывает. Расскажите, что хотите изменить, и я предложу формат.</p>
     </div>
     <div class="lead__side">
       <a class="pill" data-tg="lead" href="#">Написать в Telegram</a>
-      <label class="consent">
-        <input type="checkbox" checked>
-        Переписка остаётся между нами. Никакие данные не публикуются и не передаются третьим лицам.
-      </label>
+      <p class="consent">Переписка остаётся между нами. Никакие данные не публикуются и не передаются третьим лицам.</p>
     </div>
   </section>
 
@@ -218,7 +213,9 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
 <dialog class="sheet" id="sheet">
   <div class="sheet__inner material" id="sheet-body"></div>
-  <button class="sheet__close" id="sheet-close" type="button" aria-label="Закрыть">×</button>
+  <button class="sheet__close" id="sheet-close" type="button" aria-label="Закрыть">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5 15 15M15 5 5 15"/></svg>
+  </button>
 </dialog>
 
 <script src="js/content.js"></script>

@@ -48,7 +48,7 @@ body { padding-left: var(--spine); }
 .spine__tick {
   position: relative;
   width: 22px; height: 22px;
-  display: grid; place-items: center;
+  display: grid; place-items: center; justify-items: start;
   color: var(--muted);
   text-decoration: none;
   font-size: 10px;
@@ -56,13 +56,16 @@ body { padding-left: var(--spine); }
 }
 .spine__tick::before {
   content: "";
-  width: 12px; height: 1px;
+  width: 22px; height: 1px;
   background: currentColor;
-  transition: width 200ms var(--ease), background-color 200ms var(--ease);
+  /* Растёт трансформом, а не шириной: ширина заставляет пересчитывать раскладку. */
+  transform: scaleX(0.55);
+  transform-origin: left center;
+  transition: transform 200ms var(--ease), background-color 200ms var(--ease);
 }
-.spine__tick[aria-current="true"]::before { width: 22px; background: var(--gold); }
+.spine__tick[aria-current="true"]::before { transform: scaleX(1); background: var(--gold); }
 @media (hover: hover) and (pointer: fine) {
-  .spine__tick:hover::before { width: 22px; background: var(--gold); }
+  .spine__tick:hover::before { transform: scaleX(1); background: var(--gold); }
 }
 .spine__tick span {
   position: absolute; left: 26px;
@@ -85,7 +88,7 @@ body { padding-left: var(--spine); }
   display: flex; align-items: center; justify-content: flex-end;
   gap: clamp(14px, 2vw, 28px);
   padding: 14px clamp(18px, 4vw, 56px);
-  background: linear-gradient(180deg, rgba(24,10,14,.94), rgba(24,10,14,.35) 80%, transparent);
+  background: linear-gradient(180deg, rgba(36,16,23,.94), rgba(36,16,23,.35) 80%, transparent);
   backdrop-filter: blur(10px);
   transition: transform 240ms var(--ease-move);
 }
@@ -102,9 +105,27 @@ body { padding-left: var(--spine); }
   min-height: calc(100svh - 62px);
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
-  gap: clamp(28px, 5vw, 76px);
-  align-items: center;
-  padding: clamp(20px, 3vw, 44px) 0 clamp(40px, 6vw, 70px);
+  grid-template-rows: auto auto;
+  column-gap: clamp(24px, 4vw, 64px);
+  align-content: center;
+  padding: clamp(14px, 2vw, 28px) 0 clamp(24px, 3vw, 40px);
+}
+
+.hero__lead  { grid-column: 1; grid-row: 1; }
+.hero__price { grid-column: 1; grid-row: 2; }
+.frontis     { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+
+/* Первый экран обязан помещаться целиком: заголовок и колофон
+   ужимаются по высоте окна, а не только по его ширине. */
+@media (min-width: 1021px) {
+  .hero h1 { font-size: min(var(--step-5), 9.2vh); }
+  .hero .lede { font-size: var(--step-1); margin-top: 16px; }
+  .hero__rule { margin: 16px 0 12px; }
+  .actions { margin-top: 20px; }
+  .colophon { margin-top: 22px; }
+  .colophon__row { padding: 8px 0; }
+  .colophon__note { margin-top: 8px; }
+  .frontis__plate { height: min(72vh, 640px); width: auto; }
 }
 
 .hero__rule {
@@ -158,6 +179,9 @@ h1 {
 .colophon__note { margin-top: 12px; font-size: var(--step-0); color: var(--muted); }
 
 .frontis { position: relative; margin: 0; }
+
+/* Обрез лежит вне кадра: у .plate включён overflow, он срезал бы позолоту. */
+.frontis__book { position: relative; width: fit-content; margin-left: auto; }
 .frontis__plate {
   aspect-ratio: 4 / 5;
   border-radius: 4px 14px 14px 4px;
@@ -171,11 +195,19 @@ h1 {
   mask-image: linear-gradient(180deg, #000 calc(100% - var(--fill) * 100%), transparent 0);
 }
 .frontis__edge {
-  position: absolute; top: 8px; bottom: 8px; right: -7px;
-  width: 7px; border-radius: 0 3px 3px 0;
+  position: absolute; top: 10px; bottom: 10px; right: -8px;
+  width: 8px; border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--gold-dim), var(--gold-deep) 55%, #4A3418);
+  box-shadow: 2px 0 6px -2px rgba(9,3,5,.9);
+}
+
+/* Позолота лежит на обрезе с самого начала — тусклая; налив её разжигает. */
+.frontis__edge::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
   background: linear-gradient(180deg, var(--gold-hi), var(--gold) 45%, var(--gold-deep));
   clip-path: inset(calc(100% - var(--fill) * 100%) 0 0 0);
-  box-shadow: 2px 0 6px -2px rgba(9,3,5,.9);
 }
 .frontis__cap {
   display: flex; justify-content: space-between;
@@ -289,13 +321,17 @@ h1 {
 /* ——— Живой формат ————————————————————————————————————————————— */
 .live { padding: clamp(60px, 9vw, 130px) 0; }
 .live__grid {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(18px, 3vw, 40px);
+  max-width: 620px;
   padding-top: 26px; margin-top: 26px;
   border-top: 1px solid rgba(252,231,220,.13);
 }
 .live h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: var(--step-4); line-height: 1; margin: 8px 0 0; }
 .live__lede { color: var(--skin); max-width: 52ch; margin: 18px 0 0; }
+.live__cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+.live__cta span { color: var(--muted); font-size: var(--step-1); }
+
 .fact b {
   display: block;
   font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400;
@@ -346,8 +382,16 @@ h1 {
   font-size: var(--step-2);
 }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; color: var(--gold); font-family: 'Cormorant Garamond', Georgia, serif; font-size: var(--step-3); }
-.faq details[open] summary::after { content: "–"; }
+.faq summary::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 14px; height: 14px;
+  background:
+    linear-gradient(var(--gold), var(--gold)) center/14px 1px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) center/1px 14px no-repeat;
+  transition: transform 200ms var(--ease), opacity 200ms var(--ease);
+}
+.faq details[open] summary::after { transform: rotate(90deg); background-size: 14px 1px, 0 0; }
 .faq p { margin: 0 0 20px; color: var(--muted); max-width: 62ch; }
 
 /* ——— Заявка ——————————————————————————————————————————————————— */
@@ -361,8 +405,7 @@ h1 {
 .lead h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: var(--step-4); line-height: 1.02; margin: 8px 0 0; }
 .lead p { color: var(--skin); margin: 16px 0 0; max-width: 44ch; }
 .lead__side { display: grid; gap: 16px; justify-items: start; }
-.consent { display: flex; gap: 12px; align-items: flex-start; font-size: var(--step-0); color: var(--muted); max-width: 44ch; }
-.consent input { margin-top: 3px; accent-color: var(--gold); }
+.consent { font-size: var(--step-0); color: var(--muted); max-width: 44ch; margin: 0; }
 
 /* ——— Подвал ——————————————————————————————————————————————————— */
 .foot {
@@ -380,7 +423,7 @@ h1 {
   position: fixed; left: var(--spine); right: 0; bottom: 0; z-index: 55;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 12px clamp(16px, 4vw, 40px);
-  background: linear-gradient(0deg, rgba(24,10,14,.97), rgba(24,10,14,.8));
+  background: linear-gradient(0deg, rgba(36,16,23,.97), rgba(36,16,23,.82));
   border-top: 1px solid rgba(252,231,220,.12);
   transform: translateY(110%);
   transition: transform 200ms var(--ease);
@@ -428,8 +471,12 @@ h1 {
 .sheet__close {
   position: absolute; top: 14px; right: 16px;
   background: none; border: 0; color: var(--skin); cursor: pointer;
-  font-size: 22px; line-height: 1; padding: 6px;
+  padding: 8px; line-height: 0;
 }
+.sheet__close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.25; stroke-linecap: round; }
+
+.arrowed { display: inline-flex; align-items: center; gap: 10px; color: var(--skin); text-decoration: none; }
+.arrowed svg { width: 24px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ——— Гейт 18+ ————————————————————————————————————————————————— */
 .gate {
@@ -451,7 +498,22 @@ body[data-gated="1"] { overflow: hidden; }
 /* ——— Адаптив —————————————————————————————————————————————————— */
 @media (max-width: 1020px) {
   .hero, .private, .about, .lead, .sheet__inner { grid-template-columns: 1fr; }
-  .frontis { order: 2; max-width: 520px; }
+  /* Согласованный порядок на телефоне: заголовок, абзац, кнопка, фото, прайс. */
+  .hero { grid-template-rows: auto auto auto; }
+  .hero__lead  { grid-column: 1; grid-row: 1; }
+  .frontis     { grid-column: 1; grid-row: 2; max-width: 520px; align-self: start; }
+  .hero__price { grid-column: 1; grid-row: 3; }
+  /* Порядок блоков остаётся заданным: заголовок, абзац, кнопка, фото, прайс.
+     Чтобы иллюстрация попадала в первый экран, верх ужимается по высоте окна. */
+  .hero h1 { font-size: min(var(--step-5), 8.4vh); }
+  .hero .lede { font-size: var(--step-1); margin-top: 14px; max-width: 38ch; }
+  .hero .subjects { margin-top: 12px; }
+  .hero__rule { margin: 14px 0 10px; }
+  .actions { margin-top: 18px; }
+  .frontis { margin-top: 22px; }
+  .frontis__plate { height: min(46vh, 420px); width: auto; }
+  .frontis__edge { display: none; }
+  .colophon { margin-top: 22px; }
   .tome { grid-template-columns: 1fr; }
   .tome__plate { max-width: 340px; }
   .live__grid { grid-template-columns: 1fr; gap: 18px; }

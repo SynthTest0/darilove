@@ -2,7 +2,7 @@
    Палитра снята пипеткой с фотографий бордового латексного платья. */
 
 :root {
-  --ink:        #180A0E;
+  --ink:        #241017;
   --wine-deep:  #2C1015;
   --wine:       #4A1F24;
   --wine-lit:   #6B2A31;
@@ -13,6 +13,7 @@
   --gold:       #D9A24E;
   --gold-hi:    #FCCB6D;
   --gold-deep:  #7A5320;
+  --gold-dim:   #8A6A38;   /* позолота в покое, до налива */
 
   /* Ширина корешка: от неё зависят отступ страницы и левый край полосы. */
   --spine: 84px;
@@ -27,12 +28,23 @@
   --step-4: clamp(2rem, 1.2rem + 3.2vw, 3.6rem);
   --step-5: clamp(2.8rem, 1rem + 7vw, 6.5rem);
 
+  color-scheme: dark;
+  accent-color: var(--gold);
   --ease: cubic-bezier(0.23, 1, 0.32, 1);          /* вход, отклик */
   --ease-move: cubic-bezier(0.77, 0, 0.175, 1);    /* движение на экране */
   --fill: 0;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+
+::selection { background: var(--wine-lit); color: var(--cream); }
+
+:root {
+  scrollbar-color: var(--wine-lit) var(--wine-deep);
+  scrollbar-width: thin;
+}
+
+a { text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
 
 html { -webkit-text-size-adjust: 100%; }
 
@@ -44,6 +56,7 @@ body {
   font-size: var(--step-2);
   line-height: 1.6;
   font-synthesis-weight: none;
+  caret-color: var(--gold);
   overflow-x: hidden;
 }
 
@@ -57,7 +70,7 @@ body {
     radial-gradient(120% 80% at 18% 8%,  var(--wine) 0%, transparent 58%),
     radial-gradient(90% 70% at 88% 30%,  var(--wine-lit) 0%, transparent 55%),
     radial-gradient(140% 100% at 50% 110%, var(--wine-deep) 0%, transparent 62%),
-    var(--ink);
+    var(--wine-deep);
   /* Слой крупнее экрана, чтобы движение шло трансформом:
      background-position перерисовывает весь кадр каждый раз. */
   inset: -12%;
@@ -187,13 +200,6 @@ body {
   mix-blend-mode: screen;
   opacity: 0.20;
   pointer-events: none;
-}
-
-.kicker {
-  font-size: var(--step-0);
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: var(--skin);
 }
 
 .wordmark {

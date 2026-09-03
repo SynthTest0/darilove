@@ -157,13 +157,6 @@ body[data-gated] { overflow: hidden; }
     radial-gradient(70% 46% at 30% 86%, rgb(var(--latex-low-rgb) / .48) 0%, transparent 62%),
     radial-gradient(80% 52% at 52% 108%, var(--latex-shadow) 0%, transparent 62%),
     var(--void);
-  animation: drift 64s var(--ease-move) infinite alternate;
-  will-change: transform;
-}
-
-@keyframes drift {
-  from { transform: translate3d(-1.2%, -0.8%, 0) scale(1.02); }
-  to   { transform: translate3d(1.2%, 1.2%, 0) scale(1.05); }
 }
 
 .grain {
@@ -171,9 +164,8 @@ body[data-gated] { overflow: hidden; }
   inset: -20%;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.14;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
-  mix-blend-mode: soft-light;
 }
 
 /* ------------------------------------------------------------- материал */
@@ -225,7 +217,9 @@ body[data-gated] { overflow: hidden; }
   left: 0;
   top: 0;
   height: 1px;
-  width: calc(var(--fill) * 100%);
+  width: 100%;
+  transform: scaleX(var(--fill, 0));
+  transform-origin: left;
   background: linear-gradient(90deg, var(--latex), var(--latex-hot) 70%, transparent);
   box-shadow: 0 0 12px rgb(var(--latex-hot-rgb) / .5);
 }
@@ -275,7 +269,6 @@ body[data-gated] { overflow: hidden; }
   text-shadow: 0 1px 2px rgb(9 3 5 / .55);
   cursor: pointer;
   overflow: hidden;
-  animation: metal-turn 14s linear infinite;
   box-shadow:
     0 0 0 1px rgb(9 3 5 / .35),
     0 20px 12px -10px rgb(9 3 5 / .5),
@@ -315,7 +308,7 @@ body[data-gated] { overflow: hidden; }
 @media (hover: hover) and (pointer: fine) {
   .pill:hover {
     filter: brightness(1.06);
-    animation-duration: 5s;
+    animation: metal-turn 5s linear infinite;
     box-shadow:
       0 0 0 1px rgb(9 3 5 / .35),
       0 0 28px -2px rgb(var(--latex-lit-rgb) / .45),

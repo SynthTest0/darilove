@@ -383,13 +383,22 @@
     if (!layer || reduce.matches) return;
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
+    var pending = false;
+    var mx = 0, my = 0;
+
     window.addEventListener('pointermove', function (e) {
-      var dx = (e.clientX / window.innerWidth - 0.5) * 46;
-      var dy = (e.clientY / window.innerHeight - 0.5) * 34;
-      // Одна запись на слой, а не на каждый предмет: наследование переменной
-      // дешевле шестнадцати обращений к стилю.
-      layer.style.setProperty('--px', dx.toFixed(1) + 'px');
-      layer.style.setProperty('--py', dy.toFixed(1) + 'px');
+      mx = e.clientX;
+      my = e.clientY;
+      // Событий указателя приходит больше, чем кадров: копим и пишем раз в кадр.
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () {
+        pending = false;
+        // Одна запись на слой, а не на каждый предмет: наследование переменной
+        // дешевле шестнадцати обращений к стилю.
+        layer.style.setProperty('--px', ((mx / window.innerWidth - 0.5) * 46).toFixed(1) + 'px');
+        layer.style.setProperty('--py', ((my / window.innerHeight - 0.5) * 34).toFixed(1) + 'px');
+      });
     }, { passive: true });
   }
 
@@ -458,20 +467,40 @@
     };
   }
 
-  /* ------------------------------------------------------ скролл-состояния */
+  /* ------------------------------------------------------ скролл-состояния
+
+     Всё, что считается на прокрутке, должно быть дешёвым: кадр отдаётся
+     композитору, а не пересчёту раскладки. Поэтому здесь три правила.
+     Первое: переменные пишутся не в :root, а прямо на потребителей — запись
+     в корень инвалидирует стили всего документа. Второе: пишем только когда
+     значение действительно изменилось. Третье: положение секций меряется на
+     resize и кэшируется, а не на каждом кадре через getBoundingClientRect. */
 
   function scrollStates() {
     var navTicks = $$('.rail__tick');
     var sideTicks = ticks();
     var kickWidget = springWidget();
     var thanks = $('#thanks');
+    var head = $('#head');
+    var fillHosts = $$('.shot, .seam');
+
     var last = window.scrollY;
+    var lastFill = -1;
+    var lastRead = -1;
     var ticking = false;
 
-    function markCurrent(el, section, vh) {
-      if (!section) return;
-      var r = section.getBoundingClientRect();
-      el.setAttribute('aria-current', (r.top <= vh * 0.4 && r.bottom > vh * 0.4) ? 'true' : 'false');
+    // Кэш положений: обновляется на resize и после загрузки картинок.
+    var marks = [];
+
+    function measure() {
+      marks = [];
+      navTicks.forEach(function (el) {
+        var sec = document.querySelector(el.getAttribute('href'));
+        if (sec) marks.push({ el: el, top: sec.offsetTop, height: sec.offsetHeight });
+      });
+      sideTicks.forEach(function (t) {
+        if (t.section) marks.push({ el: t.el, top: t.section.offsetTop, height: t.section.offsetHeight });
+      });
     }
 
     function paint() {
@@ -480,15 +509,28 @@
       var vh = window.innerHeight;
       var max = Math.max(1, document.body.scrollHeight - vh);
 
-      root.style.setProperty('--fill', reduce.matches ? '1' : Math.min(1, y / (vh * 0.62)).toFixed(4));
-      root.style.setProperty('--read', (y / max).toFixed(4));
+      var fill = reduce.matches ? 1 : Math.min(1, y / (vh * 0.62));
+      var read = y / max;
+
+      // Шаг в полпроцента: глазу незаметно, кадру — заметно.
+      if (Math.abs(fill - lastFill) > 0.005) {
+        lastFill = fill;
+        fillHosts.forEach(function (el) { el.style.setProperty('--fill', fill.toFixed(3)); });
+      }
+      if (Math.abs(read - lastRead) > 0.005) {
+        lastRead = read;
+        if (head) head.style.setProperty('--read', read.toFixed(3));
+      }
 
       if (kickWidget) kickWidget(y - last);
       if (thanks) thanks.dataset.show = y > vh * 0.5 ? '1' : '0';
       last = y;
 
-      navTicks.forEach(function (t) { markCurrent(t, document.querySelector(t.getAttribute('href')), vh); });
-      sideTicks.forEach(function (t) { markCurrent(t.el, t.section, vh); });
+      // Активный раздел — сравнение чисел, без обращения к раскладке.
+      var probe = y + vh * 0.4;
+      marks.forEach(function (m) {
+        m.el.setAttribute('aria-current', (probe >= m.top && probe < m.top + m.height) ? 'true' : 'false');
+      });
     }
 
     window.addEventListener('scroll', function () {
@@ -500,7 +542,15 @@
       if (!document.hidden) paint();
     });
 
-    window.addEventListener('resize', paint);
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () { measure(); paint(); }, 120);
+    });
+
+    window.addEventListener('load', function () { measure(); paint(); });
+
+    measure();
     paint();
   }
 

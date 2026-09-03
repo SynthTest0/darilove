@@ -1,47 +1,76 @@
 ---
 name: DARI LOVE
-description: Обучение интимности как переплетённая вручную книга: вишнёвый бархат, золочёный обрез, корешок как единственная вертикальная ось.
+description: Обучение интимности подано материально — как латекс под студийным светом: почти чёрные натянутые плоскости во всю ширину, жёсткие блики по кромке, один алый акцент.
 colors:
-  ink: "#241017"
-  wine-deep: "#2C1015"
-  wine: "#4A1F24"
-  wine-lit: "#6B2A31"
-  cream: "#F2E2DA"
-  skin: "#C9A392"
-  muted: "#A98A85"
-  gold: "#D9A24E"
-  gold-hi: "#FCCB6D"
-  gold-deep: "#7A5320"
-  gold-dim: "#8A6A38"
-  edge: "rgb(252 231 220)"
+  void: "#0A0709"
+  pitch: "#120C0F"
+  slab: "#191115"
+  slab-lit: "#21161B"
+  latex: "#A50F26"
+  latex-lit: "#D51C3B"
+  latex-hot: "#FF4C63"
+  latex-low: "#4E0A16"
+  latex-shadow: "#2A0710"
+  bone: "#F5EFEF"
+  ash: "#A2908F"
+  dim: "#6E5F62"
+  sheen: "rgb(255 244 244)"
+  latex-rgb: "165 15 38"
+  latex-lit-rgb: "213 28 59"
+  latex-hot-rgb: "255 76 99"
+  latex-low-rgb: "78 10 22"
+  shade: "rgb(12 4 7)"
+  shade-lit: "rgb(60 4 14)"
+  shade-hot: "rgb(70 6 18)"
 typography:
   display:
-    fontFamily: "Cormorant Garamond, Georgia, serif"
-    fontSize: "clamp(2.8rem, 1rem + 7vw, 6.5rem)"
-    fontWeight: 400
-    lineHeight: 0.94
-    letterSpacing: "-0.015em"
+    fontFamily: "Unbounded, system-ui, sans-serif"
+    fontSize: "clamp(2.2rem, 0.6rem + 5.6vw, 4.3rem)"
+    fontWeight: 700
+    lineHeight: 0.96
+    letterSpacing: "-0.035em"
+    textTransform: "uppercase"
   headline:
-    fontFamily: "Cormorant Garamond, Georgia, serif"
-    fontSize: "clamp(2rem, 1.2rem + 3.2vw, 3.6rem)"
-    fontWeight: 400
-    lineHeight: 1.02
+    fontFamily: "Unbounded, system-ui, sans-serif"
+    fontSize: "clamp(1.85rem, 1.1rem + 3vw, 3.3rem)"
+    fontWeight: 700
+    lineHeight: 0.96
+    letterSpacing: "-0.035em"
+    textTransform: "uppercase"
   numeral:
-    fontFamily: "Cormorant Garamond, Georgia, serif"
-    fontSize: "clamp(1.7rem, 1rem + 2.2vw, 2.6rem)"
-    fontWeight: 400
+    fontFamily: "Unbounded, system-ui, sans-serif"
+    fontSize: "clamp(1.6rem, 1rem + 2.2vw, 2.5rem)"
+    fontWeight: 800
     lineHeight: 1
+    letterSpacing: "-0.04em"
     fontFeature: "tabular-nums"
   title:
-    fontFamily: "Cormorant Garamond, Georgia, serif"
-    fontSize: "clamp(1.35rem, 1.1rem + 1.1vw, 2rem)"
-    fontWeight: 400
+    fontFamily: "Unbounded, system-ui, sans-serif"
+    fontSize: "clamp(1.25rem, 1rem + 1.1vw, 1.85rem)"
+    fontWeight: 600
     lineHeight: 1.1
+    letterSpacing: "-0.03em"
   wordmark:
-    fontFamily: "Cormorant Garamond, Georgia, serif"
-    fontSize: "clamp(1.35rem, 1.1rem + 1.1vw, 2rem)"
+    fontFamily: "Unbounded, system-ui, sans-serif"
+    fontSize: "0.9375rem"
+    fontWeight: 700
+    letterSpacing: "0.18em"
+    textTransform: "uppercase"
+  accent:
+    fontFamily: "Rubik, system-ui, sans-serif"
+    fontStyle: "italic"
+    fontWeight: 500
+    letterSpacing: "-0.01em"
+  script:
+    fontFamily: "Marck Script (assets/fonts/MarckScript-Regular.ttf, разбирается в контуры)"
+    fontSize: "1.7em от кегля строки"
+    usage: "единственное слово первого экрана, пишется росчерком"
+  quote:
+    fontFamily: "Rubik, system-ui, sans-serif"
+    fontStyle: "italic"
     fontWeight: 400
-    letterSpacing: "0.34em"
+    fontSize: "1.0625rem"
+    lineHeight: 1.55
   body:
     fontFamily: "Golos Text, system-ui, sans-serif"
     fontSize: "1.0625rem"
@@ -52,229 +81,255 @@ typography:
     fontSize: "0.8125rem"
     fontWeight: 400
     lineHeight: 1.6
-    letterSpacing: "0.2em"
+    letterSpacing: "0.12em"
+    textTransform: "uppercase"
   micro:
     fontFamily: "Golos Text, system-ui, sans-serif"
     fontSize: "0.6875rem"
-    fontWeight: 400
-    letterSpacing: "0.18em"
+    fontWeight: 500
+    letterSpacing: "0.2em"
+    textTransform: "uppercase"
   action:
     fontFamily: "Golos Text, system-ui, sans-serif"
     fontSize: "0.9375rem"
     fontWeight: 600
     lineHeight: 1
-    letterSpacing: "0.01em"
+    letterSpacing: "0.005em"
 rounded:
-  xs: "3px"
-  s: "6px"
+  xs: "2px"
+  s: "5px"
   m: "10px"
-  l: "14px"
-  xl: "18px"
+  l: "18px"
+  xl: "28px"
   pill: "999px"
 spacing:
-  spine: "84px"
-  spine-narrow: "56px"
-  gutter: "clamp(18px, 4vw, 56px)"
-  section: "clamp(60px, 9vw, 120px)"
-  panel-pad: "clamp(28px, 4vw, 48px)"
-  card-pad: "clamp(16px, 2vw, 26px)"
-  container: "1360px"
+  pad: "clamp(20px, 5vw, 64px)"
+  section: "clamp(70px, 12vh, 140px)"
+  panel-pad: "clamp(28px, 4vw, 52px)"
+  card-pad: "clamp(18px, 2.2vw, 26px)"
+  container: "1240px"
 components:
   pill:
-    backgroundColor: "{colors.wine-lit}"
-    textColor: "{colors.cream}"
+    background: "linear-gradient(178deg, {colors.latex-lit}, {colors.latex} 58%, #8C0C20)"
+    textColor: "{colors.bone}"
     typography: "{typography.action}"
-    rounded: "{rounded.pill}"
-    padding: "0.95em 1.9em"
+    rounded: "{rounded.m}"
+    padding: "1em 1.7em"
   pill-quiet:
-    backgroundColor: "transparent"
-    textColor: "{colors.skin}"
+    background: "linear-gradient(178deg, {colors.slab-lit}, {colors.pitch})"
+    textColor: "{colors.bone}"
     typography: "{typography.action}"
-    rounded: "{rounded.pill}"
-    padding: "0.95em 1.9em"
-  panel:
-    backgroundColor: "{colors.wine-deep}"
-    textColor: "{colors.cream}"
+    rounded: "{rounded.m}"
+    padding: "1em 1.7em"
+  material:
+    background: "linear-gradient(180deg, {colors.slab-lit}, {colors.slab} 62%, {colors.pitch})"
+    textColor: "{colors.bone}"
     rounded: "{rounded.xl}"
     padding: "{spacing.panel-pad}"
-  tome:
-    backgroundColor: "{colors.wine-deep}"
-    textColor: "{colors.cream}"
+  material-hot:
+    background: "linear-gradient(168deg, {colors.latex-lit}, {colors.latex} 54%, {colors.latex-low})"
+    textColor: "{colors.bone}"
+    rounded: "0"
+    padding: "{spacing.panel-pad}"
+  slab:
+    background: "{components.material.background}"
+    textColor: "{colors.bone}"
     rounded: "{rounded.l}"
     padding: "{spacing.card-pad}"
   plate:
-    backgroundColor: "{colors.wine-deep}"
-    rounded: "{rounded.m}"
-  colophon-row:
-    textColor: "{colors.cream}"
+    backgroundColor: "{colors.pitch}"
+    rounded: "{rounded.l}"
+  rate:
+    textColor: "{colors.bone}"
     typography: "{typography.title}"
-    padding: "12px 0"
+    padding: "clamp(20px, 3vw, 30px) clamp(16px, 2.4vw, 32px)"
+  thanks-widget:
+    background: "linear-gradient(178deg, {colors.slab-lit}, {colors.pitch})"
+    textColor: "{colors.bone}"
+    typography: "{typography.action}"
+    rounded: "{rounded.pill}"
+    padding: "0.85em 1.25em"
+  ticks:
+    color: "{colors.dim}"
+    activeColor: "{colors.latex-hot}"
+    size: "18x2px, активная растягивается до 1.7"
 ---
 
 # Design System: DARI LOVE
 
 ## Overview
 
-**Creative North Star: "The Hand-Bound Volume"**
+**Creative North Star: "Latex Under Studio Light"**
 
-The site is a book, not a landing page: a cherry-velvet binding, a gilded fore-edge, a spine that is the page's only vertical axis, a cloth ribbon marking how far you have read, and a colophon where a price table would normally sit. Everything the visitor touches is a material — velvet with a light top edge, gold leaf that catches as you scroll, a striped headband at the head of the spine, marbled endpaper behind the footer. The confirmed rejection is the boudoir landing page: no full-bleed photograph, no cover shot behind the headline. Imagery is *tipped in* as plates in 4:5 frames, the way a plate is pasted into a printed book.
+The page is a material, not a document. Every surface behaves like a sheet of latex pulled taut: near-black, glossy, with a hard specular line along its top edge, an oblique sheen running across the plane, and dense shadow pooling at the bottom. Red appears only where light hits it. This direction replaced "The Hand-Bound Volume" (`variants/a-perepliot.html`) at the client's request; the book metaphor — spine, gilding, ribbon, colophon, fleuron, versal — is gone in full, and nothing from it should be reintroduced piecemeal.
 
-Density is editorial rather than promotional. Long measures are capped (46–68ch), display type is set tight (0.94–1.06 line-height) and body type set open (1.6), and vertical rhythm is carried by fluid section padding rather than a fixed 8pt grid. The page is dark throughout and never reaches pure black; the palette was eyedropped from photographs of a burgundy latex dress and floors at Wine Deep (#2C1015).
+Planes run edge to edge and butt against each other. Air lives *inside* a plane, not between planes: the manifesto and the closing CTA are full-bleed red slabs with generous internal padding, the price strip is a full-width three-cell band with hairline dividers, and the hero photograph runs off the right edge of the screen. There are no floating cards on an empty background.
 
-Motion is one idea repeated. A single scroll-driven variable (`--fill`) and a reading-progress variable (`--read`) drive the hero rule, the wipe that swaps the hero photograph, the gilding of the fore-edge, the length of the ribbon and the state of the spine ticks. Nothing else animates on scroll. Everything decorative stands down under `prefers-reduced-motion`, on coarse pointers, and on narrow viewports.
+Typography is a single wide grotesque in uppercase — no serif appears anywhere on the site. Two exceptions, both deliberate: the accent word set in a red italic (`love`, `не учит`), and the hero's last word, which is *written* rather than typeset — Marck Script glyphs parsed into contours and drawn stroke by stroke, then inked in.
+
+Motion is three ideas repeated. Scroll drives `--fill` and `--read`: the header progress line, the seam in the footer, the red edge of the hero frame, the side ticks. Everything else is a spring — the same critically-damped integrator (stiffness 0.16, damping 0.76–0.78) settles the material ribbon after a drag, the attributes floating behind it, and the thanks widget after a scroll kick. Third, sections arrive and leave: 26px of travel and a fade over 420ms on a strong ease-out, staggered 40-80ms between siblings, driven by an `IntersectionObserver` that never disconnects — a block that scrolls back out slides away to the side it came from, because the state is where the block sits relative to the window, not a one-off event. Interaction motion is the metal sweep and the press sink on buttons. The page itself scrolls natively; no script intercepts the wheel. Everything decorative stands down under `prefers-reduced-motion`, on coarse pointers, and at ≤1020px.
 
 **Key Characteristics:**
-- Cherry velvet ground, no pure black anywhere in the interface
-- Gold used only as an event: gilding, ribbon, rules, active state
-- One material recipe (light top edge, inner downward shading, soft wine-tinted drop) shared by every raised surface
-- Spine as the only vertical axis; the page body is inset by its width
-- Bindery detail as ornament: headband, gutter shadow, versal, fleuron, marbled endpaper
-- One animation primitive: fill, expressed five ways
+- Almost-black tensioned planes, full-bleed, no floating cards
+- One accent (latex red) in four light states — shadow, base, lit, specular
+- One material recipe: hard top edge, oblique sheen, inner bottom darkening, red-tinted drop
+- No serif anywhere; uppercase wide grotesque for every heading
+- Italic exists once per block, in red, and is a different family by necessity
+- One handwritten word per page, drawn as a stroke rather than set as type
+- Three motion primitives: scroll fill, the levitation drift, and a one-shot section reveal; native page scrolling, never hijacked
 
 ## Colors
 
-A single hue family — cherry through wine to ink — lit by one warm metal, sampled from photographs of a burgundy latex dress.
+One hue family — scarlet through crimson to near-black — lit as if by a single studio strobe.
 
 ### Primary
-- **Gilt Gold** (#D9A24E): the event colour. Fore-edge gilding, ribbon body, active spine tick, active carousel dot, versal, fleuron, FAQ toggle marks, the rule after `.tome__more`, caret.
-- **Gilt Highlight** (#FCCB6D): the lit top of any gold gradient, the focus ring, the numeral of the highlighted volume.
-- **Gilt Dim** (#8A6A38) and **Gilt Deep** (#7A5320): gold at rest — the fore-edge before the fill runs, and the shadow end of every gold gradient.
-
-### Secondary
-- **Lit Wine** (#6B2A31): the raised face. Pill buttons, selection highlight, and the local override that lifts the "private" panel and the consultation volume above the surrounding wine.
-- **Wine** (#4A1F24): the brightest velvet field in the fixed background wash.
+- **Latex Lit** (#D51C3B): the lit face of the accent. Button faces, the red slabs, active carousel dot, chapter numerals.
+- **Latex** (#A50F26): the accent at its base value, the bottom of every red gradient.
+- **Latex Hot** (#FF4C63): specular red. The accent word, the FAQ toggle, list bullets, the active nav underline, focus ring, and the progress line's leading end. Never a fill.
+- **Latex Low** (#4E0A16) and **Latex Shadow** (#2A0710): the shadow end of the red gradient, the background wash on the right of the field, and the face of a button placed *on* red.
 
 ### Neutral
-- **Ink** (#241017): the page floor under the velvet layers; also the header and dock scrims.
-- **Wine Deep** (#2C1015): every panel, card, plate frame and the spine. The palette's black substitute; nothing goes darker.
-- **Cream** (#F2E2DA): primary text, wordmarks, headings.
-- **Skin** (#C9A392): secondary text — ledes, nav links, list items, quiet button labels.
-- **Muted Rose** (#A98A85): tertiary text — captions, folio, counters, consent, legal, teaser copy.
-- **Edge Light** (rgb 252 231 220): never used raw. It exists only as an alpha ladder (5%, 8%, 10%, 14%, 20%, 32%) for the light edge of the material, borders and hairline dividers.
+- **Void** (#0A0709): the page floor and the scrims behind the header, gate and thanks widget.
+- **Pitch** (#120C0F): the bottom of every raised surface's gradient, plate backgrounds.
+- **Slab** (#191115) and **Slab Lit** (#21161B): the body and the lit top of every raised surface.
+- **Bone** (#F5EFEF): primary text, headings, wordmark.
+- **Ash** (#A2908F): secondary text — ledes, running copy, nav links.
+- **Dim** (#6E5F62): tertiary text — labels, captions, counters, legal, subject line.
+- **Sheen** (rgb 255 244 244): never used raw. It exists only as an alpha ladder (6%, 10%, 16%, 24%, 40%, 70%) for the specular edge, borders and hairline dividers.
 
 ### Named Rules
-**The No-Black Rule.** The darkest interface value is Wine Deep (#2C1015). `#000` never appears as a surface, a border or a shadow; shadows are wine-tinted (rgba(30,12,18,…) / rgba(34,14,20,…)) and mask gradients paint with `var(--cream)` because a mask reads alpha only.
+**The No-Black Rule survives the redesign.** The darkest interface value is Void (#0A0709). `#000` never appears as a surface, a border or a shadow; shadows are red-tinted (rgba(12,4,7,…) / rgba(9,3,5,…) / rgba(70,6,18,…)). The palette moved from cherry to scarlet at the client's instruction, but the prohibition on pure black did not move.
 
-**The Gold-As-Event Rule.** Gold marks a change of state or the edge of an object — gilding, progress, current, opening. It is never a background fill and never body text.
+**The Light-Makes-Red Rule.** Red is a lit material, not a colour swatch. It always arrives as a gradient with a specular top and a shadowed bottom; a flat `background: var(--latex)` reads as paint, not latex, and is wrong.
 
-**The Edge Ladder Rule.** Any light stroke, border or inner highlight comes from the `--edge-*` alpha ladder on one cream RGB. Do not introduce a new light colour to get a lighter border; step up the ladder.
+**The One-Source Rule.** Every red in a gradient, glow or shadow is mixed from the palette's own triplets (`--latex-rgb`, `--latex-lit-rgb`, `--latex-hot-rgb`, `--latex-low-rgb`) at some alpha, never from a neighbouring shade picked by eye. Wanting a slightly different red means changing the alpha, not inventing a value.
 
-**The Photographs Are Not Governed Rule.** The palette governs the interface, not the imagery. Photographs ship in their own colour with no filter and no blend mode; the plate contributes only a frame. Their studio backgrounds are darker than the palette floor, and that is accepted as photographic truth rather than a system value.
+**The Sheen Ladder Rule.** Any light stroke, border or inner highlight comes from the `--sheen-*` alpha ladder on one warm-white RGB. To get a brighter edge, step up the ladder — do not introduce a new light colour.
+
+**The Photographs Are Not Governed Rule.** Carried over unchanged. The palette governs the interface, not the imagery: photographs ship in their own colour, no filter, no blend mode. The plate contributes a crop, a radius and an edge highlight only.
 
 ## Typography
 
-**Display Font:** Cormorant Garamond (with Georgia, serif)
+**Display Font:** Unbounded (with system-ui, sans-serif)
 **Body Font:** Golos Text (with system-ui, sans-serif)
+**Accent Font:** Rubik Italic (with system-ui, sans-serif)
 
-**Character:** A high-contrast Renaissance serif set large and tight against a plain, contemporary Cyrillic grotesque set small and open — the printed page against its caption. The split is forced by Cyrillic coverage: Cormorant carries Cyrillic in both roman and italic, Golos Text in roman only, so **every italic on the site is Cormorant** and Golos never italicizes.
+**Character:** A wide geometric grotesque set uppercase and very tight against a plain, contemporary Cyrillic sans set small and open. There is no serif on the site — the previous direction's Cormorant Garamond is gone. Cyrillic coverage was verified against the CSS Google Fonts serves to a current Chrome user agent: Unbounded and Golos Text both carry `U+0400-045F`; **neither ships an italic**. Rubik is loaded in italic only, for Cyrillic italic, and appears nowhere in roman. A fourth face, Marck Script, is not loaded as a web font at all: the TTF is vendored in `assets/fonts/` and parsed into contours by `js/handwriting.js`, because a web font renders as filled shapes with nothing to stroke.
 
 ### Hierarchy
-- **Display** (400, clamp 2.8–6.5rem, 0.94, −0.015em): the h1 only. Carries a two-part letterpress relief text-shadow (light on the upper edge, shadow beneath). Constrained further by viewport height (`min(--step-5, 9.2vh)`) so the title spread always fits one screen.
-- **Headline** (400, clamp 2–3.6rem, 1.0–1.06): section h2s, volume titles, modal h3, the manifesto line.
-- **Numeral** (400, clamp 1.7–2.6rem, 1): volume numbers and the live-format facts. Tabular figures via `.tabular`.
-- **Title** (400, clamp 1.35–2rem): colophon prices, about-facts, gate heading.
-- **Wordmark** (400, 0.34em tracked, uppercase, with `love` in italic Cormorant rotated −4°): brand lockup in the hero, spine (0.44em, vertical) and footer.
-- **Body** (400, 1.0625rem, 1.6): all running copy. Measure capped at 44–52ch for paragraphs, 62–68ch for long-form and legal.
-- **Label** (400, 0.8125rem, 0.2–0.24em, uppercase): subject line, audience lines, captions, modal meta.
-- **Micro** (400, 0.6875rem, 0.18–0.3em, uppercase): spine ticks and folio only.
-- **Action** (600, 0.9375rem, 1, 0.01em): pill buttons, the one place a 600 weight appears.
+- **Display** (700, clamp 2.2–4.3rem, 0.96, −0.035em, uppercase): the h1 only. Its first two lines are `nowrap` so the break falls where it was written; the ceiling is set by the longest line fitting the left column. Its third line is the handwritten word at 1.7em.
+- **Headline** (700, clamp 1.85–3.3rem, uppercase): section h2s. The private-consultation h2 steps down to the numeral size because its two words are long enough to overflow a half-width column.
+- **Numeral** (800, clamp 1.6–2.5rem, −0.04em): chapter numbers (01–04) and the live-format facts. Tabular figures via `.tabular`.
+- **Title** (600–700, clamp 1.25–1.85rem): card titles, prices, about-facts, FAQ questions (500).
+- **Wordmark** (700, 0.18em tracked, uppercase, with `love` in Rubik italic in Latex Hot): header and footer.
+- **Body** (400, 1.0625rem, 1.6): all running copy. Measure capped at 40–46ch for paragraphs, 52–62ch for long-form and legal.
+- **Label** (400–500, 0.8125rem, 0.12em, uppercase): nav links, fact captions, footer links.
+- **Micro** (500, 0.6875rem, 0.14–0.22em, uppercase): subject line, card audience lines, price notes, meta.
+- **Action** (600, 0.9375rem): buttons — the only place Golos ships at 600.
 
 ### Named Rules
-**The Cormorant-Owns-Italic Rule.** Every italic and every large numeral is Cormorant Garamond. Golos Text is roman only — it has no Cyrillic italic, and synthesized slant is disabled globally (`font-synthesis-weight: none`).
+**The Rubik-Owns-Italic Rule.** Every italic on the site is Rubik. Unbounded and Golos Text have no italic in the served build, and synthesis is disabled globally (`font-synthesis-weight: none`), so an italic requested from either would silently render upright.
 
-**The Two-Weight Rule.** Golos ships at 400 for text and 600 for actions. Cormorant ships at 400 everywhere. No other weight is used to create emphasis; use size, colour or the gilt treatment instead.
+**The One-Accent-Per-Block Rule.** `.hot` — red Rubik italic — marks exactly one phrase per block: the manifesto line, the wordmark. Repeating it inside a paragraph destroys the effect.
 
-**The Gilt Line Rule.** `.gilt` — italic Cormorant with a gold gradient clipped to the glyphs — marks exactly one phrase per block (the display line, the manifesto). It is the typographic form of the fill primitive and loses its point if repeated.
+**The One-Written-Word Rule.** The handwriting treatment belongs to a single word on the page. It costs a font parse and 7 animated contours; a second one would read as a gimmick and double the cost. It writes itself when it first enters the viewport, rewrites on every return, and rewrites once more the moment the age gate is dismissed — otherwise the whole performance happens behind the blur and nobody sees it.
 
-**No Oldstyle Figures.** Recorded as impossible, not pending: the Google Fonts build of Cormorant Garamond exposes only `calt, ccmp, dnom, frac, liga, lnum, locl, numr, tnum` in GSUB. There is no `onum` on this face, so `font-variant-numeric: oldstyle-nums` is inert. Numerals are lining; where they align in columns, use `tabular-nums` via `.tabular`.
+**The Quote Rule.** Direct speech is set in Rubik italic inside guillemets, with a rule in Latex Shadow down its left side — not in the display face, and never in quotation marks alone.
+
+**The No-Serif Rule.** Zero serifs. If a passage needs to feel softer, lower the weight or the contrast; do not reach for an antiqua.
+
+**The Uppercase-Headings Rule.** Every h1/h2/h3 is uppercase with −0.03…−0.035em tracking. Long Russian compounds are handled with `overflow-wrap: break-word` and a smaller step, never by letting a heading run under a neighbouring element.
 
 ## Layout
 
-The page is inset from the left by the spine width (84px desktop, 56px at ≤640px), which is also the left origin of the fixed bottom dock. Content sits in a 1360px container with a fluid gutter (18–56px).
+Content sits in a 1240px container with fluid padding (`clamp(20px, 5vw, 64px)`). Full-bleed planes — the price strip, the manifesto, the closing CTA — carry no container and pad themselves with `max(--pad, calc(50vw - var(--page) / 2))` so their text still aligns to the container's left edge while the plane runs to the screen edge.
 
-The title spread is a two-column grid (1.05fr / 0.95fr) with the lead and colophon stacked in the left column and the frontispiece spanning both rows on the right. Above 1020px the whole spread is additionally sized against viewport height — the h1, plate and colophon rows all shrink so the first screen holds the title, the subject line, the button, the colophon and the plate at once. Below 1020px every two-column grid (hero, private, about, lead, modal) collapses to one column and the hero re-orders to heading → lede → actions → plate → prices; the fore-edge is dropped because it has nowhere to sit.
+The first screen is a two-column grid (1fr / 0.86fr): copy on the left, photograph on the right, stretched to the section's full height with its top-left corner rounded and its other edges cut by the viewport. Below it the price strip spans the width as three cells divided by hairlines, with the address note as a separate full-width row underneath.
 
-Section rhythm is fluid rather than stepped: `clamp(60px, 9vw, 120px)` between major sections, `clamp(50px, 9vw, 120px)` around the manifesto, panel padding `clamp(28px, 4vw, 48px)`, card padding `clamp(16px, 2vw, 26px)`. Breakpoints are only two: 1020px (layout collapse) and 640px (spine narrows, spine nav and dock note drop).
+Section rhythm is `clamp(70px, 12vh, 140px)`; panel padding `clamp(28px, 4vw, 52px)`; card padding `clamp(18px, 2.2vw, 26px)`. Breakpoints: 1020px (every two-column grid collapses; the hero photo loses its radius and the pinned carousel is disabled), 900px (header nav and the thanks link drop, leaving the wordmark and the Telegram key), 860px (private, about, lead and manifesto collapse), 720px (modal collapses), 640px (dock note drops).
 
-The table of contents is a pinned horizontal carousel: a sticky pane anchored to the **top** of the viewport (not centred), one full-width volume per step, translated in pixels from JS because the gap is a `clamp()`. It degrades to a plain vertical list on coarse pointers, at ≤1020px, and under reduced motion — the pane goes static and the track becomes a column.
+The chapter list is a pinned horizontal carousel: a sticky pane centred in the viewport, one step per card, translated in pixels from JS because the gap is a `clamp()`. It degrades to a responsive grid on coarse pointers, at ≤1020px and under reduced motion — the pane goes static, the track becomes a grid, and the dots hide.
 
 ### Named Rules
-**The One-Screen Title Rule.** The first viewport must contain the whole title spread. When height is short, type scales against `vh` before anything is allowed to scroll.
+**The Planes-Touch Rule.** Full-bleed planes butt directly against their neighbours with no gap and no radius on the bleeding edges. A red slab with rounded corners floating on the field is the wrong idiom.
 
 ## Elevation & Depth
 
-Hybrid: one material recipe plus tonal layering. Depth is built from a light top edge and inner shading rather than from stacked shadow tiers — the surface reads as a raised velvet-covered board, not as a floating card. There is exactly one elevation level; nothing raises on hover.
-
 ### Shadow Vocabulary
-- **Material** (`0 1px 0 var(--edge-14) inset, 0 -14px 30px rgba(34,14,20,.24) inset, 0 22px 44px -18px rgba(30,12,18,.85)`): every panel, card, modal body and gate card. Applied via `.material`.
-- **Pill at rest** (`0 1px 0 rgba(255,240,232,.28) inset, 0 -10px 18px rgba(34,14,20,.24) inset, 0 14px 26px -12px rgba(30,12,18,.9)`): the same recipe, tightened for a small convex object.
-- **Pill pressed** (`0 2px 6px rgba(30,12,18,.55) inset, 0 10px 20px rgba(34,14,20,.42) inset, 0 2px 6px -4px rgba(30,12,18,.9)`) with `translateY(2px) scale(0.975)`: the button is pushed into the board.
-- **Frontispiece** (`0 40px 80px -30px rgba(30,12,18,.95)`): the deepest drop on the site, reserved for the tipped-in plate.
-- **Gutter shadow** (`linear-gradient(90deg, rgba(30,12,18,.55), rgba(30,12,18,.18) 42%, transparent)`, 26px): a painted band, not a box-shadow, where the page leaves the spine.
+One recipe, applied to every raised surface:
+1. `0 1px 0 sheen-24 inset` — the hard specular line along the top edge
+2. an oblique `linear-gradient(104deg, …)` sheen at 6–12% across the plane
+3. `0 -30px 50px -20px rgba(8,2,4,.7) inset` — pooled shadow at the bottom
+4. `0 26px 50px -22px rgb(9 3 5 / .85)` — the red-tinted drop, from the `--shade-*` ramps (`--shade-rgb` under dark surfaces, `--shade-lit-rgb` / `--shade-hot-rgb` under red ones)
+
+Red planes use the same four steps with a brighter top (`sheen-40`) and a red-tinted pool.
 
 ### Named Rules
-**The One Material Rule.** Raised surfaces use `.material` unmodified. To make a surface read brighter, override `--wine-deep` locally to `--wine-lit` (as the private panel and the consultation volume do); do not write a new shadow.
-
-**The Wine Shadow Rule.** Every shadow is tinted wine. A neutral or black shadow is a defect.
-
-**The Flat-Hover Rule.** Hover never lifts. It brightens (`filter: brightness(1.09)`), lengthens a rule, or reveals a label — and only behind `(hover: hover) and (pointer: fine)`, because a sticky hover after a tap is worse than no hover.
+**The One-Light Rule.** Light comes from above and slightly to the left. Every specular edge is on top, every pool is at the bottom, every drop shadow falls down. A surface lit from another direction breaks the material.
 
 ## Shapes
 
-One radius ladder, applied by object size: 3px for the hairline detail (fore-edge caps, the spine-side corners of the frontispiece), 6px for image plates inside cards and the focus ring, 10px for standalone plates, 14px for cards and volumes, 18px for full panels and the modal, 999px for pills. The frontispiece is deliberately asymmetric — 3px on the binding side, 14px on the outer side — so the plate reads as a page hinged at the spine.
-
-Borders are 1px hairlines from the edge ladder, brighter on top than on the sides. Dividers are the same hairline: the colophon, the live-format grid, the FAQ rows and the footer all separate with a 1px `--edge-*` line and no other decoration. Photographic frames are 4:5 without exception. Non-rectangular geometry appears exactly twice: the ribbon's notched tail (`clip-path` polygon) and the clip that reveals the gilding on the fore-edge.
+Radii are tight because latex is stretched: 2 / 5 / 10 / 18 / 28px plus a pill for dots only. Buttons are 10px rectangles, not pills — the previous direction's pill silhouette is gone. Cards are 18px, full panels 28px, and any edge that meets the viewport is square.
 
 ## Components
 
 ### Buttons
-- **Shape:** fully rounded pill (999px).
-- **Primary:** lit-wine face under a light-to-dark gradient, cream label at 600/0.9375rem, padding 0.95em 1.9em, top border stepped to `--edge-32` so the object reads convex.
-- **Hover / Focus:** brightness 1.09 on fine pointers only; focus-visible is a 2px `--gold-hi` outline offset 3px, globally, on every link, button and summary.
-- **Active:** presses in — 2px down, 0.975 scale, shadow inverted to inner.
-- **Quiet:** transparent face, skin-coloured label, a single inset highlight line and no drop. Used for the secondary action beside every primary.
+`.pill` is a liquid-metal key in burgundy, built the way the reference component builds it (21st.dev, "Liquid Metal Button"): the element itself carries a conic gradient that turns continuously through a registered `--metal` angle property, `::before` lays the dark face 2px inside it so the gradient reads as a molten rim, and `::after` runs the oblique highlight. Hover speeds the rotation from 14s to 5s and adds a red bloom; press sinks it `translateY(1px) scale(0.975)` and drops an inner shadow onto the face; a click drops a radial ripple that expands and fades in 600ms. `.pill--quiet` is the same body in a darker, desaturated metal, and a key placed on a red plane inverts to near-black so it stays the darkest thing in the block. Under `prefers-reduced-motion` the metal stops turning and the ripple is suppressed.
 
-### Cards / Containers
-- **Corner Style:** 14px for volumes and reviews, 18px for full-width panels and the modal.
-- **Background:** `.material` over Wine Deep; brighter variants override `--wine-deep` to Lit Wine.
-- **Shadow Strategy:** the Material recipe, unchanged (see Elevation).
-- **Border:** 1px edge-ladder hairline, top edge brighter.
-- **Internal Padding:** `clamp(16px, 2vw, 26px)` for volumes, `clamp(28px, 4vw, 48px)` for panels.
+### Material Panels
+`.material` and `.material--hot` are the only two surface treatments. Cards (`.slab`), the modal, the gate and the private panel all take `.material`; the manifesto and the closing CTA take `.material--hot` with square corners and full bleed.
 
 ### Navigation
-Two navigations, both quiet. The **header** is sticky, blurred (10px) over an ink-to-transparent scrim, right-aligned, and retracts on downward scroll past 240px; links are skin, brighten to cream on fine-pointer hover, and the Telegram pill always terminates the row. Below 1020px only the tribute link and pill survive; below 640px only the pill. The **spine nav** is a column of 22px ticks: a 1px rule at `scaleX(0.55)` that grows to full width and turns gold when its section is current or hovered, with the section name fading in beside it on hover or focus. It scales on transform, never width. It is removed at ≤640px.
+A fixed header with the wordmark, five section links and the Telegram key. Links carry `aria-current` from the scroll observer and show a red underline when current. The header hides on scroll-down past 240px and returns on scroll-up; a 2px progress line runs along its bottom edge, its width driven by `--read`.
 
-### Colophon
-A description list standing in for a price table: label in cream Golos with a muted sub-line, value in Cormorant at title size, one hairline per row and a hairline above the first. No cell backgrounds, no emphasis on any single row.
+### Price Strip
+`.rates` is a three-cell band, not a table and not a card: hairline dividers, the price in Unbounded 600, the note in micro caps below the name. It stacks to one column with the value pushed to the right at ≤1020px.
 
-### Fore-Edge
-The signature. A vertical 8px strip outside the frontispiece frame (the plate clips, so the gilding must live outside it), painted in dim gold at rest with a bright gold layer revealed top-down by `clip-path: inset(calc(100% - var(--fill) * 100%) 0 0 0)`. It is the fill primitive's most literal expression: the book gilds itself as you read. Hidden below 1020px.
+### Material Accordion
+The materials are an elastic accordion, matching the reference the client chose (21st.dev, "Elastic Gallery" by daiv09). Panels share one row; the active one takes `flex: 4`, the rest `flex: 1`, eased with `cubic-bezier(0.25, 1, 0.5, 1)` over 700ms. Inactive panels sit at `brightness(0.5)` (0.75 on hover) with their photograph at `scale(1.1)`; the active one comes to full brightness and `scale(1)` over 1000ms, so the image settles a beat after the panel. Its caption block rises 48px with a 200ms delay; the collapsed panel's vertical label fades out at once and returns with a 500ms delay.
 
-### Ribbon (Ляссе)
-Cloth, not a hairline: 11px wide at the spine's right edge so it clears the wordmark, a lengthwise sheen gradient over a top-lit gold gradient, a notched tail via clip-path, and a length driven directly by `--read`. It is the only reading-progress indicator; there is no progress bar.
+Scroll drives the accordion: on wide screens the section sticks to the viewport for `100vh + 70vh` per extra panel and the active panel advances with the progress; on a phone, where there is no cursor, the same progress runs as the section crosses the screen, so the animation exists there too. A mouse still expands on hover, a finger on tap, the keyboard on focusing the panel's action button. Nothing scrolls horizontally: the row is always exactly the width of the container, so it has nowhere to slide. Below 860px the row becomes a column - a finger-wide strip can hold neither a photograph nor a label.
 
-### Volume Carousel
-Full-width cards in a horizontal track; the off-centre card fades via `opacity: calc(1 - var(--away) * .75)`. Each plate is 4:5 with a per-card `object-position` and scale so four crops from one shoot do not read as a repeated pose. The consultation volume is set apart by lifting its surface to Lit Wine and its numeral to Gilt Highlight — not by a badge. Dots are 34×2px rules, gold when current.
+The panel count is not baked into the layout: it follows `content.js`, and the counter reads `01 / NN`.
 
-### Bindery Ornament
-Non-interactive detail that carries the world: a 2px-striped gold/cream/wine headband across the head of the spine; a letterpress relief on the display line; a Cormorant versal dropping three lines into the manifesto in gold; an inline-SVG fleuron closing the manifesto and repeating in the footer; and marbled endpaper behind the footer — four layered repeating gradients at 38% opacity, masked to fade at both ends. All of it is `aria-hidden` and none of it carries meaning.
+### Panel Contents
+Each panel carries the photograph, an audience chip, the title in the display face, and a red action link that opens the details sheet - expanding a panel and opening its sheet are two separate actions on purpose. The consultation is **not** among the panels: it lives only in the `.private` section, because a panel for it would duplicate that section.
+
+### Age Gate
+The consent card is built from the same metal as the buttons: a turning conic rim with a dark face inside, a red bloom under it, the wordmark above the heading and the consent line below the keys. It fades in over 260ms while the card scales from 0.96 — an entrance, not an appearance. The choice is remembered in `localStorage`, so it shows once per browser; clearing `darilove:age` brings it back.
+
+### Floating Attributes
+Cut-out props (cuffs, whip, gag, each used more than once) levitate across the whole page, not just one section: an absolutely positioned layer under `main`, spanning the full document height, with sixteen instances stepped down the page from the hero to the footer — four of them on the first screen. Each is large — up to 720px — sits at 33-50% opacity, carries its own tilt, and takes a blur between 2px and 6px that stands in for depth: the nearer objects are bigger and sharper, the far ones smaller and softer. Motion has two sources. A `levitate` keyframe drifts, turns the object up to 28 degrees around its own axis and breathes its scale over 23-38s, with negative delays so no two are in phase. On top of it the pointer moves the whole layer: two variables are written once on `.attrs`, and each object multiplies them by its own depth `--k` (0.5-1.7), so the far ones barely move and the near ones swing about 30px. There is no spring — the wrapper carries a 900ms ease-out transition, so the objects lag the cursor and drift into place. Parallax runs only on a fine pointer. Every second one is dropped below 700px and the rest fade to 20%.
+
+### Side Ticks
+A fixed column of dashes at the left edge, one per section, the current one lit red and stretched; its label appears on hover. Hidden below 1100px, where the header nav carries the same information.
+
+### Thanks Widget
+The only "Поблагодарить" on the page: a floating pill at the bottom right that rises after half a viewport and takes a spring kick from every scroll delta. It is deliberately absent from the header and the footer — one place, one gesture. Below 520px it drops its label and becomes a circular heart.
+
+### Seam
+`.seam` replaces the book ornament: a hairline with a red segment whose width tracks `--fill`. Used once, in the footer.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** build every raised surface from `.material` and change its tone by overriding `--wine-deep` locally.
-- **Do** take light strokes from the `--edge-*` alpha ladder and radii from the `--r-*` ladder; a new literal in either family is a drift.
-- **Do** drive any new scroll-linked effect from the existing `--fill` / `--read` variables rather than adding a second scroll listener.
-- **Do** paint mask gradients with `var(--cream)`; a mask reads alpha, and `#000` there is a false colour token.
-- **Do** gate every hover behind `(hover: hover) and (pointer: fine)`, and give every movement a reduced-motion path that keeps opacity and colour.
-- **Do** set every italic and every large numeral in Cormorant Garamond, and use `.tabular` wherever figures align.
-- **Do** frame photographs 4:5 inside `.plate` and let the frame — not a filter — do the work.
+- Give every pressable thing a press state - `scale(0.97)` is enough
+- Make a reveal reversible: the block returns to the side it came from, and `--reveal-dir` records which side that is
+- Let the page scroll natively; drive motion from scroll position, never from a hijacked wheel or a custom inertia loop
+- Let planes run to the screen edge and touch each other
+- Build every raised surface from the four-step material recipe
+- Keep red as a lit gradient with a specular top
+- Set headings uppercase and tight, and cap paragraph measure
+- Use the accent italic exactly once per block
+- Verify Cyrillic and italic coverage against the served font CSS before adding a face
 
 ### Don't:
-- **Don't** use `#000` or a neutral shadow anywhere in the interface; the floor is Wine Deep and shadows are wine-tinted.
-- **Don't** apply a duotone, blend mode or colour filter to a photograph. Removing it was a client decision; the plate contributes a frame only.
-- **Don't** use gold as a fill or as body text — it marks state and edges.
-- **Don't** raise a surface on hover or introduce a second elevation tier.
-- **Don't** rely on `oldstyle-nums`; the shipped Cormorant build has no `onum` table and the declaration does nothing.
-- **Don't** put a full-bleed photograph behind the headline. Imagery is tipped in, never a backdrop — this is the build's founding refusal.
-- **Don't** let the title spread overflow the first viewport; scale type against `vh` before allowing a scroll.
+- Reintroduce book vocabulary: spine, gilding, ribbon, colophon, versal, fleuron
+- Introduce a serif, or synthesise an italic from Unbounded or Golos
+- Use pure black, or a neutral grey shadow
+- Fill an area with flat red
+- Float a rounded card on the empty field where a full-bleed plane belongs
+- Add a second accent colour, or use Latex Hot as a background
+- Let a script hold content invisible: every reveal carries a timeout that inks it in regardless, because a frozen frame loop must never cost the reader the text
+- Pin the section and translate a card row by scroll offset. Two attempts at that produced a ribbon that slid past its last card into emptiness; the accordion has no offset to get wrong
+- Duplicate a call to action: the consultation belongs to one section, the thanks button to one widget

@@ -1,103 +1,133 @@
-/* DARI LOVE — общий фундамент трёх вариантов направления.
-   Палитра снята пипеткой с фотографий бордового латексного платья. */
+/* DARI LOVE — фундамент направления «Латекс».
+   Материал страницы — не бархат, а латекс: свет ложится жёсткими бликами,
+   тени густые, красный горит только там, где на него падает свет. */
 
 :root {
-  --ink:        #241017;
-  --wine-deep:  #2C1015;
-  --wine:       #4A1F24;
-  --wine-lit:   #6B2A31;
-  --cream:      #F2E2DA;
-  --skin:       #C9A392;
-  --muted:      #A98A85;
-  --gold:       #D9A24E;
-  --gold-hi:    #FCCB6D;
-  --gold-deep:  #7A5320;
-  --gold-dim:   #8A6A38;   /* позолота в покое, до налива */
+  /* Поверхности: от самой глубокой к поднятой. Чистого чёрного нет. */
+  --void:      #0A0709;
+  --pitch:     #120C0F;
+  --slab:      #191115;
+  --slab-lit:  #21161B;
 
-  /* Ширина корешка: от неё зависят отступ страницы и левый край полосы. */
-  --spine: 84px;
+  /* Латекс: один акцент, три состояния света. */
+  --latex:     #A50F26;
+  --latex-lit: #D51C3B;
+  --latex-hot: #FF4C63;
+  --latex-low: #4E0A16;
 
-  /* Светлая грань материала: один цвет, лестница прозрачностей. */
-  --edge-rgb: 252 231 220;
-  --edge-05: rgb(var(--edge-rgb) / .05);
-  --edge-08: rgb(var(--edge-rgb) / .08);
-  --edge-10: rgb(var(--edge-rgb) / .10);
-  --edge-14: rgb(var(--edge-rgb) / .14);
-  --edge-20: rgb(var(--edge-rgb) / .20);
-  --edge-32: rgb(var(--edge-rgb) / .32);
-  --edge-hi: var(--edge-20);
-  --edge-lo: rgba(34, 14, 20, 0.55);
+  /* Те же цвета триплетами: поле и свечения смешиваются из палитры,
+     а не из подобранных на глаз соседних оттенков. */
+  --latex-rgb:     165 15 38;
+  --latex-lit-rgb: 213 28 59;
+  --latex-hot-rgb: 255 76 99;
+  --latex-low-rgb: 78 10 22;
+  --latex-shadow: #2A0710;   /* красное в тени: текст и клавиша на алой плоскости */
 
-  /* Радиусы: одна лестница на весь сайт. */
-  --r-xs: 3px;
-  --r-s:  6px;
+  /* Текст. */
+  --bone:      #F5EFEF;
+  --ash:       #A2908F;
+  --dim:       #6E5F62;
+
+  /* Блик: один цвет, лестница прозрачностей. */
+  --sheen-rgb: 255 244 244;
+  --sheen-06: rgb(var(--sheen-rgb) / .06);
+  --sheen-10: rgb(var(--sheen-rgb) / .10);
+  --sheen-16: rgb(var(--sheen-rgb) / .16);
+  --sheen-24: rgb(var(--sheen-rgb) / .24);
+  --sheen-40: rgb(var(--sheen-rgb) / .40);
+  --sheen-70: rgb(var(--sheen-rgb) / .70);
+
+  /* Тень всегда с красным подтоном: нейтральной чёрной на странице нет.
+     Под алыми поверхностями подтон горячее — отсюда отдельная пара. */
+  --shade-rgb:     12 4 7;
+  --shade-hot-rgb: 70 6 18;
+  --shade-lit-rgb: 60 4 14;
+  --shade-soft: rgb(var(--shade-rgb) / .55);
+  --shade-deep: rgb(9 3 5 / .85);
+
+  /* Ширина верхней полосы и общий предел ширины. */
+  --rail: 64px;
+  --page: 1240px;
+  --pad: clamp(20px, 5vw, 64px);
+
+  /* Радиусы: латекс натянут, углы тугие. */
+  --r-xs: 2px;
+  --r-s:  5px;
   --r-m:  10px;
-  --r-l:  14px;
-  --r-xl: 18px;
+  --r-l:  18px;
+  --r-xl: 28px;
   --r-pill: 999px;
 
-  --step-0: 0.8125rem;
-  --step-1: 0.9375rem;
-  --step-2: 1.0625rem;
+  /* Шкала. Дисплей — Unbounded, широкий, поэтому трекинг отрицательный. */
   --step-00: 0.6875rem;
-  --step-3: clamp(1.35rem, 1.1rem + 1.1vw, 2rem);
-  --step-3x: clamp(1.7rem, 1rem + 2.2vw, 2.6rem);
-  --step-4: clamp(2rem, 1.2rem + 3.2vw, 3.6rem);
-  --step-5: clamp(2.8rem, 1rem + 7vw, 6.5rem);
+  --step-0:  0.8125rem;
+  --step-1:  0.9375rem;
+  --step-2:  1.0625rem;
+  --step-3:  clamp(1.25rem, 1rem + 1.1vw, 1.85rem);
+  --step-3x: clamp(1.6rem, 1rem + 2.2vw, 2.5rem);
+  --step-4:  clamp(1.85rem, 1.1rem + 3vw, 3.3rem);
+  --step-5:  clamp(2.2rem, 0.6rem + 5.6vw, 4.3rem);
 
   color-scheme: dark;
-  accent-color: var(--gold);
-  --ease: cubic-bezier(0.23, 1, 0.32, 1);          /* вход, отклик */
-  --ease-move: cubic-bezier(0.77, 0, 0.175, 1);    /* движение на экране */
+  accent-color: var(--latex-lit);
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-move: cubic-bezier(0.77, 0, 0.175, 1);
   --fill: 0;
+  --read: 0;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-::selection { background: var(--wine-lit); color: var(--cream); }
+::selection { background: var(--latex); color: var(--bone); }
 
 :root {
-  scrollbar-color: var(--wine-lit) var(--wine-deep);
+  scrollbar-color: var(--latex) var(--void);
   scrollbar-width: thin;
 }
 
 a { text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
 
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
   margin: 0;
-  background: var(--ink);
-  color: var(--cream);
+  position: relative;      /* слой атрибутов меряется от всей страницы, не от окна */
+  background: var(--void);
+  color: var(--bone);
   font-family: 'Golos Text', system-ui, sans-serif;
   font-size: var(--step-2);
   line-height: 1.6;
   font-synthesis-weight: none;
-  caret-color: var(--gold);
+  caret-color: var(--latex-lit);
   overflow-x: hidden;
 }
 
-/* Бархат: вишнёвые поля света поверх глубокой основы плюс зерно,
-   которое снимает бандинг на градиенте. */
-.velvet {
+body[data-gated] { overflow: hidden; }
+
+/* Студийный свет по латексу: две тугих зоны — холодная сверху слева
+   и красная снизу справа. Пятна маленькие и с резким спадом:
+   размазанное свечение читается как бархат, а не как резина. */
+.field {
   position: fixed;
-  inset: 0;
+  inset: -10%;
   z-index: -2;
   background:
-    radial-gradient(120% 80% at 18% 8%,  var(--wine) 0%, transparent 58%),
-    radial-gradient(90% 70% at 88% 30%,  var(--wine-lit) 0%, transparent 55%),
-    radial-gradient(140% 100% at 50% 110%, var(--wine-deep) 0%, transparent 62%),
-    var(--wine-deep);
-  /* Слой крупнее экрана, чтобы движение шло трансформом:
-     background-position перерисовывает весь кадр каждый раз. */
-  inset: -12%;
-  animation: drift 52s var(--ease-move) infinite alternate;
+    radial-gradient(34% 22% at 20% 4%,  rgb(var(--sheen-rgb) / .10) 0%, transparent 62%),
+    radial-gradient(52% 38% at 88% 18%, rgb(var(--latex-rgb) / .38) 0%, transparent 60%),
+    radial-gradient(46% 32% at 8% 42%,  rgb(var(--latex-low-rgb) / .55) 0%, transparent 62%),
+    radial-gradient(58% 40% at 78% 62%, rgb(var(--latex-rgb) / .24) 0%, transparent 64%),
+    radial-gradient(70% 46% at 30% 86%, rgb(var(--latex-low-rgb) / .48) 0%, transparent 62%),
+    radial-gradient(80% 52% at 52% 108%, var(--latex-shadow) 0%, transparent 62%),
+    var(--void);
+  animation: drift 64s var(--ease-move) infinite alternate;
   will-change: transform;
 }
 
 @keyframes drift {
-  from { transform: translate3d(-1.5%, -1%, 0) scale(1.02); }
-  to   { transform: translate3d(1.5%, 1.5%, 0) scale(1.06); }
+  from { transform: translate3d(-1.2%, -0.8%, 0) scale(1.02); }
+  to   { transform: translate3d(1.2%, 1.2%, 0) scale(1.05); }
 }
 
 .grain {
@@ -105,82 +135,209 @@ body {
   inset: -20%;
   z-index: -1;
   pointer-events: none;
-  opacity: 0.22;
+  opacity: 0.14;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
   mix-blend-mode: soft-light;
 }
 
-/* Материал: бархат, светлая грань по верхнему краю, мягкая внешняя тень. */
+/* ------------------------------------------------------------- материал */
+
+/* Один рецепт на все поднятые поверхности: жёсткая грань сверху,
+   косой блик через плоскость, густое затемнение книзу, красная тень. */
 .material {
+  position: relative;
   background:
-    linear-gradient(180deg, var(--edge-08), rgba(34, 14, 20, 0.10) 42%),
-    var(--wine-deep);
-  border: 1px solid var(--edge-10);
-  border-top-color: var(--edge-hi);
+    linear-gradient(180deg, var(--sheen-10), transparent 14%),
+    linear-gradient(104deg, transparent 26%, var(--sheen-06) 42%, transparent 56%),
+    linear-gradient(180deg, var(--slab-lit), var(--slab) 62%, var(--pitch));
+  border: 1px solid var(--sheen-10);
+  border-top-color: var(--sheen-24);
   box-shadow:
-    0 1px 0 var(--edge-14) inset,
-    0 -14px 30px rgba(34, 14, 20, 0.24) inset,
-    0 22px 44px -18px rgba(30, 12, 18, 0.85);
+    0 1px 0 var(--sheen-24) inset,
+    0 -30px 50px -20px rgba(8, 2, 4, .7) inset,
+    0 26px 50px -22px var(--shade-deep);
 }
 
-/* Кнопка-пилюля: выпуклая в покое, продавливается при нажатии. */
+/* Красная плоскость: тот же рецепт, но свет по латексу горячее. */
+.material--hot {
+  background:
+    linear-gradient(180deg, var(--sheen-24), transparent 12%),
+    linear-gradient(104deg, transparent 22%, rgb(var(--sheen-rgb) / .12) 40%, transparent 54%),
+    linear-gradient(168deg, var(--latex-lit), var(--latex) 54%, var(--latex-low));
+  border-color: rgb(var(--sheen-rgb) / .14);
+  border-top-color: var(--sheen-40);
+  box-shadow:
+    0 1px 0 var(--sheen-40) inset,
+    0 -34px 56px -18px rgb(var(--shade-lit-rgb) / .65) inset,
+    0 26px 54px -22px rgb(var(--shade-hot-rgb) / .75);
+}
+
+/* Шов: две волосяные линии с красной искрой между ними —
+   вместо книжного орнамента. */
+.seam {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background:
+    linear-gradient(90deg, transparent, var(--sheen-16) 22%, var(--sheen-16) 78%, transparent);
+  position: relative;
+}
+
+.seam::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 1px;
+  width: calc(var(--fill) * 100%);
+  background: linear-gradient(90deg, var(--latex), var(--latex-hot) 70%, transparent);
+  box-shadow: 0 0 12px rgb(var(--latex-hot-rgb) / .5);
+}
+
+/* ------------------------------------------------------------- кнопка */
+
+/* Жидкий металл в бордовом: корпус собран слоями, как в референсе.
+   Внешний слой — вращающийся конический градиент, он же ободок; внутренняя
+   грань лежит на ::before и вдавливается при нажатии; ::after ведёт косой
+   блик. Угол крутится как свойство, поэтому металл течёт, а не мигает. */
+
+@property --metal {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes metal-turn {
+  to { --metal: 360deg; }
+}
+
+@keyframes ripple-out {
+  from { transform: translate(-50%, -50%) scale(0); opacity: .55; }
+  to   { transform: translate(-50%, -50%) scale(14); opacity: 0; }
+}
+
 .pill {
-  --pill-face: var(--wine-lit);
+  --face: linear-gradient(180deg, #4A0C18 0%, #16070B 100%);
+  --ring: conic-gradient(from var(--metal),
+    #7A1120 0deg, #D51C3B 60deg, #FF9DAC 110deg, #A50F26 170deg,
+    #4E0A16 240deg, #D51C3B 310deg, #7A1120 360deg);
   appearance: none;
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.6em;
-  padding: 0.95em 1.9em;
-  border: 1px solid var(--edge-14);
-  border-top-color: var(--edge-32);
+  padding: 1em 1.8em;
+  border: 0;
   border-radius: var(--r-pill);
-  background:
-    linear-gradient(180deg, var(--edge-20), rgba(34, 14, 20, 0.18) 55%),
-    var(--pill-face);
-  color: var(--cream);
+  background: var(--ring);
+  color: var(--bone);
   font: 600 var(--step-1)/1 'Golos Text', system-ui, sans-serif;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.005em;
   text-decoration: none;
+  text-shadow: 0 1px 2px rgb(9 3 5 / .55);
   cursor: pointer;
+  overflow: hidden;
+  animation: metal-turn 14s linear infinite;
   box-shadow:
-    0 1px 0 rgba(255, 240, 232, 0.28) inset,
-    0 -10px 18px rgba(34, 14, 20, 0.24) inset,
-    0 14px 26px -12px rgba(30, 12, 18, 0.9);
-  transition: transform 140ms var(--ease), box-shadow 140ms var(--ease), filter 140ms var(--ease);
+    0 0 0 1px rgb(9 3 5 / .35),
+    0 20px 12px -10px rgb(9 3 5 / .5),
+    0 9px 9px -6px rgb(9 3 5 / .4),
+    0 2px 5px rgb(9 3 5 / .35);
+  transition:
+    transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 200ms var(--ease),
+    filter 200ms var(--ease);
 }
 
-/* На тач-устройствах ховер залипает после тапа — только точный указатель. */
+/* Внутренняя грань: она и делает ободок шириной 2px. */
+.pill::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--face);
+  box-shadow: 0 1px 0 rgb(var(--sheen-rgb) / .18) inset;
+  transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Косой блик по грани: уезжает при наведении. */
+.pill::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(104deg, transparent 34%, rgb(var(--sheen-rgb) / .20) 46%, transparent 58%);
+  transform: translateX(-16%);
+  transition: transform 420ms var(--ease);
+  pointer-events: none;
+}
+
 @media (hover: hover) and (pointer: fine) {
-  .pill:hover { filter: brightness(1.09); }
+  .pill:hover {
+    filter: brightness(1.06);
+    animation-duration: 5s;
+    box-shadow:
+      0 0 0 1px rgb(9 3 5 / .35),
+      0 0 28px -2px rgb(var(--latex-lit-rgb) / .45),
+      0 18px 14px -10px rgb(9 3 5 / .5),
+      0 6px 8px -6px rgb(9 3 5 / .4);
+  }
+  .pill:hover::after { transform: translateX(18%); }
 }
 
 .pill:active {
-  transform: translateY(2px) scale(0.975);
-  box-shadow:
-    0 2px 6px rgba(30, 12, 18, 0.55) inset,
-    0 10px 20px rgba(34, 14, 20, 0.42) inset,
-    0 2px 6px -4px rgba(30, 12, 18, 0.9);
+  transform: translateY(1px) scale(0.975);
 }
 
+.pill:active::before {
+  box-shadow:
+    0 2px 4px rgb(9 3 5 / .5) inset,
+    0 1px 2px rgb(9 3 5 / .4) inset;
+}
+
+/* Тихая кнопка: тот же корпус, металл темнее и без алого накала. */
 .pill--quiet {
-  --pill-face: transparent;
-  background: linear-gradient(180deg, var(--edge-08), transparent 60%);
-  color: var(--skin);
-  box-shadow: 0 1px 0 rgba(255, 240, 232, 0.16) inset;
+  --face: linear-gradient(180deg, #241318 0%, #0D0709 100%);
+  --ring: conic-gradient(from var(--metal),
+    #3A2128 0deg, #6E3B45 70deg, #9C5A66 120deg, #4A2A31 180deg,
+    #1E1114 250deg, #6E3B45 320deg, #3A2128 360deg);
+}
+
+/* Рябь от клика: один короткий кадр, добавляется скриптом. */
+.pill .ripple {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(var(--sheen-rgb) / .5) 0%, rgb(var(--sheen-rgb) / 0) 70%);
+  pointer-events: none;
+  z-index: -1;
+  animation: ripple-out 600ms ease-out forwards;
 }
 
 :where(a, button, summary):focus-visible {
-  outline: 2px solid var(--gold-hi);
+  outline: 2px solid var(--latex-hot);
   outline-offset: 3px;
   border-radius: var(--r-s);
 }
 
-/* Фотографии идут в собственном цвете: тонирование снято по решению клиента.
-   Остаётся только посадка кадра в оправу — рамка, радиус, тень задаются снаружи. */
+@media (prefers-reduced-motion: reduce) {
+  .pill { animation: none; }
+  .pill .ripple { display: none; }
+}
+
+/* ------------------------------------------------------------ фотография */
+
+/* Кадры идут в собственном цвете: оправа даёт обрезку, радиус и блик по
+   кромке, но не фильтр и не режим наложения. */
 .plate {
   position: relative;
   overflow: hidden;
-  background: var(--wine-deep);
+  background: var(--pitch);
   isolation: isolate;
 }
 
@@ -191,29 +348,53 @@ body {
   object-fit: cover;
 }
 
+/* Латексная кромка вокруг кадра: свет сверху, красная искра снизу. */
+.plate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow:
+    0 1px 0 var(--sheen-24) inset,
+    0 -1px 0 rgb(var(--latex-lit-rgb) / .35) inset;
+}
+
+/* ------------------------------------------------------------- логотип */
+
 .wordmark {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Unbounded', system-ui, sans-serif;
   font-size: var(--step-3);
-  letter-spacing: 0.34em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--cream);
+  color: var(--bone);
+  line-height: 1;
 }
 
 .wordmark i {
+  font-family: 'Rubik', system-ui, sans-serif;
   font-style: italic;
-  letter-spacing: 0.04em;
-  text-transform: none;
-  color: var(--skin);
-  display: inline-block;
-  transform: rotate(-4deg);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
+  color: var(--latex-hot);
+}
+
+/* Горячее слово: акцент набирается курсивом Rubik — у Unbounded и Golos
+   курсива нет, синтетический наклон запрещён. */
+.hot {
+  font-family: 'Rubik', system-ui, sans-serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--latex-hot);
+  letter-spacing: -0.01em;
 }
 
 .tabular { font-variant-numeric: tabular-nums; }
 
-/* Меньше движения — не значит ноль анимации: перемещение убираем,
-   прозрачность и цвет оставляем, они помогают понять, что изменилось. */
 @media (prefers-reduced-motion: reduce) {
-  .velvet { animation: none; transform: none; }
+  .field { animation: none; transform: none; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;

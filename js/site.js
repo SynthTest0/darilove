@@ -6,11 +6,11 @@
   var C = window.CONTENT;
   var root = document.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var coarse = window.matchMedia('(pointer: coarse)');
-  var narrow = window.matchMedia('(max-width: 1020px)');
 
   var $ = function (sel, ctx) { return (ctx || document).querySelector(sel); };
   var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
+  var clamp = function (v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); };
+  var pad2 = function (n) { return n < 10 ? '0' + n : String(n); };
 
   /* ---------------------------------------------------------------- ссылки */
 
@@ -47,6 +47,7 @@
       try { localStorage.setItem('darilove:age', 'ok'); } catch (e) {}
       delete document.body.dataset.gated;
       el.remove();
+      document.dispatchEvent(new CustomEvent('darilove:enter'));
     });
 
     $('#gate-no').addEventListener('click', function () {
@@ -60,45 +61,51 @@
     var host = $('#prices');
     if (!host) return;
     host.innerHTML = C.prices.map(function (p) {
-      return '<div class="colophon__row"><dt>' + p.name + '<small>' + p.note + '</small></dt>' +
+      return '<div class="rate"><dt>' + p.name + '<small>' + p.note + '</small></dt>' +
              '<dd class="tabular">' + p.value + '</dd></div>';
     }).join('');
   }
 
   function renderChapters() {
-    var track = $('#deck-track');
-    var dots = $('#deck-dots');
-    if (!track) return;
+    var host = $('#gallery');
+    if (!host) return;
 
-    track.innerHTML = C.chapters.map(function (ch, i) {
+    host.innerHTML = C.chapters.map(function (ch, i) {
       return '' +
-        '<article class="tome material' + (ch.private ? ' tome--private' : '') + '" data-index="' + i + '" tabindex="0" role="button" aria-label="' + ch.title + ' — подробнее">' +
-          '<div class="plate tome__plate"><img src="' + ch.image + '" alt="" loading="lazy"></div>' +
-          '<div>' +
-            '<p class="tome__num">' + ch.num + '</p>' +
-            '<h3 class="tome__title">' + ch.title + '</h3>' +
-            (ch.whom ? '<p class="tome__whom">' + ch.whom + '</p>' : '') +
-            '<p class="tome__teaser">' + ch.teaser + '</p>' +
-            '<span class="tome__more">Подробнее</span>' +
+        '<article class="pane" data-index="' + i + '" data-active="' + (i === 0 ? '1' : '0') + '">' +
+          '<div class="pane__plate"><img src="' + ch.image + '" alt="" loading="lazy" draggable="false"></div>' +
+          '<div class="pane__veil"></div>' +
+          '<div class="pane__body">' +
+            (ch.whom ? '<span class="pane__cat">' + ch.whom + '</span>' : '') +
+            '<h3 class="pane__title">' + ch.title + '</h3>' +
+            '<button class="pane__more" type="button" data-open="' + i + '">Подробнее' +
+              '<svg viewBox="0 0 24 12" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg>' +
+            '</button>' +
           '</div>' +
+          '<span class="pane__spine">' + ch.title + '</span>' +
         '</article>';
-    }).join('');
-
-    dots.innerHTML = C.chapters.map(function (ch, i) {
-      return '<button class="deck__dot" type="button" data-go="' + i + '" aria-label="Том ' + ch.num + ': ' + ch.title + '"></button>';
     }).join('');
   }
 
   function renderLive() {
+    if (!$('#live-seats')) return;
     $('#live-seats').textContent = C.live.seats + (C.live.seats === 1 ? ' место' : ' места');
     $('#live-deadline').textContent = 'до ' + C.live.deadline;
     $('#live-month').textContent = 'открыта запись на ' + C.live.month;
     $('#live-gift').textContent = C.live.gift;
-    $('#dock-note').textContent = 'Ближайший поток — ' + C.live.month + ' · ' + C.live.seats +
-      (C.live.seats === 1 ? ' место' : ' места');
+  }
+
+  function renderConsult() {
+    var c = C.consult;
+    if (!c) return;
+    $('#consult-title').textContent = c.title;
+    $('#consult-text').textContent = c.text;
+    $('#consult-points').innerHTML = c.points.map(function (p) { return '<li>' + p + '</li>'; }).join('');
+    $('#consult-price').textContent = c.price;
   }
 
   function renderAbout() {
+    if (!$('#about-title')) return;
     $('#about-title').textContent = C.about.title;
     $('#about-text').textContent = C.about.text;
     $('#about-facts').innerHTML = C.about.facts.map(function (f) {
@@ -108,6 +115,7 @@
 
   function renderReviews() {
     var sec = $('#reviews');
+    if (!sec) return;
     if (!C.reviews.length) { sec.remove(); return; }
     $('#reviews-grid').innerHTML = C.reviews.map(function (r) {
       return '<blockquote class="review material"><p>' + r.text + '</p><cite>' + r.author + '</cite></blockquote>';
@@ -115,12 +123,45 @@
   }
 
   function renderFaq() {
-    $('#faq-list').innerHTML = C.faq.map(function (f) {
-      return '<details><summary>' + f.q + '</summary><p>' + f.a + '</p></details>';
-    }).join('');
+    var host = $('#faq-list');
+    if (!host) return;
+
+    host.innerHTML =
+      '<div class="chat">' +
+        '<p class="chat__stamp">' + (C.faqStamp || 'Отвечаю лично, обычно в течение дня') + '</p>' +
+        C.faq.map(function (f, i) {
+          return '' +
+            '<div class="chat__item" data-open="0" data-faq="' + i + '">' +
+              '<button class="chat__q" type="button" aria-expanded="false" aria-controls="faq-a-' + i + '">' +
+                '<span class="chat__chip">' + f.q + '</span>' +
+                '<span class="chat__sign" aria-hidden="true"></span>' +
+              '</button>' +
+              '<div class="chat__answer" id="faq-a-' + i + '" role="region">' +
+                '<div><p class="chat__bubble">' + f.a + '</p></div>' +
+              '</div>' +
+            '</div>';
+        }).join('') +
+      '</div>';
+
+    // Открыт один вопрос за раз: это переписка, а не список.
+    host.addEventListener('click', function (e) {
+      var btn = e.target.closest('.chat__q');
+      if (!btn) return;
+      var item = btn.closest('.chat__item');
+      var open = item.dataset.open === '1';
+      $$('.chat__item', host).forEach(function (other) {
+        other.dataset.open = '0';
+        $('.chat__q', other).setAttribute('aria-expanded', 'false');
+      });
+      if (!open) {
+        item.dataset.open = '1';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
   }
 
   function renderFooter() {
+    if (!$('#foot-legal')) return;
     $('#foot-legal').textContent = C.footer.legal + ' ' + C.footer.entity;
     $('#foot-links').innerHTML = C.footer.links.map(function (l) {
       return l.href === 'tribute'
@@ -134,16 +175,18 @@
   function sheets() {
     var dlg = $('#sheet');
     var body = $('#sheet-body');
+    if (!dlg || !body) return;
 
     function open(i) {
       var ch = C.chapters[i];
+      if (!ch) return;
       body.innerHTML = '' +
         '<div class="plate sheet__plate"><img src="' + ch.image + '" alt=""></div>' +
         '<div>' +
-          '<p class="tome__num">' + ch.num + '</p>' +
+          '<p class="slab__num">' + ch.num + '</p>' +
           '<h3>' + ch.title + '</h3>' +
-          (ch.whom ? '<p class="tome__whom">' + ch.whom + '</p>' : '') +
-          '<p style="color:var(--skin);margin-top:16px">' + ch.about + '</p>' +
+          (ch.whom ? '<p class="slab__whom">' + ch.whom + '</p>' : '') +
+          '<p style="color:var(--ash);margin-top:16px">' + ch.about + '</p>' +
           '<ul class="sheet__list">' + ch.points.map(function (p) { return '<li>' + p + '</li>'; }).join('') + '</ul>' +
           '<p class="sheet__meta">' + ch.format + ' · ' + ch.price + '</p>' +
           '<p style="margin-top:22px"><a class="pill" data-tg="chapter_' + ch.id + '" href="#">Написать в Telegram</a></p>' +
@@ -153,155 +196,271 @@
     }
 
     document.addEventListener('click', function (e) {
-      var card = e.target.closest('.tome');
-      if (card) { open(+card.dataset.index); }
+      var btn = e.target.closest('.pane__more');
+      if (!btn) return;
+      e.stopPropagation();
+      open(+btn.dataset.open);
     });
 
-    document.addEventListener('keydown', function (e) {
-      if (e.key !== 'Enter' && e.key !== ' ') return;
-      var card = document.activeElement && document.activeElement.closest && document.activeElement.closest('.tome');
-      if (card) { e.preventDefault(); open(+card.dataset.index); }
-    });
+    // Клик по раскрытой панели приходит сюда же.
+    document.addEventListener('darilove:open', function (e) { open(e.detail); });
 
     $('#sheet-close').addEventListener('click', function () { dlg.close(); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
   }
 
-  /* ------------------------------------------------------- пин-карусель */
+  /* ------------------------------------------------- гармошка материалов
 
-  var deck = {
-    section: null,
-    slide: 0,
-    active: false
-  };
+     Активная панель раздаётся, соседние сжимаются в полосы с вертикальной
+     подписью. Раскрытие идёт по flex, а не по сдвигу ленты: ряд всегда равен
+     окну, и уезжать за край, как это делала прокручиваемая лента, ему негде.
+     Мышь раскрывает наведением, палец — касанием, клавиатура — фокусом на
+     кнопке «Подробнее». Число панелей не зашито: сколько материалов в
+     content.js, столько и панелей.                                          */
 
-  function setupDeck() {
-    deck.section = $('#chapters');
-    var track = $('#deck-track');
-    var dots = $$('.deck__dot');
-    var count = C.chapters.length;
+  function gallery() {
+    var section = $('#chapters');
+    var host = $('#gallery');
+    if (!section || !host) return;
 
-    // На мобильном, при грубом указателе и при выключенной анимации
-    // пин не используется: карточки идут обычной вертикальной лентой.
-    var pinned = !(coarse.matches || narrow.matches || reduce.matches);
+    var panes = $$('.pane', host);
+    var counter = $('#deck-counter');
+    var fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+    var active = -1;
+    var pinned = false;
 
-    deck.section.dataset.pin = pinned ? '1' : '0';
-    deck.section.style.height = pinned ? (count * 85 + 60) + 'vh' : 'auto';
+    if (!panes.length) return;
 
-    if (!pinned) {
-      track.style.transform = '';
-      $$('.tome', track).forEach(function (el) { el.style.setProperty('--away', '0'); });
-      $('#deck-counter').textContent = count + ' тома';
-      deck.paint = null;
-      deck.active = false;
-      return;
+    function show(i) {
+      var n = clamp(i, 0, panes.length - 1);
+      if (n === active) return;
+      active = n;
+      panes.forEach(function (p, k) { p.dataset.active = k === active ? '1' : '0'; });
+      if (counter) counter.textContent = pad2(active + 1) + ' / ' + pad2(panes.length);
     }
 
-    function step() {
-      var cards = $$('.tome', track);
-      if (cards.length < 2) return cards.length ? cards[0].offsetWidth : 0;
-      return cards[1].offsetLeft - cards[0].offsetLeft;
+    function layout() {
+      // Пин работает на любой ширине: на телефоне это единственный способ
+      // пролистать ленту, там нет курсора. Отключаем только при запрете
+      // движения — тогда панели просто идут колонкой.
+      pinned = !reduce.matches;
+      section.dataset.pin = pinned ? '1' : '0';
+      // Экран на первую панель плюс по 70vh прокрутки на каждую следующую:
+      // столько времени лента и держит экран.
+      section.style.height = pinned ? (100 + (panes.length - 1) * 70) + 'vh' : '';
+      paint();
     }
 
+    // Раскрытие ведёт прокрутка: на телефоне это единственный способ
+    // показать анимацию, курсора там нет.
     function paint() {
-      var rect = deck.section.getBoundingClientRect();
-      var total = Math.max(1, deck.section.offsetHeight - window.innerHeight);
-      var p = Math.min(1, Math.max(0, -rect.top / total));
-      var exact = p * (count - 1);
-      var index = Math.round(exact);
+      var rect = section.getBoundingClientRect();
+      var total = Math.max(1, section.offsetHeight - window.innerHeight);
+      var p = pinned
+        ? clamp(-rect.top / total, 0, 1)
+        : clamp((window.innerHeight * 0.75 - rect.top) / Math.max(1, rect.height * 0.8), 0, 1);
 
-      deck.active = rect.top <= 0 && rect.bottom >= window.innerHeight;
-      track.style.transform = 'translate3d(' + (-exact * step()).toFixed(2) + 'px,0,0)';
-
-      $$('.tome', track).forEach(function (el, i) {
-        el.style.setProperty('--away', Math.min(1, Math.abs(exact - i)).toFixed(3));
-      });
-
-      dots.forEach(function (d, i) { d.setAttribute('aria-current', i === index ? 'true' : 'false'); });
-      $('#deck-counter').textContent = (index + 1) + ' / ' + count;
+      // Первая карточка держится, пока лента только подходит к экрану:
+      // без этого она схлопывалась на первых же пикселях прокрутки.
+      var steps = panes.length - 1;
+      show(steps ? Math.round(clamp((p - 0.08) / 0.92, 0, 1) * steps) : 0);
     }
 
-    deck.paint = paint;
-    paint();
+    // Без requestAnimationFrame: paint трогает DOM только когда индекс
+    // действительно сменился, а во вкладке в фоне кадры не идут и панель
+    // осталась бы на первой.
 
-    if (!deck.wired) {
-      deck.wired = true;
-      dots.forEach(function (d) {
-        d.addEventListener('click', function () {
-          var i = +d.dataset.go;
-          var total = deck.section.offsetHeight - window.innerHeight;
-          var y = deck.section.offsetTop + total * (i / (count - 1));
-          window.scrollTo({ top: y, behavior: reduce.matches ? 'auto' : 'smooth' });
-        });
+    panes.forEach(function (pane, i) {
+      // Курсор перебивает прокрутку: пока мышь на панели, слушаем её.
+      pane.addEventListener('mouseenter', function () { if (fine.matches) show(i); });
+
+      // Клик по свёрнутой панели раскрывает её, клик по раскрытой открывает
+      // подробности: то же, что кнопка «Подробнее», но по всей карточке.
+      pane.addEventListener('click', function (e) {
+        if (e.target.closest('.pane__more')) return;
+        if (pane.dataset.active === '1') {
+          document.dispatchEvent(new CustomEvent('darilove:open', { detail: i }));
+        } else {
+          show(i);
+        }
       });
-    }
+
+      $('.pane__more', pane).addEventListener('focus', function () { show(i); });
+    });
+
+    window.addEventListener('scroll', paint, { passive: true });
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(layout, 120);
+    });
+
+    show(0);
+    layout();
   }
 
-  /* --------------------------------------------- инерция и резиновый край */
+  /* --------------------------------------------------------- появления
 
-  function smoothScroll() {
-    if (reduce.matches || coarse.matches) return;
+     Секция въезжает на 14px с прозрачности, соседи с шагом 60 мс. Один
+     проход: показали — наблюдатель отключается, чтобы прокрутка вверх не
+     проигрывала всё заново.                                              */
 
-    var bounce = $('#bounce');
-    var target = window.scrollY;
-    var current = target;
-    var over = 0;
-    var running = false;
+  function reveals() {
+    if (!('IntersectionObserver' in window)) return;
 
-    function maxScroll() {
-      return Math.max(0, document.body.scrollHeight - window.innerHeight);
-    }
+    var groups = [
+      ['.hero__lead > *', 60],
+      ['.rate', 50],
+      ['.manifest__inner > *', 80],
+      ['.about > *', 80],
+      ['.chapters__head', 0],
+      ['.live > *', 60],
+      ['.private > *', 80],
+      ['.faq h2, .chat__item', 40],
+      ['.lead > *', 80],
+      ['.foot > *', 40]
+    ];
+
+    // Обратимо: пока блок в окне — он на месте, вышел за край — уехал
+    // обратно в ту сторону, с которой пришёл. Наблюдатель не отключается.
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.dataset.reveal = 'in';
+          return;
+        }
+        // Ушёл вниз за нижний край окна — ждёт снизу; ушёл вверх — сверху.
+        var below = e.boundingClientRect.top > 0;
+        e.target.style.setProperty('--reveal-dir', below ? '1' : '-1');
+        e.target.dataset.reveal = '';
+      });
+    }, { threshold: 0.12, rootMargin: '-4% 0px -8% 0px' });
+
+    var watched = [];
+
+    groups.forEach(function (g) {
+      $$(g[0]).forEach(function (el, i) {
+        el.dataset.reveal = '';
+        el.style.setProperty('--reveal-delay', (i * g[1]) + 'ms');
+        io.observe(el);
+        watched.push(el);
+      });
+    });
+
+    // Страховка: скрытый текст — худшая из возможных поломок. Если
+    // наблюдатель по какой-то причине не сработал, через полторы секунды
+    // показываем всё, что сейчас в окне.
+    setTimeout(function () {
+      watched.forEach(function (el) {
+        if (el.dataset.reveal === 'in') return;
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) el.dataset.reveal = 'in';
+      });
+    }, 1500);
+  }
+
+  /* -------------------------------------------------- параллакс атрибутов
+
+     Курсор ведёт две переменные на слое, каждый предмет умножает их на свою
+     глубину. Пружины нет: у предметов долгий переход, поэтому они отстают от
+     курсора и доплывают — это и читается как парение.                      */
+
+  function parallax() {
+    var layer = $('.attrs');
+    if (!layer || reduce.matches) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    window.addEventListener('pointermove', function (e) {
+      var dx = (e.clientX / window.innerWidth - 0.5) * 46;
+      var dy = (e.clientY / window.innerHeight - 0.5) * 34;
+      // Одна запись на слой, а не на каждый предмет: наследование переменной
+      // дешевле шестнадцати обращений к стилю.
+      layer.style.setProperty('--px', dx.toFixed(1) + 'px');
+      layer.style.setProperty('--py', dy.toFixed(1) + 'px');
+    }, { passive: true });
+  }
+
+  /* ------------------------------------------------------- рябь по клику */
+
+  function ripples() {
+    if (reduce.matches) return;
+    document.addEventListener('pointerdown', function (e) {
+      var pill = e.target.closest('.pill');
+      if (!pill) return;
+      var r = pill.getBoundingClientRect();
+      var dot = document.createElement('span');
+      dot.className = 'ripple';
+      dot.style.left = (e.clientX - r.left) + 'px';
+      dot.style.top = (e.clientY - r.top) + 'px';
+      pill.appendChild(dot);
+      setTimeout(function () { dot.remove(); }, 620);
+    });
+  }
+
+  /* ------------------------------------------------------ индикатор слева */
+
+  function ticks() {
+    var host = $('#ticks');
+    if (!host) return [];
+
+    var items = [
+      { id: 'top', label: 'Начало' },
+      { id: 'about', label: 'Обо мне' },
+      { id: 'chapters', label: 'Материалы' },
+      { id: 'live', label: 'Живой формат' },
+      { id: 'private', label: 'Приватно' },
+      { id: 'faq', label: 'Вопросы' }
+    ].filter(function (it) { return document.getElementById(it.id); });
+
+    host.innerHTML = items.map(function (it) {
+      return '<a class="ticks__item" href="#' + it.id + '"><i aria-hidden="true"></i><span>' + it.label + '</span></a>';
+    }).join('');
+
+    return $$('.ticks__item', host).map(function (el, i) {
+      return { el: el, section: document.getElementById(items[i].id) };
+    });
+  }
+
+  /* ------------------------------------------------------- пружина виджета */
+
+  function springWidget() {
+    var el = $('#thanks');
+    if (!el || reduce.matches) return null;
+
+    var offset = 0, vel = 0, raf = null;
 
     function frame() {
-      current += (target - current) * 0.14;
-      over += (0 - over) * 0.12;
-
-      if (Math.abs(target - current) < 0.4) current = target;
-      if (Math.abs(over) < 0.3) over = 0;
-
-      window.scrollTo(0, current);
-      bounce.style.transform = over ? 'translate3d(0,' + over.toFixed(2) + 'px,0)' : '';
-
-      if (current !== target || over !== 0) {
-        requestAnimationFrame(frame);
-      } else {
-        running = false;
-      }
+      raf = null;
+      vel += (0 - offset) * 0.16;
+      vel *= 0.76;
+      offset += vel;
+      el.style.setProperty('--ty', offset.toFixed(2) + 'px');
+      if (Math.abs(offset) > 0.2 || Math.abs(vel) > 0.2) raf = requestAnimationFrame(frame);
+      else el.style.setProperty('--ty', '0px');
     }
 
-    window.addEventListener('wheel', function (e) {
-      // Внутри пина инерция снимается: там свой ритм по карточкам.
-      if (deck.active) { target = window.scrollY; current = target; return; }
-      if (e.ctrlKey) return;
-
-      e.preventDefault();
-      var max = maxScroll();
-      var next = target + e.deltaY;
-
-      if (next < 0 || next > max) {
-        // Резиновый край: страница пружинит, а не упирается.
-        over += (next < 0 ? -next : max - next) * 0.12;
-        over = Math.max(-90, Math.min(90, over));
-      }
-
-      target = Math.max(0, Math.min(max, next));
-      if (!running) { running = true; requestAnimationFrame(frame); }
-    }, { passive: false });
-
-    window.addEventListener('scroll', function () {
-      if (!running) { target = window.scrollY; current = target; }
-    }, { passive: true });
+    return function (dy) {
+      offset = clamp(offset + dy * 0.16, -22, 22);
+      if (!raf) raf = requestAnimationFrame(frame);
+    };
   }
 
   /* ------------------------------------------------------ скролл-состояния */
 
   function scrollStates() {
-    var head = $('#head');
-    var dock = $('#dock');
-    var chapters = $('#chapters');
-    var ticks = $$('.spine__tick');
+    var navTicks = $$('.rail__tick');
+    var sideTicks = ticks();
+    var kickWidget = springWidget();
+    var thanks = $('#thanks');
     var last = window.scrollY;
     var ticking = false;
+
+    function markCurrent(el, section, vh) {
+      if (!section) return;
+      var r = section.getBoundingClientRect();
+      el.setAttribute('aria-current', (r.top <= vh * 0.4 && r.bottom > vh * 0.4) ? 'true' : 'false');
+    }
 
     function paint() {
       ticking = false;
@@ -312,19 +471,12 @@
       root.style.setProperty('--fill', reduce.matches ? '1' : Math.min(1, y / (vh * 0.62)).toFixed(4));
       root.style.setProperty('--read', (y / max).toFixed(4));
 
-      head.dataset.hidden = (y > 240 && y > last) ? '1' : '0';
+      if (kickWidget) kickWidget(y - last);
+      if (thanks) thanks.dataset.show = y > vh * 0.5 ? '1' : '0';
       last = y;
 
-      dock.dataset.show = chapters.getBoundingClientRect().bottom < vh * 0.9 ? '1' : '0';
-
-      ticks.forEach(function (t) {
-        var sec = document.querySelector(t.getAttribute('href'));
-        if (!sec) return;
-        var r = sec.getBoundingClientRect();
-        t.setAttribute('aria-current', (r.top <= vh * 0.4 && r.bottom > vh * 0.4) ? 'true' : 'false');
-      });
-
-      if (deck.paint) deck.paint();
+      navTicks.forEach(function (t) { markCurrent(t, document.querySelector(t.getAttribute('href')), vh); });
+      sideTicks.forEach(function (t) { markCurrent(t.el, t.section, vh); });
     }
 
     window.addEventListener('scroll', function () {
@@ -336,29 +488,38 @@
       if (!document.hidden) paint();
     });
 
-    var resizeTimer;
-    window.addEventListener('resize', function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function () { setupDeck(); paint(); }, 150);
-    });
+    window.addEventListener('resize', paint);
     paint();
   }
 
   /* ------------------------------------------------------------------ старт */
 
+  // Каждый шаг падает сам за себя: одна сломанная секция не должна оставлять
+  // посетителя за возрастным гейтом с мёртвой кнопкой.
+  function safe(name, fn) {
+    try { fn(); } catch (e) {
+      if (window.console && console.error) console.error('DARI LOVE: шаг «' + name + '» упал', e);
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
-    renderPrices();
-    renderChapters();
-    renderLive();
-    renderAbout();
-    renderReviews();
-    renderFaq();
-    renderFooter();
-    wireLinks();
-    gate();
-    sheets();
-    setupDeck();
-    scrollStates();
-    smoothScroll();
+    // Гейт первым: он пускает на страницу и не зависит ни от чего остального.
+    safe('гейт', gate);
+    safe('прайс', renderPrices);
+    safe('материалы', renderChapters);
+    safe('живой формат', renderLive);
+    safe('консультация', renderConsult);
+    safe('обо мне', renderAbout);
+    safe('отзывы', renderReviews);
+    safe('вопросы', renderFaq);
+    safe('подвал', renderFooter);
+    safe('ссылки', wireLinks);
+    safe('модалка', sheets);
+    safe('гармошка', gallery);
+    safe('появления', reveals);
+    safe('параллакс', parallax);
+    safe('рябь', ripples);
+    safe('состояния скролла', scrollStates);
+    safe('росчерк', function () { if (window.HANDWRITE) window.HANDWRITE('[data-handwrite]'); });
   });
 })();

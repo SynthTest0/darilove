@@ -9,126 +9,137 @@
 <meta property="og:description" content="Индивидуальное обучение · Москва">
 <meta property="og:type" content="website">
 <meta name="robots" content="index,follow">
-<meta name="theme-color" content="#180A0E">
+<meta name="theme-color" content="#0A0709">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Golos+Text:wght@400;500;600&family=Rubik:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 <!--
-THESIS: обучение интимности подано как переплетённая вручную книга, которую
-дают в руки; отказ от боудуар-лендинга с фотографией во всю ширину.
-OWN-WORLD: вишнёвый бархат переплёта, крашеный золотой обрез, корешок как
-единственная вертикальная ось, ляссе-закладка, колофон вместо прайс-таблицы.
-STORY: посетитель видит закрытую книгу по теме, о которой не говорят вслух,
-проходит четыре тома и уходит в Telegram за своим экземпляром.
-FIRST VIEWPORT: слева титул с золочёной строкой, строка тем, кнопка и колофон
-цен; справа вклеенная иллюстрация 4:5 с золочёным обрезом.
-FORM: переплётная мастерская, кандидат 5 из семи, seed 8447b63e.
+THESIS: обучение интимности подано материально — как латекс под студийным
+светом: плотно, глянцево, без иносказаний; отказ от книжной метафоры.
+OWN-WORLD: почти чёрные натянутые плоскости во всю ширину, жёсткие блики по
+верхней кромке, один алый акцент, который горит только под светом,
+широкий гротеск капслоком без единой антиквы; атрибуты в фоне ленты
+качаются на пружине вслед за перетаскиванием.
+STORY: посетитель упирается в прямое заявление, знакомится с автором,
+проходит доступные материалы, получает цену и уходит в Telegram.
+FIRST VIEWPORT: слева заголовок капслоком и рукописное слово, которое
+дописывается на глазах; справа кадр, упирающийся в край экрана.
+FORM: латексная плоскость, направление выбрано клиентом взамен «Переплёта».
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 -->
-<div class="velvet"></div>
+<div class="field"></div>
 <div class="grain"></div>
 
 <!-- Возрастной гейт: страница за размытием до подтверждения -->
 <div class="gate" id="gate" hidden>
-  <div class="gate__card material">
+  <div class="gate__card">
+    <p class="gate__mark wordmark">DARI <i>love</i></p>
     <h2>Здесь говорят о сексе прямо</h2>
-    <p>Материалы сайта предназначены для совершеннолетних.</p>
+    <p class="gate__note">Материалы сайта предназначены для совершеннолетних.</p>
     <div class="gate__row">
       <button class="pill" id="gate-yes" type="button">Мне есть 18</button>
       <button class="pill pill--quiet" id="gate-no" type="button">Мне нет 18</button>
     </div>
+    <p class="gate__legal">Нажимая «Мне есть 18», вы подтверждаете совершеннолетие и согласие с обработкой данных.</p>
   </div>
 </div>
 
-<aside class="spine">
-  <div class="headband" aria-hidden="true"></div>
-  <div class="lasse" aria-hidden="true"></div>
-  <a class="spine__mark" href="#top">DARI <i>love</i></a>
-
-  <nav class="spine__nav" aria-label="Оглавление">
-    <a class="spine__tick" href="#chapters"><span>Тома</span></a>
-    <a class="spine__tick" href="#live"><span>Живой формат</span></a>
-    <a class="spine__tick" href="#private"><span>Приватно</span></a>
-    <a class="spine__tick" href="#about"><span>Обо мне</span></a>
-    <a class="spine__tick" href="#faq"><span>Вопросы</span></a>
-  </nav>
-
-  <div class="spine__folio">МОСКВА</div>
-</aside>
-
-<div id="bounce">
-
 <header class="head" id="head">
-  <a href="#about">Обо мне</a>
-  <a href="#chapters">Оглавление</a>
-  <a href="#live">Живой формат</a>
-  <a class="thanks" data-href="tribute" href="#">Поблагодарить</a>
+  <a class="head__mark wordmark" href="#top">DARI <i>love</i></a>
+  <nav aria-label="Разделы">
+    <a class="rail__tick" href="#about">Обо мне</a>
+    <a class="rail__tick" href="#chapters">Темы</a>
+    <a class="rail__tick" href="#live">Живой формат</a>
+    <a class="rail__tick" href="#faq">Вопросы</a>
+  </nav>
   <a class="pill" data-tg="head" href="#">Написать в Telegram</a>
 </header>
 
+<!-- Индикатор прокрутки: столбик чёрточек слева, по одной на раздел -->
+<nav class="ticks" id="ticks" aria-label="Разделы страницы"></nav>
+
+<!-- Атрибуты левитируют в фоне всей страницы, начиная с первого экрана:
+     разные размеры, стороны, наклоны и глубина размытия -->
+<div class="attrs" aria-hidden="true">
+  <span class="attr attr--01"><img src="assets/img/att-cuffs.webp" alt="" fetchpriority="low"></span>
+  <span class="attr attr--02"><img src="assets/img/att-gag.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--03"><img src="assets/img/att-whip.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--04"><img src="assets/img/att-cuffs.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--05"><img src="assets/img/att-gag.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--06"><img src="assets/img/att-whip.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--07"><img src="assets/img/att-cuffs.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--08"><img src="assets/img/att-gag.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--09"><img src="assets/img/att-whip.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--10"><img src="assets/img/att-cuffs.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--11"><img src="assets/img/att-gag.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--12"><img src="assets/img/att-whip.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--13"><img src="assets/img/att-cuffs.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--14"><img src="assets/img/att-gag.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--15"><img src="assets/img/att-whip.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--16"><img src="assets/img/att-cuffs.webp" alt="" loading="lazy"></span>
+</div>
+
 <main class="wrap" id="top">
 
-  <!-- ——— Титульный разворот ——————————————————————————————— -->
+  <!-- ——— Первый экран ————————————————————————————————————— -->
   <section class="hero">
     <div class="hero__lead">
-      <p class="hero__mark wordmark">DARI <i>love</i></p>
-      <h1>Об этом<br>не говорят<br><span class="gilt">вслух</span></h1>
-      <div class="hero__rule"></div>
+      <h1><span class="hero__line">Об этом</span> <span class="hero__line">не говорят</span> <span class="hot" data-handwrite>вслух</span></h1>
       <p class="lede">Живые занятия и разборы, готовые лекции и работа один на один. Теория, практика с обратной связью и план на несколько недель вместо случайных советов.</p>
-      <p class="subjects">Кунилингус · Сексология · БДСМ · Приватно · Москва</p>
+      <p class="subjects">Кунилингус · Сексология · БДСМ · Приватно · Москва · и многое другое</p>
 
       <div class="actions">
         <a class="pill" data-tg="hero" href="#">Написать в Telegram</a>
-        <a class="pill pill--quiet" href="#chapters">Смотреть оглавление</a>
+        <a class="pill pill--quiet" href="#chapters">Смотреть темы</a>
       </div>
-
     </div>
 
-    <div class="hero__price">
-      <dl class="colophon" id="prices"></dl>
-      <p class="colophon__note">Адрес очных занятий — после подтверждения записи</p>
-    </div>
-
-    <figure class="frontis">
-      <div class="frontis__book">
-        <div class="plate frontis__plate">
-          <img class="under" src="assets/img/dari-wide.webp" alt="" aria-hidden="true">
-          <img class="over" src="assets/img/dari-hero.webp" alt="Dari love в бордовом платье" fetchpriority="high">
-        </div>
-        <div class="frontis__edge"></div>
+    <figure class="shot">
+      <div class="plate">
+        <img class="over" src="assets/img/dari-hero2.webp" alt="Dari love в бордовом латексном платье" fetchpriority="high">
       </div>
-      <figcaption class="frontis__cap"><span>Фронтиспис</span><span class="tabular">4:5</span></figcaption>
+      <figcaption class="shot__cap"><span>Москва</span><span class="tabular">18+</span></figcaption>
     </figure>
   </section>
 
-  <!-- ——— Манифест ————————————————————————————————————————— -->
-  <section class="manifest">
-    <p class="manifest__line">Стыд <span class="gilt">не учит</span> ничему. Учит практика.</p>
-    <p class="manifest__note"><span class="versal">Н</span>икаких намёков и обтекаемых формулировок: темы называются своими именами, разбираются по частям и отрабатываются с обратной связью. Столько теории, сколько нужно, чтобы понять, и столько практики, сколько нужно, чтобы получилось.</p>
-    <svg class="fleuron" viewBox="0 0 120 24" aria-hidden="true">
-      <path d="M60 4c-6 0-10 4-10 8s4 8 10 8 10-4 10-8-4-8-10-8zm0 3c4 0 7 2 7 5s-3 5-7 5-7-2-7-5 3-5 7-5z"/>
-      <path d="M50 12H30c-4 0-6-2-8-4M70 12h20c4 0 6-2 8-4M50 12H30c-4 0-6 2-8 4M70 12h20c4 0 6 2 8 4"/>
-      <circle cx="14" cy="12" r="2"/><circle cx="106" cy="12" r="2"/>
-    </svg>
+  <!-- ——— Прайс-строка ————————————————————————————————————— -->
+  <dl class="rates" id="prices"></dl>
+  <p class="rates__note">Адрес очных занятий — после подтверждения записи</p>
+
+  <!-- ——— Манифест: алая плоскость во всю ширину ——————————— -->
+  <section class="manifest material material--hot">
+    <div class="hold manifest__inner">
+      <p class="manifest__line">Стыд <span class="hot">не учит</span> ничему. Учит практика.</p>
+      <blockquote class="manifest__quote">«Никаких намёков и обтекаемых формулировок: темы называются своими именами, разбираются по частям и отрабатываются с обратной связью. Столько теории, сколько нужно, чтобы понять, и столько практики, сколько нужно, чтобы получилось»</blockquote>
+    </div>
   </section>
 
-  <!-- ——— Оглавление: четыре тома, пин-карусель ————————————— -->
+  <!-- ——— Обо мне ————————————————————————————————————————— -->
+  <section class="about" id="about">
+    <div class="plate about__plate">
+      <img src="assets/img/dari-wide.webp" alt="Dari love" loading="lazy">
+    </div>
+    <div>
+      <h2 id="about-title"></h2>
+      <p class="about__text" id="about-text"></p>
+      <p class="placeholder">Заглушка — заменить на настоящий текст и факты</p>
+      <div class="about__facts" id="about-facts"></div>
+    </div>
+  </section>
+
+  <!-- ——— Доступные материалы: тянущаяся лента ——————————————— -->
   <section class="chapters" id="chapters">
     <div class="chapters__pin">
       <div class="chapters__head">
-        <h2>Четыре тома</h2>
-        <p class="chapters__counter tabular" id="deck-counter">1 / 4</p>
+        <h2>Доступные материалы</h2>
+        <p class="chapters__counter tabular" id="deck-counter"></p>
       </div>
 
-      <div class="deck">
-        <div class="deck__track" id="deck-track"></div>
-      </div>
-
-      <div class="deck__dots" id="deck-dots" role="tablist" aria-label="Переключение томов"></div>
+      <div class="gallery" id="gallery"></div>
     </div>
   </section>
 
@@ -148,29 +159,17 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     </p>
   </section>
 
-  <!-- ——— Приватно ———————————————————————————————————————— -->
+  <!-- ——— Приватно: единственное место консультации на странице —— -->
   <section class="private material" id="private">
     <div>
-      <h2>Индивидуальная консультация</h2>
-      <p>Личный запрос, онлайн или очно в Москве. Формат, длительность и цена обсуждаются в переписке до записи. Адрес приходит только после подтверждения.</p>
+      <h2 id="consult-title"></h2>
+      <p id="consult-text"></p>
+      <ul class="private__list" id="consult-points"></ul>
+      <p class="private__price" id="consult-price"></p>
       <p style="margin-top:26px"><a class="pill" data-tg="private" href="#">Написать лично</a></p>
     </div>
     <div class="plate private__plate">
       <img src="assets/img/card-konsul.webp" alt="" loading="lazy">
-    </div>
-  </section>
-
-  <!-- ——— Обо мне ————————————————————————————————————————— -->
-  <section class="about" id="about">
-    <div class="plate about__plate">
-      <img src="assets/img/dari-wide.webp" alt="Dari love" loading="lazy">
-    </div>
-    <div>
-      <h2 id="about-title"></h2>
-      <p class="about__text" id="about-text"></p>
-      <p class="placeholder">Заглушка — заменить на настоящий текст и факты</p>
-      <div class="about__facts" id="about-facts"></div>
-      <p style="margin-top:26px"><a class="thanks arrowed" data-href="tribute" href="#">Поблагодарить<svg viewBox="0 0 24 12" aria-hidden="true"><path d="M0 6h22M17 1l5 5-5 5"/></svg></a></p>
     </div>
   </section>
 
@@ -186,8 +185,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <div id="faq-list"></div>
   </section>
 
-  <!-- ——— Заявка —————————————————————————————————————————— -->
-  <section class="lead material">
+  <!-- ——— Заявка: алая плоскость во всю ширину —————————————— -->
+  <section class="lead material material--hot">
     <div>
       <h2>Напишите — разберём ваш запрос</h2>
       <p>Первое сообщение ни к чему не обязывает. Расскажите, что хотите изменить, и я предложу формат.</p>
@@ -200,11 +199,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
   <!-- ——— Подвал —————————————————————————————————————————— -->
   <footer class="foot">
-    <svg class="fleuron fleuron--foot" viewBox="0 0 120 24" aria-hidden="true">
-      <path d="M60 4c-6 0-10 4-10 8s4 8 10 8 10-4 10-8-4-8-10-8zm0 3c4 0 7 2 7 5s-3 5-7 5-7-2-7-5 3-5 7-5z"/>
-      <path d="M50 12H30c-4 0-6-2-8-4M70 12h20c4 0 6-2 8-4M50 12H30c-4 0-6 2-8 4M70 12h20c4 0 6 2 8 4"/>
-      <circle cx="14" cy="12" r="2"/><circle cx="106" cy="12" r="2"/>
-    </svg>
+    <hr class="seam">
     <div class="wordmark">DARI <i>love</i></div>
     <div class="foot__links" id="foot-links"></div>
     <small id="foot-legal"></small>
@@ -212,16 +207,11 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   </footer>
 </main>
 
-</div><!-- /#bounce -->
-
-<!-- Липкая полоса: появляется после оглавления -->
-<div class="dock" id="dock">
-  <p class="dock__note" id="dock-note"></p>
-  <div class="dock__side">
-    <a class="quiet" data-href="tribute" href="#">Поблагодарить</a>
-    <a class="pill" data-tg="dock" href="#">Написать в Telegram</a>
-  </div>
-</div>
+<!-- Единственная кнопка благодарности: плавающий виджет, качается при прокрутке -->
+<a class="thanks-widget" id="thanks" data-href="tribute" href="#">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.4 4.3 12.8a4.6 4.6 0 0 1 6.5-6.5l1.2 1.2 1.2-1.2a4.6 4.6 0 0 1 6.5 6.5z"/></svg>
+  <span>Поблагодарить</span>
+</a>
 
 <dialog class="sheet" id="sheet">
   <div class="sheet__inner material" id="sheet-body"></div>
@@ -231,6 +221,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </dialog>
 
 <script src="js/content.js"></script>
+<script src="js/handwriting.js"></script>
 <script src="js/site.js"></script>
 </body>
 </html>

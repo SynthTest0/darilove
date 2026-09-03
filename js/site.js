@@ -66,6 +66,18 @@
     }).join('');
   }
 
+  // Кадр отдаём двумя форматами: AVIF там, где браузер его понимает, WebP
+  // остальным. Размеры проставлены, чтобы место под картинку резервировалось
+  // до загрузки и макет не дёргался.
+  function picture(src, w, h, eager) {
+    var avif = src.replace(/\.webp$/, '.avif');
+    return '<picture>' +
+      '<source srcset="' + avif + '" type="image/avif">' +
+      '<img src="' + src + '" alt="" width="' + w + '" height="' + h + '" ' +
+      (eager ? 'fetchpriority="high"' : 'loading="lazy"') + ' decoding="async" draggable="false">' +
+    '</picture>';
+  }
+
   function renderChapters() {
     var host = $('#gallery');
     if (!host) return;
@@ -73,7 +85,7 @@
     host.innerHTML = C.chapters.map(function (ch, i) {
       return '' +
         '<article class="pane" data-index="' + i + '" data-active="' + (i === 0 ? '1' : '0') + '">' +
-          '<div class="pane__plate"><img src="' + ch.image + '" alt="" loading="lazy" draggable="false"></div>' +
+          '<div class="pane__plate">' + picture(ch.image, 900, 1125, i === 0) + '</div>' +
           '<div class="pane__veil"></div>' +
           '<div class="pane__body">' +
             (ch.whom ? '<span class="pane__cat">' + ch.whom + '</span>' : '') +
@@ -181,7 +193,7 @@
       var ch = C.chapters[i];
       if (!ch) return;
       body.innerHTML = '' +
-        '<div class="plate sheet__plate"><img src="' + ch.image + '" alt=""></div>' +
+        '<div class="plate sheet__plate">' + picture(ch.image, 900, 1125, true) + '</div>' +
         '<div>' +
           '<p class="slab__num">' + ch.num + '</p>' +
           '<h3>' + ch.title + '</h3>' +

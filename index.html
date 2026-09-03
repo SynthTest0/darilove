@@ -10,9 +10,9 @@
 <meta property="og:type" content="website">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#0A0709">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Golos+Text:wght@400;500;600&family=Rubik:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/unbounded-subset.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/golos-text-subset.woff2" crossorigin>
+<link rel="preload" as="image" href="assets/img/dari-hero2.avif" type="image/avif">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/site.css">
 </head>
@@ -65,22 +65,22 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 <!-- Атрибуты левитируют в фоне всей страницы, начиная с первого экрана:
      разные размеры, стороны, наклоны и глубина размытия -->
 <div class="attrs" aria-hidden="true">
-  <span class="attr attr--01"><img src="assets/img/att-cuffs.webp" alt="" fetchpriority="low"></span>
-  <span class="attr attr--02"><img src="assets/img/att-gag.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--03"><img src="assets/img/att-whip.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--04"><img src="assets/img/att-cuffs.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--05"><img src="assets/img/att-gag.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--06"><img src="assets/img/att-whip.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--07"><img src="assets/img/att-cuffs.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--08"><img src="assets/img/att-gag.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--09"><img src="assets/img/att-whip.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--10"><img src="assets/img/att-cuffs.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--11"><img src="assets/img/att-gag.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--12"><img src="assets/img/att-whip.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--13"><img src="assets/img/att-cuffs.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--14"><img src="assets/img/att-gag.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--15"><img src="assets/img/att-whip.webp" alt="" loading="lazy"></span>
-  <span class="attr attr--16"><img src="assets/img/att-cuffs.webp" alt="" loading="lazy"></span>
+  <span class="attr attr--01"><picture><source srcset="assets/img/att-cuffs.avif" type="image/avif"><img src="assets/img/att-cuffs.webp" alt="" width="466" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--02"><picture><source srcset="assets/img/att-gag.avif" type="image/avif"><img src="assets/img/att-gag.webp" alt="" width="700" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--03"><picture><source srcset="assets/img/att-whip.avif" type="image/avif"><img src="assets/img/att-whip.webp" alt="" width="466" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--04"><picture><source srcset="assets/img/att-cuffs.avif" type="image/avif"><img src="assets/img/att-cuffs.webp" alt="" width="466" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--05"><picture><source srcset="assets/img/att-gag.avif" type="image/avif"><img src="assets/img/att-gag.webp" alt="" width="700" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--06"><picture><source srcset="assets/img/att-whip.avif" type="image/avif"><img src="assets/img/att-whip.webp" alt="" width="466" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--07"><picture><source srcset="assets/img/att-cuffs.avif" type="image/avif"><img src="assets/img/att-cuffs.webp" alt="" width="466" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--08"><picture><source srcset="assets/img/att-gag.avif" type="image/avif"><img src="assets/img/att-gag.webp" alt="" width="700" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--09"><picture><source srcset="assets/img/att-whip.avif" type="image/avif"><img src="assets/img/att-whip.webp" alt="" width="466" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--10"><picture><source srcset="assets/img/att-cuffs.avif" type="image/avif"><img src="assets/img/att-cuffs.webp" alt="" width="466" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--11"><picture><source srcset="assets/img/att-gag.avif" type="image/avif"><img src="assets/img/att-gag.webp" alt="" width="700" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--12"><picture><source srcset="assets/img/att-whip.avif" type="image/avif"><img src="assets/img/att-whip.webp" alt="" width="466" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--13"><picture><source srcset="assets/img/att-cuffs.avif" type="image/avif"><img src="assets/img/att-cuffs.webp" alt="" width="466" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--14"><picture><source srcset="assets/img/att-gag.avif" type="image/avif"><img src="assets/img/att-gag.webp" alt="" width="700" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--15"><picture><source srcset="assets/img/att-whip.avif" type="image/avif"><img src="assets/img/att-whip.webp" alt="" width="466" height="700" loading="lazy" decoding="async"></picture></span>
+  <span class="attr attr--16"><picture><source srcset="assets/img/att-cuffs.avif" type="image/avif"><img src="assets/img/att-cuffs.webp" alt="" width="466" height="700" loading="lazy" decoding="async"></picture></span>
 </div>
 
 <main class="wrap" id="top">
@@ -100,7 +100,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
     <figure class="shot">
       <div class="plate">
-        <img class="over" src="assets/img/dari-hero2.webp" alt="Dari love в бордовом латексном платье" fetchpriority="high">
+        <picture><source srcset="assets/img/dari-hero2.avif" type="image/avif"><img class="over" src="assets/img/dari-hero2.webp" alt="Dari love в бордовом латексном платье" width="1200" height="1600" fetchpriority="high" decoding="async"></picture>
       </div>
       <figcaption class="shot__cap"><span>Москва</span><span class="tabular">18+</span></figcaption>
     </figure>
@@ -121,7 +121,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <!-- ——— Обо мне ————————————————————————————————————————— -->
   <section class="about" id="about">
     <div class="plate about__plate">
-      <img src="assets/img/dari-wide.webp" alt="Dari love" loading="lazy">
+      <img src="assets/img/dari-wide.webp" alt="Dari love" width="1200" height="675" loading="lazy" decoding="async">
     </div>
     <div>
       <h2 id="about-title"></h2>
@@ -169,7 +169,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <p style="margin-top:26px"><a class="pill" data-tg="private" href="#">Написать лично</a></p>
     </div>
     <div class="plate private__plate">
-      <img src="assets/img/card-konsul.webp" alt="" loading="lazy">
+      <picture><source srcset="assets/img/card-konsul.avif" type="image/avif"><img src="assets/img/card-konsul.webp" alt="" width="900" height="1125" loading="lazy" decoding="async"></picture>
     </div>
   </section>
 
@@ -220,8 +220,8 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   </button>
 </dialog>
 
-<script src="js/content.js"></script>
-<script src="js/handwriting.js"></script>
-<script src="js/site.js"></script>
+<script src="js/content.js" defer></script>
+<script src="js/handwriting.js" defer></script>
+<script src="js/site.js" defer></script>
 </body>
 </html>

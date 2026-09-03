@@ -2,6 +2,37 @@
    Материал страницы — не бархат, а латекс: свет ложится жёсткими бликами,
    тени густые, красный горит только там, где на него падает свет. */
 
+/* Шрифты лежат в репозитории сабсетами: кириллица, базовая латиница,
+   типографика и знак рубля. С Google приходило 307 КБ в пяти файлах плюс два
+   внешних соединения (googleapis + gstatic); здесь 120 КБ и ни одного чужого
+   домена. Unbounded и Golos — переменные по оси веса, Rubik зафиксирован на
+   450: он нужен ровно для курсивных акцентов и прямой речи.
+   Лицензии OFL лежат рядом, в assets/fonts/. */
+
+@font-face {
+  font-family: 'Unbounded';
+  src: url('../assets/fonts/unbounded-subset.woff2') format('woff2-variations');
+  font-weight: 500 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Golos Text';
+  src: url('../assets/fonts/golos-text-subset.woff2') format('woff2-variations');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('../assets/fonts/rubik-italic-subset.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   /* Поверхности: от самой глубокой к поднятой. Чистого чёрного нет. */
   --void:      #0A0709;
@@ -77,6 +108,10 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
+
+/* <picture> — обёртка для выбора формата, а не элемент раскладки: убираем её
+   из потока, иначе размеры и анимации, рассчитанные на <img>, ломаются. */
+picture { display: contents; }
 
 ::selection { background: var(--latex); color: var(--bone); }
 
